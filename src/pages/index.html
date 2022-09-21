@@ -6,8 +6,14 @@
     max-width: 99%;
     max-height: 99%;
   }
-  input[type=text] {
-    margin-left: auto;
+
+  div.wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  input[type="text"] {
+    margin-left: 0;
     margin-right: auto;
   }
 </style>
@@ -15,18 +21,23 @@
   src="https://r34-json-api.herokuapp.com/images?url=https://api-cdn.rule34.xxx/images/5404/189e72216f9f07bbbc83034dbc15e028fc5cff46.jpg"
   id="img"
 />
-<input type="text" placeholder="daddy's finder..." style="margin-left: auto; margin-right: auto;"/>
+<div class="wrapper">
+  <input type="text" placeholder="daddy's finder..." id="search" />
+</div>
 
 <script>
   const leftArrow = 37;
   const rightArrow = 39;
-
+  const enter = 13;
+  
   var image = document.getElementById("img");
-
+  var tagData = []
+  
   addEvent(document, "keydown", function (e) {
     e = e || window.event;
-    image.src =
-      "https://r34-json-api.herokuapp.com/images?url=https://api-cdn.rule34.xxx/images/5404/771a5895cdb6886f593f34cd5acadd3c.jpeg";
+    if (e.keyCode === enter) {
+      fetch(`https://r34-json-api.herokuapp.com/posts?tags=${}`)
+    }
   });
 
   function addEvent(element, eventName, callback) {
