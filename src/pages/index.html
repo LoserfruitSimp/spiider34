@@ -1,36 +1,40 @@
-<head>
-  <title>spiider34</title>
-  <link type="image/png" rel="icon" herf="//cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png">
-</head>
-<style>
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 99%;
-    max-height: 99%;
-  }
+<html>
+  <head>
+    <title>spiider34</title>
+    <link
+      rel="icon"
+      herf="https://i.ibb.co/3NJzN7D/ezgif-com-gif-maker-2.png"
+    />
+  </head>
+  <body>
+    <style>
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 99%;
+      max-height: 99%;
+    }
 
-  div.wrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-</style>
-<img
-  src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
-  id="img"
-/>
-<div class="wrapper">
-  <input
-    type="text"
-    placeholder="daddy's finder..."
-    id="search"
-    style="margin-left: 0; margin-right: auto"
+    div.wrapper {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+  <img
+    src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+    id="img"
   />
-</div>
+  <div class="wrapper">
+    <input
+      type="text"
+      placeholder="daddy's finder..."
+      id="search"
+      style="margin-left: 0; margin-right: auto"
+    />
+  </div>
 
-<script>
+  <script>
     const leftArrow = 37;
     const rightArrow = 39;
     const enter = 13;
@@ -43,34 +47,34 @@
       console.log(e.keyCode);
 
       if (e.keyCode === enter) {
-          fetch(
-            `https://r34-json-api.herokuapp.com/posts?tags=${
-              document.getElementById("search").value
-            }`
-          )
+        fetch(
+          `https://r34-json-api.herokuapp.com/posts?tags=${
+            document.getElementById("search").value
+          }`
+        )
           .then((response) => response.json())
           .then((data) => {
             tagData = data;
-            idx = 0
+            idx = 0;
 
-            setActiveImg(tagData[idx].file_url)
+            setActiveImg(tagData[idx].file_url);
           });
       } else if (e.keyCode === leftArrow) {
-          if (idx > 0) {
-            idx = idx - 1
-            console.log(idx)
-            setActiveImg(tagData[idx].file_url)
-          }
+        if (idx > 0) {
+          idx = idx - 1;
+          console.log(idx);
+          setActiveImg(tagData[idx].file_url);
+        }
       } else if (e.keyCode === rightArrow) {
-          if (idx <= (tagData.length + 1)) {
-            idx = idx + 1
-            setActiveImg(tagData[idx].file_url)
-          }
+        if (idx <= tagData.length + 1) {
+          idx = idx + 1;
+          setActiveImg(tagData[idx].file_url);
+        }
       }
     });
 
     function setActiveImg(url) {
-      console.log(url)
+      console.log(url);
       var image = document.getElementById("img");
       image.src = url;
     }
@@ -84,4 +88,6 @@
         element["on" + eventName] = callback;
       }
     }
-</script>
+  </script>
+  </body>
+</html>
