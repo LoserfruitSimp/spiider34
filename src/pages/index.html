@@ -12,10 +12,6 @@
     justify-content: center;
   }
 
-  input[type="text"] {
-    margin-left: 0;
-    margin-right: auto;
-  }
 </style>
 <img
   src="https://preview.redd.it/jdg5ne7b34641.jpg?width=640&crop=smart&auto=webp&s=5c16761cc7882dc6b584a002df8e22797d6f18db"
@@ -61,7 +57,7 @@
             console.log(idx)
             setActiveImg(tagData[idx].file_url)
           }
-      } else if (e.keyCode === leftArrow) {
+      } else if (e.keyCode === rightArrow) {
           if (idx <= (tagData.length + 1)) {
             idx = idx + 1
             setActiveImg(tagData[idx].file_url)
