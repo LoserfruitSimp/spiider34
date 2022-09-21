@@ -1,0 +1,30 @@
+<style>
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 99%;
+    max-height: 99%;
+  }
+</style>
+<img
+  src="https://r34-json-api.herokuapp.com/images?url=https://api-cdn.rule34.xxx/images/5404/189e72216f9f07bbbc83034dbc15e028fc5cff46.jpg"
+/>
+<script>
+  c
+  
+addEvent(document, "keydown", function (e) {
+    e = e || window.event;
+    console.log(e)
+});
+
+function addEvent(element, eventName, callback) {
+    if (element.addEventListener) {
+        element.addEventListener(eventName, callback, false);
+    } else if (element.attachEvent) {
+        element.attachEvent("on" + eventName, callback);
+    } else {
+        element["on" + eventName] = callback;
+    }
+}
+</script>
