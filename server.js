@@ -4,6 +4,7 @@
  */
 
 const path = require("path");
+const scrape = require('website-scraper');
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -38,7 +39,9 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.html");
 });
 
-fastify
+fastify.get("/posts", function (request, reply) {
+  
+});
 
 // Run the server and report out to the logs
 fastify.listen(
