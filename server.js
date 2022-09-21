@@ -38,6 +38,8 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.html");
 });
 
+fastify
+
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
