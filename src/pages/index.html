@@ -6,25 +6,36 @@
     max-width: 99%;
     max-height: 99%;
   }
+  input[type=text] {
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 <img
   src="https://r34-json-api.herokuapp.com/images?url=https://api-cdn.rule34.xxx/images/5404/189e72216f9f07bbbc83034dbc15e028fc5cff46.jpg"
+  id="img"
 />
-<script>
-  c
-  
-addEvent(document, "keydown", function (e) {
-    e = e || window.event;
-    console.log(e)
-});
+<input type="text" placeholder="daddy's finder..." style="margin-left: auto; margin-right: auto;"/>
 
-function addEvent(element, eventName, callback) {
+<script>
+  const leftArrow = 37;
+  const rightArrow = 39;
+
+  var image = document.getElementById("img");
+
+  addEvent(document, "keydown", function (e) {
+    e = e || window.event;
+    image.src =
+      "https://r34-json-api.herokuapp.com/images?url=https://api-cdn.rule34.xxx/images/5404/771a5895cdb6886f593f34cd5acadd3c.jpeg";
+  });
+
+  function addEvent(element, eventName, callback) {
     if (element.addEventListener) {
-        element.addEventListener(eventName, callback, false);
+      element.addEventListener(eventName, callback, false);
     } else if (element.attachEvent) {
-        element.attachEvent("on" + eventName, callback);
+      element.attachEvent("on" + eventName, callback);
     } else {
-        element["on" + eventName] = callback;
+      element["on" + eventName] = callback;
     }
-}
+  }
 </script>
