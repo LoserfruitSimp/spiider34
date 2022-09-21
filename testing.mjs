@@ -1,4 +1,4 @@
-const scraper = require('website-scraper');
+import scrape from 'website-scraper'; // only as ESM, no CommonJS
 
 const options = {
   urls: ['http://rule34.xxx/'],
@@ -6,6 +6,6 @@ const options = {
 };
 
 // with promise
-scraper(options).then((result) => {
+scrape(options).then((result) => {
   console.log(result)
 });
