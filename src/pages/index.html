@@ -18,7 +18,7 @@
   }
 </style>
 <img
-  src="https://r34-json-api.herokuapp.com/images?url=https://api-cdn.rule34.xxx/images/5404/189e72216f9f07bbbc83034dbc15e028fc5cff46.jpg"
+  src=""
   id="img"
 />
 <div class="wrapper">
@@ -29,14 +29,24 @@
   const leftArrow = 37;
   const rightArrow = 39;
   const enter = 13;
-  
+
   var image = document.getElementById("img");
-  var tagData = []
-  
+  var tagData = [];
+
   addEvent(document, "keydown", function (e) {
     e = e || window.event;
+    console.log(e.keyCode);
     if (e.keyCode === enter) {
-      fetch(`https://r34-json-api.herokuapp.com/posts?tags=${}`)
+      fetch(
+        `https://r34-json-api.herokuapp.com/posts?tags=${
+          document.getElementById("search").value
+        }`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          tagData = data;
+          image.src = tagData[0].file_url;
+        });
     }
   });
 
