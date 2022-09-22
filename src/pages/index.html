@@ -61,7 +61,6 @@
         id="search"
         size="30"
         autocomplete="off"
-        value="star_wars"
       />
     </div>
 
@@ -69,10 +68,14 @@
       const leftArrow = 37;
       const rightArrow = 39;
       const enter = 13;
-
+      const m = 77;
+      
       var tagData = [];
       var idx = 0;
-
+      
+      const toggle = {true: "visibility: visible;", false: "visibility: hidden;"}
+      var active = false
+      
       addEvent(document, "keydown", function (e) {
         e = e || window.event;
         console.log(e.keyCode);
@@ -89,6 +92,9 @@
               idx = 0;
 
               setActiveImg(tagData[idx].file_url);
+                            
+              var gallery = document.getElementsByClassName("gallery")[0]
+              gallery.innerHTML = ''
             
               for (var i = 0; i < tagData.length; i++) {
                 const figure = document.createElement("figure")
@@ -98,7 +104,7 @@
                 img.src = tagData[i].preview_url
                 
                 figure.appendChild(img)
-                document.getElementsByClassName("gallery")[0].appendChild(figure)
+                gallery.appendChild(figure)
               }
             });
         } else if (e.keyCode === leftArrow) {
@@ -112,6 +118,9 @@
             idx = idx + 1;
             setActiveImg(tagData[idx].file_url);
           }
+        } else if (e.keyCode === m) {
+          active = !active
+          document.getElementsByClassName("gallery")[0].style = toggle[active]
         }
       });
 
@@ -131,12 +140,5 @@
         }
       }
     </script>
-    
-    <figure style="visibility: hidden;" id="figure">
-        <img
-          class="galleryItem"
-          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
-        />
-      </figure>
   </body>
 </html>
