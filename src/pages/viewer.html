@@ -41,6 +41,9 @@
         grid-template-columns: auto auto auto;
       }
     </style>
+    <h2 id="tags" class="wrapper" style="color: white;">
+      
+    </h2>
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif?20140201131911"
       id="img"
@@ -64,16 +67,21 @@
       const enter = 13;
       const m = 77;
       
+      const tags = document.baseURI.substring(35).replaceAll('%20', " ")
+      
       var tagData = [];
       var idx = 0;
       
       const toggle = {true: "visibility: visible;", false: "visibility: hidden;"}
       var active = false
       
+      document.getElementById("tags").innerHTML = tags;
+      document.getElementById("search").value = tags;
+      
       // Sets the tag
       fetch(
             `https://spiider34.glitch.me/posts?tags=${
-              document.baseURI.substring(35)
+              tags
             }`
           )
             .then((response) => response.json())
@@ -81,12 +89,16 @@
               tagData = data;
               idx = 0;
 
+              if (tagData.length === 0) {
+                setActiveImg('https://cdn-icons-png.flaticon.com/512/103/103085.png')
+                return;
+              }
+              
               setActiveImg(tagData[idx].file_url);
                             
               var gallery = document.getElementsByClassName("gallery")[0]
               gallery.innerHTML = ''
               
-              if 
         
               for (var i = 0; i < tagData.length; i++) {
                 const figure = document.createElement("figure")
