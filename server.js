@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/p', function(req, res) {
-  res
+  res.sendFile(path.join(__dirname, '/src/pages/viewer.html'));
 });
 
 app.listen(port, function () {

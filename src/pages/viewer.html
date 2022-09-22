@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <title>spiider34</title>
+    <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png">
+  </head>
+  <body>
+    <style>
+      body {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1px;
+        background-color: #add8e6;
+      }
+
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 99%;
+        max-height: 99%;
+      }
+
+      .wrapper {
+        padding: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .galleryItem {
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+      }
+
+      .gallery {
+        z-index: 2;
+        background: rgba(105,105,105, 0.75);
+        position: absolute;
+        display: grid;
+        grid-template-columns: auto auto auto;
+      }
+    </style>
+    <img
+      src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+      id="img"
+    />
+    
+    <div class="gallery" style="visibility: hidden;"></div>
+
+    <div class="wrapper">
+      <input
+        type="text"
+        placeholder="daddy's finder..."
+        id="search"
+        size="30"
+        autocomplete="off"
+      />
+    </div>
+
+    <script>
+      const leftArrow = 37;
+      const rightArrow = 39;
+      const enter = 13;
+      const m = 77;
+      
+      var tagData = [];
+      var idx = 0;
+      
+      const toggle = {true: "visibility: visible;", false: "visibility: hidden;"}
+      var active = false
+      
+      
+      addEvent(document, "keydown", function (e) {
+        e = e || window.event;
+        console.log(e.keyCode);
+
+        if (e.keyCode === enter) {
+          fetch(
+            `https://spiider34.glitch.me/posts?tags=${
+              document.getElementById("search").value
+            }`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              tagData = data;
+              idx = 0;
+
+              setActiveImg(tagData[idx].file_url);
+                            
+              var gallery = document.getElementsByClassName("gallery")[0]
+              gallery.innerHTML = ''
+            
+              for (var i = 0; i < tagData.length; i++) {
+                const figure = document.createElement("figure")
+                const img = document.createElement("img")
+                
+                img.class = "galleryItem"
+                img.src = tagData[i].preview_url
+                
+                figure.appendChild(img)
+                gallery.appendChild(figure)
+              }
+            });
+        } else if (e.keyCode === leftArrow) {
+          if (idx > 0) {
+            idx = idx - 1;
+            console.log(idx);
+            setActiveImg(tagData[idx].file_url);
+          }
+        } else if (e.keyCode === rightArrow) {
+          if (idx <= tagData.length + 1) {
+            idx = idx + 1;
+            setActiveImg(tagData[idx].file_url);
+          }
+        } else if (e.keyCode === m) {
+          active = !active
+          document.getElementsByClassName("gallery")[0].style = toggle[active]
+        }
+      });
+
+      function setActiveImg(url) {
+        console.log(url);
+        var image = document.getElementById("img");
+        image.src = url;
+      }
+
+      function addEvent(element, eventName, callback) {
+        if (element.addEventListener) {
+          element.addEventListener(eventName, callback, false);
+        } else if (element.attachEvent) {
+          element.attachEvent("on" + eventName, callback);
+        } else {
+          element["on" + eventName] = callback;
+        }
+      }
+    </script>
+  </body>
+</html>
