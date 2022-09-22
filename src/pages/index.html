@@ -1,7 +1,12 @@
 <html>
   <head>
     <title>spiider34</title>
-    <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="any"
+      href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"
+    />
   </head>
   <body>
     <style>
@@ -35,7 +40,7 @@
 
       .gallery {
         z-index: 2;
-        background: rgba(105,105,105, 0.75);
+        background: rgba(105, 105, 105, 0.75);
         position: absolute;
         display: grid;
         grid-template-columns: auto auto auto;
@@ -45,8 +50,8 @@
       src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
       id="img"
     />
-    
-    <div class="gallery" style="visibility: hidden;"></div>
+
+    <div class="gallery" style="visibility: hidden"></div>
 
     <p class="wrapper">
       <strong>spiider34 is a better way to consume rule34 content!</strong>
@@ -66,43 +71,30 @@
       const rightArrow = 39;
       const enter = 13;
       const m = 77;
-      
+
       var tagData = [];
       var idx = 0;
-      
-      const toggle = {true: "visibility: visible;", false: "visibility: hidden;"}
-      var active = false
-      
+
+      const toggle = {
+        true: "visibility: visible;",
+        false: "visibility: hidden;",
+      };
+      var active = false;
+
       addEvent(document, "keydown", function (e) {
         e = e || window.event;
-        console.log(e.keyCode);
 
         if (e.keyCode === enter) {
-          window.location.replace(`https://spiider34.glitch.me/p?tags=${
-              document.getElementById("search").value
-            }`)
-        } else if (e.keyCode === leftArrow) {
-          if (idx > 0) {
-            idx = idx - 1;
-            console.log(idx);
-            setActiveImg(tagData[idx].file_url);
+          console.log(document.activeElement.id)
+          if (document.activeElement.id === "search") {
+            window.location.replace(
+              `https://spiider34.glitch.me/p?tags=${
+                document.getElementById("search").value
+              }`
+            );
           }
-        } else if (e.keyCode === rightArrow) {
-          if (idx <= tagData.length + 1) {
-            idx = idx + 1;
-            setActiveImg(tagData[idx].file_url);
-          }
-        } else if (e.keyCode === m) {
-          active = !active
-          document.getElementsByClassName("gallery")[0].style = toggle[active]
         }
       });
-
-      function setActiveImg(url) {
-        console.log(url);
-        var image = document.getElementById("img");
-        image.src = url;
-      }
 
       function addEvent(element, eventName, callback) {
         if (element.addEventListener) {

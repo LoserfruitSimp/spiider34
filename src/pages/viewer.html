@@ -71,7 +71,6 @@
       var active = false
       
       // Sets the tag
-      console.log(document)
       fetch(
             `https://spiider34.glitch.me/posts?tags=${
               document.baseURI.substring(35)
@@ -86,7 +85,9 @@
                             
               var gallery = document.getElementsByClassName("gallery")[0]
               gallery.innerHTML = ''
-            
+              
+              if 
+        
               for (var i = 0; i < tagData.length; i++) {
                 const figure = document.createElement("figure")
                 const img = document.createElement("img")
@@ -102,14 +103,18 @@
       
       addEvent(document, "keydown", function (e) {
         e = e || window.event;
-        console.log(e.keyCode);
 
         if (e.keyCode === enter) {
-          
+          if (document.activeElement.id === "search") {
+            window.location.replace(
+              `https://spiider34.glitch.me/p?tags=${
+                document.getElementById("search").value
+              }`
+            );
+          }
         } else if (e.keyCode === leftArrow) {
           if (idx > 0) {
             idx = idx - 1;
-            console.log(idx);
             setActiveImg(tagData[idx].file_url);
           }
         } else if (e.keyCode === rightArrow) {
@@ -118,13 +123,15 @@
             setActiveImg(tagData[idx].file_url);
           }
         } else if (e.keyCode === m) {
-          active = !active
-          document.getElementsByClassName("gallery")[0].style = toggle[active]
+          if (document.activeElement.id !== "search") {
+            active = !active;
+            document.getElementsByClassName("gallery")[0].style =
+              toggle[active];
+          }
         }
       });
 
       function setActiveImg(url) {
-        console.log(url);
         var image = document.getElementById("img");
         image.src = url;
       }
