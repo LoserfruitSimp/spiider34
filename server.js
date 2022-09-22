@@ -43,6 +43,10 @@ fastify.get("/posts", function (request, reply) {
   
 });
 
+fastify.get("/favicon", function(_, reply) {
+  return reply.redirect("https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png?v=1663802054959")
+});
+
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
