@@ -62,12 +62,22 @@
         size="30"
         autocomplete="off"
       />
-      <h3>
-        Tags:
-      </h3>
-      <p id="curTags">
-        
+      <p>
+        <strong> Tags:</strong>
       </p>
+      <p id="curTags" style="overflow-wrap: normal"></p>
+      <p>
+        <strong> Author:</strong>
+      </p>
+      <p id="author" style="overflow-wrap: normal"></p>
+      <p>
+        <strong> Sourse:</strong>
+      </p>
+      <p id="sourse" style="overflow-wrap: normal"></p>
+      <p>
+        <strong> Uploaded:</strong>
+      </p>
+      <p id="uploaded" style="overflow-wrap: normal"></p>
     </div>
 
     <script>
@@ -116,9 +126,11 @@
 
             img.class = "galleryItem";
             img.src = tagData[i].preview_url;
-            img.onclick = function() { click(img) }
-            img.id = i
-            
+            img.onclick = function () {
+              click(img);
+            };
+            img.id = i;
+
             figure.appendChild(img);
             gallery.appendChild(figure);
           }
@@ -161,9 +173,16 @@
 
       function setActiveImg(data) {
         var image = document.getElementById("img");
-        var tagsText = document.getElementById("curTags")
-        
-        tagsText.innerHTML = data.tags
+        var tagsText = document.getElementById("curTags");
+        var authorText = document.getElementById("author");
+        var sourseText = document.getElementById("sourse");
+        var dateText = document.getElementById("uploaded");
+
+        tagsText.innerHTML = data.tags.join(" ");
+        authorText.innerHTML = data.creator_url
+        sourseText.innerHTML = data.source
+        dateText.innerHTML = data.created_at
+
         image.src = data.file_url;
       }
 
