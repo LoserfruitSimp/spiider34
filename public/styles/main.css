@@ -18,6 +18,7 @@ img {
 .wrapper {
   padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-wrap: normal;
 }
 
 .galleryItem {

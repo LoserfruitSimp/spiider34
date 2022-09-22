@@ -27,7 +27,7 @@ fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
 
     if (tagData.length === 0) {
       var image = document.getElementById("img");
-      img.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
+      image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
       return;
     }
 
