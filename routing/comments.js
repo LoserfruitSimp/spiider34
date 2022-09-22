@@ -4,7 +4,7 @@ const commentRouter = express.Router();
 
 commentRouter.get("/", function (req, res) {
   var baseURI = "";
-  if (req.params.type == "hypnoh") {
+  if (req.baseUrl.substring(7) == "hypnoh") {
     baseURI = "https://hypnohub.net";
   } else {
     baseURI = "https://rule34.xxx";
@@ -23,7 +23,7 @@ commentRouter.get("/", function (req, res) {
       return $("comment")
         .map(function () {
           let result = this.attribs;
-          result.post_url = process.env.HOST + "/posts/" + req.params.type + "?id=" + result.post_id;
+          result.post_url = process.env.HOST + "/posts/" + req.baseUrl.substring(7) + "?id=" + result.post_id;
           return result;
         })
         .get();

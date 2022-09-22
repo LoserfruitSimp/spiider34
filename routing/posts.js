@@ -6,8 +6,7 @@ const host = "https://spiider34.glitch.me";
 
 postRouter.get("/", function (req, res) {
   var baseURI = "";
-  console.log(req)
-  if (req.params.type == "hypnoh") {
+  if (req.baseUrl.substring(7) == "hypnoh") {
     baseURI = "https://hypnohub.net";
   } else {
     baseURI = "https://rule34.xxx";
@@ -24,7 +23,7 @@ postRouter.get("/", function (req, res) {
           let result = this.attribs;
 
           // get comments url
-          result.comments_url = host + "/comments/" + req.params.type + "?post_id=" + result.id;
+          result.comments_url = host + "/comments/" + req.baseUrl.substring(7) + "?post_id=" + result.id;
 
           // convert tags
           result.tags = result.tags.split(" ").filter((tag) => tag !== "");
@@ -41,11 +40,11 @@ postRouter.get("/", function (req, res) {
           } else {
             result.type = "image";
           }
-
+        
           //modify urls
-          result.file_url = host + "/images/" + req.params.type + "?url=" + result.file_url;
-          result.preview_url = host + "/images/" + req.params.type + "?url=" + result.preview_url;
-          result.sample_url = host + "/images/" + req.params.type + "?url=" + result.sample_url;
+          result.file_url = host + "/images/" + req.baseUrl.substring(7) + "?url=" + result.file_url;
+          result.preview_url = host + "/images/" + req.baseUrl.substring(7) + "?url=" + result.preview_url;
+          result.sample_url = host + "/images/" + req.baseUrl.substring(7) + "?url=" + result.sample_url;
           result.creator_url =
             baseURI +
             "/index.php?page=account&s=profile&id=" +
@@ -63,7 +62,7 @@ postRouter.get("/", function (req, res) {
 
 function getUrl(req) {
   var baseURI = "";
-  if (req.params.type == "hypnoh") {
+  if (req.baseUrl.substring(7) == "hypnoh") {
     baseURI = "https://hypnohub.net";
   } else {
     baseURI = "https://rule34.xxx";

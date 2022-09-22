@@ -1,7 +1,12 @@
 <html>
   <head>
     <title>spiider34</title>
-    <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="any"
+      href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"
+    />
   </head>
   <body>
     <style>
@@ -35,21 +40,19 @@
 
       .gallery {
         z-index: 2;
-        background: rgba(105,105,105, 0.75);
+        background: rgba(105, 105, 105, 0.75);
         position: absolute;
         display: grid;
         grid-template-columns: auto auto auto;
       }
     </style>
-    <h2 id="tags" class="wrapper" style="color: white;">
-      
-    </h2>
+    <h2 id="tags" class="wrapper" style="color: white"></h2>
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif?20140201131911"
       id="img"
     />
-    
-    <div class="gallery" style="visibility: hidden;"></div>
+
+    <div class="gallery" style="visibility: hidden"></div>
 
     <div class="wrapper">
       <input
@@ -66,54 +69,56 @@
       const rightArrow = 39;
       const enter = 13;
       const m = 77;
-      
-      const tags = document.baseURI.substring(42).replaceAll('%20', " ")
-      const cite = document.baseURI.substring(30).slice(0, 6)
-      
+
+      const tags = document.baseURI.substring(42).replaceAll("%20", " ");
+      const cite = document.baseURI.substring(30).slice(0, 6);
+
       var tagData = [];
       var idx = 0;
-      
-      const toggle = {true: "visibility: visible;", false: "visibility: hidden;"}
-      var active = false
-      
+
+      const toggle = {
+        true: "visibility: visible;",
+        false: "visibility: hidden;",
+      };
+      var active = false;
+
       document.getElementById("tags").innerHTML = tags;
       document.getElementById("search").value = tags;
-      
-      // Sets the tag
-      fetch(
-            `https://spiider34.glitch.me/posts/${cite}?tags=${
-              tags
-            }`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              tagData = data;
-              idx = 0;
 
-              if (tagData.length === 0) {
-                setActiveImg('https://cdn-icons-png.flaticon.com/512/103/103085.png')
-                return;
-              }
-              
-              setActiveImg(tagData[idx].file_url);
-                            
-              var gallery = document.getElementsByClassName("gallery")[0]
-              gallery.innerHTML = ''
-              
-        
-              for (var i = 0; i < tagData.length; i++) {
-                const figure = document.createElement("figure")
-                const img = document.createElement("img")
-                
-                img.class = "galleryItem"
-                img.src = tagData[i].preview_url
-                
-                figure.appendChild(img)
-                gallery.appendChild(figure)
-              }
-            });
-      
-      
+      // Sets the tag
+      fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
+        .then((response) => response.json())
+        .then((data) => {
+          tagData = data;
+          idx = 0;
+
+          if (tagData.length === 0) {
+            setActiveImg(
+              "https://cdn-icons-png.flaticon.com/512/103/103085.png"
+            );
+            return;
+          }
+
+          setActiveImg(tagData[idx].file_url);
+
+          var gallery = document.getElementsByClassName("gallery")[0];
+          gallery.innerHTML = "";
+
+          for (var i = 0; i < tagData.length; i++) {
+            const figure = document.createElement("figure");
+            const img = document.createElement("img");
+
+            img.class = "galleryItem";
+            img.src = tagData[i].preview_url;
+            img.id = (i - 1)
+
+            img.addEventListener("click", myScript);
+            
+            figure.appendChild(img);
+            gallery.appendChild(figure);
+          }
+        });
+
       addEvent(document, "keydown", function (e) {
         e = e || window.event;
 
@@ -143,6 +148,11 @@
           }
         }
       });
+
+      function click(img) {
+        idx = img.id;
+        setActiveImg(tagData[idx].file_url);
+      }
 
       function setActiveImg(url) {
         var image = document.getElementById("img");
