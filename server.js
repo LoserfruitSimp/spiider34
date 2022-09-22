@@ -12,7 +12,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-
+console.log(process.env)
 app.use('/posts/:type', postRouter);
 app.use("/images/:type", imageRouter);
 app.use('/comments/:type', commentRouter);
@@ -22,6 +22,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/p/:type', function(req, res) {
+  console.log(req.params)
   res.sendFile(path.join(__dirname, '/src/pages/viewer.html'));
 });
 

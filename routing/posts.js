@@ -1,17 +1,19 @@
 const express = require("express");
 const scraper = require("../misc/scraper");
-const postRouter = express.Router();
+const postRouter = express.Router({ mergeParams: true });
+
+const hostAdress = process.env.HOST_ADDRESS + ":"
 
 const host = "https://spiider34.glitch.me";
 
 postRouter.get("/", function (req, res) {
-  var baseURI = "";
-  if (req.baseUrl.substring(7) == "hypnoh") {
+  const cite = req.params.type
+  
+  var baseURI = "https://rule34.xxx";
+  if (cite == "hypnoh") {
     baseURI = "https://hypnohub.net";
-  } else {
-    baseURI = "https://rule34.xxx";
   }
-
+  
   const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
 
@@ -23,7 +25,7 @@ postRouter.get("/", function (req, res) {
           let result = this.attribs;
 
           // get comments url
-          result.comments_url = host + "/comments/" + req.baseUrl.substring(7) + "?post_id=" + result.id;
+          result.comments_url = host + "/comments/" + cite + "?post_id=" + result.id;
 
           // convert tags
           result.tags = result.tags.split(" ").filter((tag) => tag !== "");
