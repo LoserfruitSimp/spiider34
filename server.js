@@ -4,7 +4,7 @@
  */
 
 const path = require("path");
-const scrape = require('website-scraper');
+const postRouter = require('./routing/posts');
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({

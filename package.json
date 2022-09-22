@@ -12,7 +12,8 @@
     "@fastify/formbody": "^7.2.0",
     "@fastify/static": "^6.5.0",
     "@fastify/view": "^7.1.0",
-    "website-scraper": "4.2.3"
+    "website-scraper": "4.2.3",
+    "scraperjs": "^1.2.0"
   },
   "engines": {
     "node": "14.x"
