@@ -52,13 +52,9 @@
       src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
       id="img"
     />
+    
     <div class="gallery">
-      <figure>
-        <img
-          class="galleryItem"
-          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
-        />
-      </figure>
+      
     </div>
 
     <p class="wrapper">
@@ -98,6 +94,13 @@
               idx = 0;
 
               setActiveImg(tagData[idx].file_url);
+            
+              for (var i = 0; i < tagData.length; i++) {
+                const template = document.getElementById("figure");
+                const clone = template.cloneNode(true);
+                clone.firstElementChild.src = tagData[i].preview_url
+                clone.style = ""
+              }
             });
         } else if (e.keyCode === leftArrow) {
           if (idx > 0) {
@@ -129,5 +132,12 @@
         }
       }
     </script>
+    
+    <figure style="visibility: hidden;" id="figure">
+        <img
+          class="galleryItem"
+          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+        />
+      </figure>
   </body>
 </html>
