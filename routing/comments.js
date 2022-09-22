@@ -2,7 +2,8 @@ const express = require('express');
 const scraper = require('../misc/scraper');
 const commentRouter = express.Router();
 
-const baseUrl = 'https://rule34.xxx/index.php?page=dapi&s=comment&q=index';
+const baseURI = "https://hypnohub.net" // https://rule34.xxx
+const baseUrl = baseURI + '/index.php?page=dapi&s=comment&q=index';
 
 commentRouter.get('/', function (req, res) {
     let url = baseUrl;

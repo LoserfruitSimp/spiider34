@@ -2,7 +2,9 @@ const express = require('express');
 const scraper = require('../misc/scraper');
 const postRouter = express.Router();
 
-const baseUrl = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index';
+const baseURI = "https://hypnohub.net" // https://rule34.xxx
+
+const baseUrl = baseURI + '/index.php?page=dapi&s=post&q=index';
 const host = "https://spiider34.glitch.me"
 
 postRouter.get('/', function (req, res) {
@@ -34,7 +36,7 @@ postRouter.get('/', function (req, res) {
                 result.file_url = host + "/images?url=" + result.file_url;
                 result.preview_url = host + "/images?url=" + result.preview_url;
                 result.sample_url = host + "/images?url=" + result.sample_url;
-                result.creator_url = "https://rule34.xxx/index.php?page=account&s=profile&id=" + result.creator_id;
+                result.creator_url = baseURI + "/index.php?page=account&s=profile&id=" + result.creator_id;
 
                 return result;
             }).get();
