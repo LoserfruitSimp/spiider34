@@ -130,7 +130,7 @@
     </div>
     <p class="wrapper">Change between hypnohub and rule34</p>
     <label class="switch">
-      <input type="checkbox" />
+      <input type="checkbox" id="type" />
       <span class="slider round"></span>
     </label>
     <script>
@@ -152,10 +152,14 @@
         e = e || window.event;
 
         if (e.keyCode === enter) {
-          console.log(document.activeElement.id);
+          var cite = "rule34";
+          if (document.getElementById("type").checked) {
+            cite = "hypnoh";
+          }
+
           if (document.activeElement.id === "search") {
             window.location.replace(
-              `https://spiider34.glitch.me/p?tags=${
+              `https://spiider34.glitch.me/p/${cite}?tags=${
                 document.getElementById("search").value
               }`
             );
