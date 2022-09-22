@@ -78,32 +78,9 @@
         console.log(e.keyCode);
 
         if (e.keyCode === enter) {
-          fetch(
-            `https://spiider34.glitch.me/posts?tags=${
+          window.location.replace(`https://spiider34.glitch.me/p?tags=${
               document.getElementById("search").value
-            }`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              tagData = data;
-              idx = 0;
-
-              setActiveImg(tagData[idx].file_url);
-                            
-              var gallery = document.getElementsByClassName("gallery")[0]
-              gallery.innerHTML = ''
-            
-              for (var i = 0; i < tagData.length; i++) {
-                const figure = document.createElement("figure")
-                const img = document.createElement("img")
-                
-                img.class = "galleryItem"
-                img.src = tagData[i].preview_url
-                
-                figure.appendChild(img)
-                gallery.appendChild(figure)
-              }
-            });
+            }`)
         } else if (e.keyCode === leftArrow) {
           if (idx > 0) {
             idx = idx - 1;

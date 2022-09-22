@@ -42,7 +42,7 @@
       }
     </style>
     <img
-      src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+      src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif?20140201131911"
       id="img"
     />
     
@@ -70,15 +70,11 @@
       const toggle = {true: "visibility: visible;", false: "visibility: hidden;"}
       var active = false
       
-      
-      addEvent(document, "keydown", function (e) {
-        e = e || window.event;
-        console.log(e.keyCode);
-
-        if (e.keyCode === enter) {
-          fetch(
+      // Sets the tag
+      console.log(document)
+      fetch(
             `https://spiider34.glitch.me/posts?tags=${
-              document.getElementById("search").value
+              document.baseURI.substring(35)
             }`
           )
             .then((response) => response.json())
@@ -102,6 +98,14 @@
                 gallery.appendChild(figure)
               }
             });
+      
+      
+      addEvent(document, "keydown", function (e) {
+        e = e || window.event;
+        console.log(e.keyCode);
+
+        if (e.keyCode === enter) {
+          
         } else if (e.keyCode === leftArrow) {
           if (idx > 0) {
             idx = idx - 1;
