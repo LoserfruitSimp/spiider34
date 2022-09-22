@@ -30,6 +30,12 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
+      .galleryItem {
+        width: 50%;
+        height: 50%;
+        object-fit: scale-down;
+      }
+
       .gallery {
         z-index: 2;
         position: absolute;
@@ -37,8 +43,8 @@
         width: 90%;
         height: 90%;
         top: 5%;
-        grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(8, 5vw);
+        grid-template-columns: auto auto auto;
+
         grid-gap: 5%;
       }
     </style>
@@ -46,7 +52,38 @@
       src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
       id="img"
     />
-    <div class="gallery"></div>
+    <div class="gallery">
+      <figure>
+        <img
+          class="galleryItem"
+          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+        />
+      </figure>
+      <figure>
+        <img
+          class="galleryItem"
+          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+        />
+      </figure>
+      <figure>
+        <img
+          class="galleryItem"
+          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+        />
+      </figure>
+      <figure>
+        <img
+          class="galleryItem"
+          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+        />
+      </figure>
+      <figure>
+        <img
+          class="galleryItem"
+          src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+        />
+      </figure>
+    </div>
 
     <p class="wrapper">
       <strong>spiider34 is a better way to consume rule34 content!</strong>
