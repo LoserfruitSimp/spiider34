@@ -62,6 +62,12 @@
         size="30"
         autocomplete="off"
       />
+      <h3>
+        Tags:
+      </h3>
+      <p id="curTags">
+        
+      </p>
     </div>
 
     <script>
@@ -99,7 +105,7 @@
             return;
           }
 
-          setActiveImg(tagData[idx].file_url);
+          setActiveImg(tagData[idx]);
 
           var gallery = document.getElementsByClassName("gallery")[0];
           gallery.innerHTML = "";
@@ -110,9 +116,8 @@
 
             img.class = "galleryItem";
             img.src = tagData[i].preview_url;
-            img.id = (i - 1)
-
-            img.addEventListener("click", myScript);
+            img.onclick = function() { click(img) }
+            img.id = i
             
             figure.appendChild(img);
             gallery.appendChild(figure);
@@ -133,12 +138,12 @@
         } else if (e.keyCode === leftArrow) {
           if (idx > 0) {
             idx = idx - 1;
-            setActiveImg(tagData[idx].file_url);
+            setActiveImg(tagData[idx]);
           }
         } else if (e.keyCode === rightArrow) {
           if (idx <= tagData.length + 1) {
             idx = idx + 1;
-            setActiveImg(tagData[idx].file_url);
+            setActiveImg(tagData[idx]);
           }
         } else if (e.keyCode === m) {
           if (document.activeElement.id !== "search") {
@@ -150,13 +155,16 @@
       });
 
       function click(img) {
-        idx = img.id;
-        setActiveImg(tagData[idx].file_url);
+        idx = Number(img.id);
+        setActiveImg(tagData[idx]);
       }
 
-      function setActiveImg(url) {
+      function setActiveImg(data) {
         var image = document.getElementById("img");
-        image.src = url;
+        var tagsText = document.getElementById("curTags")
+        
+        tagsText.innerHTML = data.tags
+        image.src = data.file_url;
       }
 
       function addEvent(element, eventName, callback) {
