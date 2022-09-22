@@ -1,7 +1,7 @@
 const path = require("path");
-const postRouter = require('./routing/posts');
-const imageRouter = require("./routing/images");
-const commentRouter = require('./routing/comments');
+const postRouter = require('./src/routing/posts');
+const imageRouter = require("./src/routing/images");
+const commentRouter = require('./src/routing/comments');
 
 const port = process.env.PORT
 
