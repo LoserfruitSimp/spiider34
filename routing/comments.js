@@ -1,13 +1,11 @@
 const express = require("express");
 const scraper = require("../misc/scraper");
-const commentRouter = express.Router();
+const commentRouter = express.Router({ mergeParams: true });
 
 commentRouter.get("/", function (req, res) {
-  var baseURI = "";
-  if (req.baseUrl.substring(7) == "hypnoh") {
+  var baseURI = "https://rule34.xxx";
+  if (req.params.type == "hypnoh") {
     baseURI = "https://hypnohub.net";
-  } else {
-    baseURI = "https://rule34.xxx";
   }
 
   const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
