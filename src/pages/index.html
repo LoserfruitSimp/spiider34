@@ -29,13 +29,28 @@
         padding: 5px;
         font-family: Arial, Helvetica, sans-serif;
       }
+
+      .gallery {
+        z-index: 2;
+        position: absolute;
+        display: grid;
+        width: 90%;
+        height: 90%;
+        top: 5%;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 5vw);
+        grid-gap: 5%;
+      }
     </style>
     <img
       src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
       id="img"
     />
+    <div class="gallery"></div>
 
-    <p class="wrapper"><strong>spiider34 is a better way to consume rule34 content!</strong></p>
+    <p class="wrapper">
+      <strong>spiider34 is a better way to consume rule34 content!</strong>
+    </p>
     <div class="wrapper">
       <input
         type="text"
