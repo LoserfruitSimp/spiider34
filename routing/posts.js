@@ -1,9 +1,11 @@
 const express = require('express');
 const scraper = require('../misc/scraper');
+const postRouter = express.Router();
 
 const baseUrl = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index';
+const host = "https://spiider34.glitch.me"
 
-function getPosts(req) {
+postRouter.get('/', function (req, res) {
     let url = getUrl(req);
 
     scraper(url,
@@ -12,7 +14,7 @@ function getPosts(req) {
                 let result = this.attribs;
 
                 // get comments url
-                result.comments_url = process.env.HOST + '/comments?post_id=' + result.id;
+                result.comments_url = host + '/comments?post_id=' + result.id;
 
                 // convert tags
                 result.tags = result.tags.split(" ")
@@ -29,18 +31,18 @@ function getPosts(req) {
                 }
 
                 //modify urls
-                result.file_url = process.env.HOST + "/images?url=" + result.file_url;
-                result.preview_url = process.env.HOST + "/images?url=" + result.preview_url;
-                result.sample_url = process.env.HOST + "/images?url=" + result.sample_url;
+                result.file_url = host + "/images?url=" + result.file_url;
+                result.preview_url = host + "/images?url=" + result.preview_url;
+                result.sample_url = host + "/images?url=" + result.sample_url;
                 result.creator_url = "https://rule34.xxx/index.php?page=account&s=profile&id=" + result.creator_id;
 
                 return result;
             }).get();
         },
         function (comments) {
-            reply.json(comments);
+            res.json(comments);
         });
-};
+});
 
 function getUrl(req){
     let url = baseUrl;
