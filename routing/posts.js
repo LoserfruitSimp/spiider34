@@ -1,19 +1,13 @@
 const express = require("express");
 const scraper = require("../misc/scraper");
 const postRouter = express.Router({ mergeParams: true });
-
-const hostAdress = process.env.HOST_ADDRESS + ":"
-
-const host = "https://spiider34.glitch.me";
+const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
 
 postRouter.get("/", function (req, res) {
-  const cite = req.params.type
-  
+  const cite = req.params.type;
   var baseURI = "https://rule34.xxx";
-  if (cite == "hypnoh") {
-    baseURI = "https://hypnohub.net";
-  }
-  
+  if (cite == "hypnoh") baseURI = "https://hypnohub.net";
+
   const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
 
@@ -25,7 +19,8 @@ postRouter.get("/", function (req, res) {
           let result = this.attribs;
 
           // get comments url
-          result.comments_url = host + "/comments/" + cite + "?post_id=" + result.id;
+          result.comments_url =
+            host + "/comments/" + cite + "?post_id=" + result.id;
 
           // convert tags
           result.tags = result.tags.split(" ").filter((tag) => tag !== "");
@@ -42,11 +37,26 @@ postRouter.get("/", function (req, res) {
           } else {
             result.type = "image";
           }
-        
+
           //modify urls
-          result.file_url = host + "/images/" + req.baseUrl.substring(7) + "?url=" + result.file_url;
-          result.preview_url = host + "/images/" + req.baseUrl.substring(7) + "?url=" + result.preview_url;
-          result.sample_url = host + "/images/" + req.baseUrl.substring(7) + "?url=" + result.sample_url;
+          result.file_url =
+            host +
+            "/images/" +
+            req.baseUrl.substring(7) +
+            "?url=" +
+            result.file_url;
+          result.preview_url =
+            host +
+            "/images/" +
+            req.baseUrl.substring(7) +
+            "?url=" +
+            result.preview_url;
+          result.sample_url =
+            host +
+            "/images/" +
+            req.baseUrl.substring(7) +
+            "?url=" +
+            result.sample_url;
           result.creator_url =
             baseURI +
             "/index.php?page=account&s=profile&id=" +
