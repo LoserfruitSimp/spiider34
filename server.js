@@ -7,10 +7,12 @@ const path = require("path");
 const postRouter = require('./routing/posts');
 
 // Require the fastify framework and instantiate it
-const fastify = require("fastify")({
-  // Set this to true for detailed logging:
-  logger: true,
-});
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+
 
 // ADD FAVORITES ARRAY VARIABLE FROM TODO HERE
 

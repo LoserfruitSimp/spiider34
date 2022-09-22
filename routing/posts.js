@@ -3,7 +3,7 @@ const scraper = require('../misc/scraper');
 
 const baseUrl = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index';
 
-function getPosts(req, reply)
+function getPosts(req) {
     let url = getUrl(req);
 
     scraper(url,
@@ -38,9 +38,9 @@ function getPosts(req, reply)
             }).get();
         },
         function (comments) {
-            res.json(comments);
+            reply.json(comments);
         });
-});
+};
 
 function getUrl(req){
     let url = baseUrl;
