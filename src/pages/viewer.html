@@ -68,7 +68,8 @@
       const m = 77;
       
       const tags = document.baseURI.substring(42).replaceAll('%20', " ")
-      const cite = document.baseURI.substring(36)
+      const cite = document.baseURI.substring(30).slice(0, 6)
+      
       var tagData = [];
       var idx = 0;
       
@@ -80,7 +81,7 @@
       
       // Sets the tag
       fetch(
-            `https://spiider34.glitch.me/posts?tags=${
+            `https://spiider34.glitch.me/posts/${cite}?tags=${
               tags
             }`
           )
@@ -119,7 +120,7 @@
         if (e.keyCode === enter) {
           if (document.activeElement.id === "search") {
             window.location.replace(
-              `https://spiider34.glitch.me/p?tags=${
+              `https://spiider34.glitch.me/p/${cite}?tags=${
                 document.getElementById("search").value
               }`
             );

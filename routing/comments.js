@@ -23,7 +23,7 @@ commentRouter.get("/", function (req, res) {
       return $("comment")
         .map(function () {
           let result = this.attribs;
-          result.post_url = process.env.HOST + "/posts?id=" + result.post_id;
+          result.post_url = process.env.HOST + "/posts/" + req.params.type + "?id=" + result.post_id;
           return result;
         })
         .get();
