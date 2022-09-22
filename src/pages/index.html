@@ -39,12 +39,8 @@
       .gallery {
         z-index: 2;
         background: rgba(105,105,105, 0.75);
-        border-radius: 1%;
         position: absolute;
         display: grid;
-        width: 90%;
-        height: 90%;
-        top: 5%;
         grid-template-columns: auto auto auto;
       }
     </style>
@@ -53,9 +49,7 @@
       id="img"
     />
     
-    <div class="gallery">
-      
-    </div>
+    <div class="gallery" style="visibility: hidden;"></div>
 
     <p class="wrapper">
       <strong>spiider34 is a better way to consume rule34 content!</strong>
@@ -67,6 +61,7 @@
         id="search"
         size="30"
         autocomplete="off"
+        value="star_wars"
       />
     </div>
 
@@ -96,10 +91,14 @@
               setActiveImg(tagData[idx].file_url);
             
               for (var i = 0; i < tagData.length; i++) {
-                const template = document.getElementById("figure");
-                const clone = template.cloneNode(true);
-                clone.firstElementChild.src = tagData[i].preview_url
-                clone.style = ""
+                const figure = document.createElement("figure")
+                const img = document.createElement("img")
+                
+                img.class = "galleryItem"
+                img.src = tagData[i].preview_url
+                
+                figure.appendChild(img)
+                document.getElementsByClassName("gallery")[0].appendChild(figure)
               }
             });
         } else if (e.keyCode === leftArrow) {
