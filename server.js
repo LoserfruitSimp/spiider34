@@ -21,8 +21,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/src/pages/index.html'));
 });
 
-app.get('/p/:type', function(req, res) {
-  console.log(req.params)
+app.get('/p/:type/:quality', function(req, res) {
   res.sendFile(path.join(__dirname, '/src/pages/viewer.html'));
 });
 
