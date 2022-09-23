@@ -5,13 +5,20 @@ const cite = document.baseURI.substring(30).slice(0, 6);
 const toggle = { true: "visibility: visible;", false: "visibility: hidden;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
+var authorText = document.getElementById("author");
+var sourseText = document.getElementById("sourse");
+var dateText = document.getElementById("uploaded");
+var tagsText = document.getElementById("curTags");
+var tagsElement = document.getElementById("tags");
+var search = document.getElementById("search");
 var image = document.getElementById("img");
+
 var active = false;
 var tagData = [];
 var idx = 0;
 
-document.getElementById("tags").innerHTML = tags;
-document.getElementById("search").value = tags;
+tagsElement.innerHTML = tags;
+search.value = tags;
 
 fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
   .then((response) => response.json())
@@ -46,56 +53,50 @@ addEvent(document, "keydown", function (e) {
 
   switch (e.keyCode) {
     case leftArrow:
-      if (idx > 0) {
+      if (idx > 0 && !checkSearchActive()) {
         idx = idx - 1;
         setActivePost(tagData[idx]);
       }
       break;
-    case rightArrow
-  }
-  if (e.keyCode === enter) {
-    if (document.activeElement.id === "search") {
-      window.location.replace(
-        `https://spiider34.glitch.me/p/${cite}?tags=${
-          document.getElementById("search").value
-        }`
-      );
-    }
-  } else if (e.keyCode === leftArrow) {
-    
-  } else if (e.keyCode === rightArrow) {
-    if (idx <= tagData.length + 1) {
-      idx = idx + 1;
-      setActivePost(tagData[idx]);
-    }
-  } else if (e.keyCode === m) {
-    if (document.activeElement.id !== "search") {
-      active = !active;
-      document.getElementsByClassName("gallery")[0].style = toggle[active];
-    }
+    case rightArrow:
+      if (idx <= (tagData.length + 1) && !checkSearchActive()){
+        idx = idx + 1;
+        setActivePost(tagData[idx]);
+      }
+      break;
+    case m:
+      if (!checkSearchActive()) {
+        active = !active;
+        gallery.style = toggle[active];
+      }
+      break;
+    case enter:
+       window.location.replace(`https://spiider34.glitch.me/p/${cite}?tags=${search.value}`);
+      break;
   }
 });
-
+         
 function click(img) {
   idx = Number(img.id);
   setActivePost(tagData[idx]);
 }
 
 function setActivePost(data) {
-  var image = document.getElementById("img");
-  var tagsText = document.getElementById("curTags");
-  var authorText = document.getElementById("author");
-  var sourseText = document.getElementById("sourse");
-  var dateText = document.getElementById("uploaded");
-
   tagsText.innerHTML = data.tags.join(" ");
   authorText.innerHTML = data.creator_url;
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
-
   image.src = data.file_url;
 }
 
+function checkSearchActive() {
+  if (document.activeElement.id === "search") {
+    return true
+  } else {
+    return false
+  }
+}
+  
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
     element.addEventListener(eventName, callback, false);
