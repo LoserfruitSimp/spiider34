@@ -4,9 +4,9 @@ const postRouter = express.Router({ mergeParams: true });
 const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
 
 postRouter.get("/", function (req, res) {
-  const cite = req.params.type;
+  const cite = req.query.sourse;
   var baseURI = "https://rule34.xxx";
-  if (cite == "hypnoh") baseURI = "https://hypnohub.net";
+  if (cite == "hypnohub") baseURI = "https://hypnohub.net";
 
   const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);

@@ -12,16 +12,16 @@ const app = express();
 app.use(cors());
 
 console.log(process.env)
-app.use('/posts/:type', postRouter);
-app.use("/images/:type", imageRouter);
-app.use('/comments/:type', commentRouter);
+app.use('/posts', postRouter);
+app.use("/images", imageRouter);
+app.use('/comments', commentRouter);
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/src/pages/index.html'));
 });
 
-app.get('/p/:type/:quality', function(req, res) {
+app.get('/p', function(req, res) {
   res.sendFile(path.join(__dirname, '/src/pages/viewer.html'));
 });
 

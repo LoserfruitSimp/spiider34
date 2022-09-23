@@ -4,7 +4,7 @@ const commentRouter = express.Router({ mergeParams: true });
 
 commentRouter.get("/", function (req, res) {
   var baseURI = "https://rule34.xxx";
-  if (req.params.type == "hypnoh") {
+  if (req.query.sourse == "hypnohub") {
     baseURI = "https://hypnohub.net";
   }
 

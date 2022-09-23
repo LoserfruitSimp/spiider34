@@ -1,8 +1,6 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
 const tags = document.baseURI.substring(47).replaceAll("%20", " ");
-const quality = document.baseURI.substring(37).slice(0, 4);
-const cite = document.baseURI.substring(30).slice(0, 6);
 const toggle = { true: "display: grid;", false: "display: none;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
@@ -22,7 +20,7 @@ var idx = 0;
 tagsElement.innerHTML = tags;
 search.value = tags;
 
-fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
+fetch(`https://spiider34.glitch.me/posts?tags=${tags}&sourse=${data.sourse}`)
   .then((response) => response.json())
   .then((data) => {
     tagData = data;
@@ -76,7 +74,7 @@ addEvent(document, "keydown", function (e) {
       }
       break;
     case enter:
-       window.location.replace(`https://spiider34.glitch.me/p/${cite}?tags=${search.value}`);
+       window.location.replace(`https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}`);
       break;
   }
 });
@@ -99,7 +97,7 @@ function setActivePost(data) {
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
   
-  if (quality === "full") {
+  if (data.quality === "Full") {
       image.src = data.file_url;
   } else {
       image.src = data.sample_url;
