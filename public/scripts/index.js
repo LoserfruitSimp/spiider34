@@ -15,7 +15,7 @@ addEvent(document, "keydown", function (e) {
   if (e.keyCode === enter) {
     if (document.activeElement.id === "search") {
       window.location.replace(
-        `https://spiider34.glitch.me/p/${data.sourse}/${quality}?tags=${
+        `https://spiider34.glitch.me/p/${data.sourse}/${data.quality}?tags=${
           search.value
         }`
       );
@@ -24,13 +24,13 @@ addEvent(document, "keydown", function (e) {
 });
 
 function updateCite(e) { 
-  if (e.srcElement.checked) { cite = "hypnoh" } else { cite = "rule34" } 
-  typeSetting.innerHTML = 'Sourse: ' + cite 
+  if (e.srcElement.checked) { setSourse("hypnohub") } else { setSourse("Rule34") } 
+  typeSetting.innerHTML = 'Sourse: ' + data.sourse 
 }
 
 function updateQuality(e) { 
-  if (e.srcElement.checked) { quality = "full" } else { quality = "samp" } 
-  qualitySetting.innerHTML = 'Quality: ' + quality 
+  if (e.srcElement.checked) { setQuality("Full") } else { setQuality("Sample") } 
+  qualitySetting.innerHTML = 'Quality: ' + data.quality 
 }
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
@@ -41,3 +41,6 @@ function addEvent(element, eventName, callback) {
     element["on" + eventName] = callback;
   }
 }
+
+typeSetting.innerHTML = 'Sourse: ' + data.sourse 
+qualitySetting.innerHTML = 'Quality: ' + data.quality 
