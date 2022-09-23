@@ -4,15 +4,16 @@
     <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"/>
     <link rel="stylesheet" href="/static/styles/slider.css"/>
     <link rel="stylesheet" href="/static/styles/main.css"/>
+      <link rel="stylesheet" href="/static/styles/awesomplete.css"/>
   </head>
   <body>
     <img src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336" id="img"/>
     <div class="gallery" style="visibility: hidden"></div>
     <p class="wrapper"> <strong>spiider34 is a better way to consume rule34 content!</strong> </p>
     <div class="wrapper">
-      <label class="settings" id="typesetting">Sourse: </label>
+      <label class="settings" id="typesetting">Sourse: Rule34</label>
       <label class="settings">- Settings -</label>
-      <label class="settings" id="qualitysetting">Quality: </label>
+      <label class="settings" id="qualitysetting">Quality: Sample</label>
       <br>
       <input type="text" placeholder="daddy's finder..." id="search" size="30" autocomplete="off"/>
       <br><br>
@@ -27,7 +28,10 @@
          <span class="slider round"></span>
       </label> 
     </div>
+    <input class="awesomplete"
+       data-list="Ada, Java, JavaScript, Brainfuck, LOLCODE, Node.js, Ruby on Rails" />
     <script src="/static/scripts/settings.js"></script>
     <script src="/static/scripts/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js" integrity="sha512-HcBl0GSJvt4Qecm4srHapirUx0HJDi2zYXm6KUKNNUGdTIN9cBwakVZHWmRVj4MKgy1AChqhWGYcMDbRKgO0zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </body>
 </html>
