@@ -29,10 +29,12 @@ app.get("/autocomplete", function (req, res) {
   axios
     .get("https://rule34.xxx/public/autocomplete.php?q=" + req.query.q)
     .then(function (response) {
+    console.log(response)
       res.send(response);
     })
     .catch(function (error) {
       res.send(error.message);
+      console.error(error);
     });
 });
 

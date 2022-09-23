@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"/>
     <link rel="stylesheet" href="/static/styles/slider.css"/>
     <link rel="stylesheet" href="/static/styles/main.css"/>
-      <link rel="stylesheet" href="/static/styles/awesomplete.css"/>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
   </head>
   <body>
     <img src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336" id="img"/>
@@ -28,10 +28,10 @@
          <span class="slider round"></span>
       </label> 
     </div>
-    <input class="awesomplete"
-       data-list="Ada, Java, JavaScript, Brainfuck, LOLCODE, Node.js, Ruby on Rails" />
+    <div class="awesomplete"><input id="tags" name="tags" size="30" type="text" value="" autocomplete="off" aria-autocomplete="list"><ul hidden=""></ul><span class="visually-hidden" role="status" aria-live="assertive" aria-relevant="additions"></span></div>
     <script src="/static/scripts/settings.js"></script>
     <script src="/static/scripts/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js" integrity="sha512-HcBl0GSJvt4Qecm4srHapirUx0HJDi2zYXm6KUKNNUGdTIN9cBwakVZHWmRVj4MKgy1AChqhWGYcMDbRKgO0zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/scripts/autocomplete.js"></script>
+    <script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
   </body>
 </html>

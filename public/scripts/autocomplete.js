@@ -276,7 +276,7 @@ function setUp(elem) {
                 a.list = [];
             } else {
                 var ajax = new XMLHttpRequest();
-                ajax.open("GET", "/public/autocomplete.php?q=" + val, true);
+                ajax.open("GET", "/autocomplete?q=" + val, true);
                 ajax.onload = function() {
                     var list = JSON.parse(ajax.responseText);
                     a.list = list;
