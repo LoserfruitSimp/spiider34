@@ -83,6 +83,9 @@ addEvent(document, "keydown", function (e) {
 function click(img) {
   idx = Number(img.id);
   setActivePost(tagData[idx]);
+  
+  active = !active;
+  gallery.style = toggle[active];
 }
 
 function setActivePost(data) {
