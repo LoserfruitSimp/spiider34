@@ -1,6 +1,7 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
-const tags = document.baseURI.substring(42).replaceAll("%20", " ");
+const tags = document.baseURI.substring(47).replaceAll("%20", " ");
+const quality = document.baseURI.substring(37).slice(0, 4);
 const cite = document.baseURI.substring(30).slice(0, 6);
 const toggle = { true: "display: grid;", false: "display: none;" };
 
@@ -89,7 +90,12 @@ function setActivePost(data) {
   authorText.innerHTML = data.creator_url;
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
-  image.src = data.file_url;
+  
+  if (quality === "full") {
+      image.src = data.file_url;
+  } else {
+      image.src = data.sample_url;
+  }
 }
 
 function checkSearchActive() {

@@ -7,7 +7,7 @@ var typeSwitch = document.getElementById("type")
 var search = document.getElementById("search")
 
 var cite = "rule34";
-var quality = "full";
+var quality = "samp";
 
 addEvent(typeSwitch, "change", updateCite)
 addEvent(qualitySwitch, "change", updateQuality)
@@ -16,13 +16,6 @@ addEvent(document, "keydown", function (e) {
   e = e || window.event;
 
   if (e.keyCode === enter) {
-    var cite = "rule34";
-    var quality = "full"
-    
-    if (typeSwitch.checked) {
-      cite = "hypnoh";
-    }
-  
     if (document.activeElement.id === "search") {
       window.location.replace(
         `https://spiider34.glitch.me/p/${cite}/${quality}?tags=${
@@ -39,7 +32,7 @@ function updateCite(e) {
 }
 
 function updateQuality(e) { 
-  if (e.srcElement.checked) { quality = "samp" } else { quality = "full" } 
+  if (e.srcElement.checked) { quality = "full" } else { quality = "samp" } 
   qualitySetting.innerHTML = 'Quality: ' + quality 
 }
 function addEvent(element, eventName, callback) {
