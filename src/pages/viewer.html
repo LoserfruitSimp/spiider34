@@ -6,12 +6,15 @@
   </head>
   <body>
     <button class="home" id="home"><strong>Home</strong></button>
-    <h2 id="tags" class="wrapper" style="color: white"></h2>
+    <h2 id="tagsH" class="wrapper" style="color: white"></h2>
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif?20140201131911" id="img"/>
     <div class="gallery" style="visibility: hidden"></div>
     <div class="wrapper">
-      <input type="text" placeholder="daddy's finder..." id="search" size="30" autocomplete="off"/>
-      <!-- Tags -->
+      <div class="awesomplete">
+        <input id="tags" placeholder="dadd's finder..." name="tags" size="30" type="text" value="" autocomplete="off" aria-autocomplete="list">
+        <ul hidden=""></ul>
+        <span class="visually-hidden" role="status" aria-live="assertive" aria-relevant="additions"></span>
+      </div>      <!-- Tags -->
       <p> <strong> Tags:</strong> </p>
       <p id="curTags"></p>
       <!-- Author -->

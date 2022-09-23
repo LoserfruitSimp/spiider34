@@ -8,7 +8,7 @@ var authorText = document.getElementById("author");
 var sourseText = document.getElementById("sourse");
 var dateText = document.getElementById("uploaded");
 var tagsText = document.getElementById("curTags");
-var tagsElement = document.getElementById("tags");
+var tagsElement = document.getElementById("tagsH");
 var search = document.getElementById("search");
 var image = document.getElementById("img");
 var home = document.getElementById("home");
@@ -73,16 +73,6 @@ addEvent(document, "keydown", function (e) {
         gallery.style = toggle[active];
       }
       break;
-    case enter:
-      if (document.activeElement.id === "search") {
-        if (search.value.includes("&")) {
-          window.location.replace(`https://spiider34.glitch.me`);
-        } else {
-          window.location.replace(`https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}&quality=${data.quality}`);
-        }
-      }
-      break;
-  }
 });
        
 addEvent(home, "click", function (e) {
@@ -122,14 +112,4 @@ function testImage(img) {
     var tester = new Image();
     tester.onerror = function() { img.parentElement.remove() };
     tester.src = img.src;
-}
-
-function addEvent(element, eventName, callback) {
-  if (element.addEventListener) {
-    element.addEventListener(eventName, callback, false);
-  } else if (element.attachEvent) {
-    element.attachEvent("on" + eventName, callback);
-  } else {
-    element["on" + eventName] = callback;
-  }
 }

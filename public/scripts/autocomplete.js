@@ -228,20 +228,6 @@
     }, "undefined" != typeof Document && ("loading" !== document.readyState ? s() : document.addEventListener("DOMContentLoaded", s)), r.$ = i, r.$$ = n, "undefined" != typeof self && (self.Awesomplete = r), "object" == typeof module && module.exports && (module.exports = r)
 }();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var decodeEntities = (function() {
     // this prevents any overhead from creating the object each time
     var element = document.createElement('div');
@@ -271,7 +257,6 @@ function setUp(elem) {
         elem.oninput = function(evt) {
             var val = evt.target.value;
             val = val.match(/[^ -][^ ]*$/)[0];
-            console.log("GET FOR", val);
             if (evt.keyCode == 32) {
                 a.list = [];
             } else {
@@ -298,7 +283,6 @@ function setUp(elem) {
                 var ITEM = function (text, input) {
                     var html = input.trim() === "" ? text.label : text.label.replace(RegExp(Awesomplete.$.regExpEscape(input.trim()), "gi"), "<mark>$&</mark>");
 
-                    console.log(text);
                     return Awesomplete.$.create("li", {
                         innerHTML: html,
                         "aria-selected": "false",
@@ -355,4 +339,18 @@ function autocomplete_setup() {
 
 window.addEventListener('DOMContentLoaded', function(){
     autocomplete_setup();
+});
+
+addEvent(document, "keydown", function (e) {
+  e = e || window.event;
+
+  if (e.keyCode === enter) {
+    if (document.activeElement.id === "search") {
+      if (search.value.includes("&" || "?")) {
+        window.location.replace(`https://spiider34.glitch.me`);
+      } else {
+        window.location.replace(`https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}&quality=${data.quality}`);
+      }
+    }
+  }
 });
