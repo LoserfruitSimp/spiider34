@@ -13,6 +13,7 @@ var tagsText = document.getElementById("curTags");
 var tagsElement = document.getElementById("tags");
 var search = document.getElementById("search");
 var image = document.getElementById("img");
+var home = document.getElementById("home");
 
 var active = false;
 var tagData = [];
@@ -79,7 +80,11 @@ addEvent(document, "keydown", function (e) {
       break;
   }
 });
-         
+       
+addEvent(home, "click", function (e) {
+  window.location.replace(`https://spiider34.glitch.me`);
+});
+
 function click(img) {
   idx = Number(img.id);
   setActivePost(tagData[idx]);
