@@ -22,10 +22,18 @@ img {
 }
 
 .galleryItem {
-  width: 100%;
-  height: 100%;
   object-fit: scale-down;
 }
+
+.gallery figure img {
+	opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover figure:hover img {
+	opacity: .5;
+}
+
 
 .gallery {
   z-index: 2;

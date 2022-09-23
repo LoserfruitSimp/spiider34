@@ -37,12 +37,13 @@ fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
     for (var i = 0; i < tagData.length; i++) {
       const figure = document.createElement("figure");
       const img = document.createElement("img");
-
-      img.class = "galleryItem";
+      
+      img.classList.add("galleryItem");
       img.src = tagData[i].preview_url;
       img.onclick = function () { click(img) };
       img.id = i;
-
+      
+      figure.classList.add("hover")
       figure.appendChild(img);
       gallery.appendChild(figure);
     }
