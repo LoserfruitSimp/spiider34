@@ -6,9 +6,6 @@ var qualitySwitch = document.getElementById("quality")
 var typeSwitch = document.getElementById("type")
 var search = document.getElementById("search")
 
-var cite = "rule34";
-var quality = "samp";
-
 addEvent(typeSwitch, "change", updateCite)
 addEvent(qualitySwitch, "change", updateQuality)
 
@@ -18,7 +15,7 @@ addEvent(document, "keydown", function (e) {
   if (e.keyCode === enter) {
     if (document.activeElement.id === "search") {
       window.location.replace(
-        `https://spiider34.glitch.me/p/${cite}/${quality}?tags=${
+        `https://spiider34.glitch.me/p/${data.sourse}/${quality}?tags=${
           search.value
         }`
       );
