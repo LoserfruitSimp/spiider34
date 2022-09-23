@@ -11,7 +11,6 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-console.log(process.env)
 app.use('/posts', postRouter);
 app.use("/images", imageRouter);
 app.use('/comments', commentRouter);

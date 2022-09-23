@@ -5,9 +5,9 @@ const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
 
 postRouter.get("/", function (req, res) {
   const cite = req.query.sourse;
-  console.log(cite)
+
   var baseURI = "https://rule34.xxx";
-  if (cite == "hypnohub") baseURI = "https://hypnohub.net";
+  if (cite === "hypnohub") baseURI = "https://hypnohub.net";
 
   const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
@@ -38,7 +38,6 @@ postRouter.get("/", function (req, res) {
           } else {
             result.type = "image";
           }
-
           //modify urls
           result.file_url =
             host +
@@ -62,7 +61,6 @@ postRouter.get("/", function (req, res) {
             baseURI +
             "/index.php?page=account&s=profile&id=" +
             result.creator_id;
-
           return result;
         })
         .get();
@@ -74,12 +72,11 @@ postRouter.get("/", function (req, res) {
 });
 
 function getUrl(req) {
-  var baseURI = "";
-  if (req.baseUrl.substring(7) == "hypnoh") {
-    baseURI = "https://hypnohub.net";
-  } else {
-    baseURI = "https://rule34.xxx";
-  }
+  const cite = req.query.sourse;
+
+  var baseURI = "https://rule34.xxx";
+  if (cite === "hypnohub") baseURI = "https://hypnohub.net";
+
 
   const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
 
