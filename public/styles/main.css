@@ -30,7 +30,7 @@ img {
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
-.hover figure:hover img {
+.gallery figure:hover img {
 	opacity: .5;
 }
 

@@ -2,7 +2,7 @@ const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
 const tags = document.baseURI.substring(42).replaceAll("%20", " ");
 const cite = document.baseURI.substring(30).slice(0, 6);
-const toggle = { true: "visibility: visible;", false: "visibility: hidden;" };
+const toggle = { true: "display: grid;", false: "display: none;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
 var authorText = document.getElementById("author");
@@ -97,7 +97,13 @@ function checkSearchActive() {
     return false
   }
 }
-  
+
+async function testImage(imagege) {
+    var tester = new Image();
+    tester.onerror = imageNotFound;
+    tester.src=URL;
+}
+
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
     element.addEventListener(eventName, callback, false);
