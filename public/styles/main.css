@@ -39,21 +39,26 @@ img {
 }
 
 .home {
-    background-size: contain;
     background-image: url(https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png?v=1663802054959);
+    background-size: contain;
+    font-style: normal;
+    border-radius: 20%;
     cursor: pointer;
     border: none;
-    width: 50px;
-    border-radius: 20%;
     height: 50px;
+    width: 50px;
+  
+    position: absolute;
+    z-index: 3;
+    bottom: 1%;
+    left: 1%;
+  
     color: white;
-    font-style: normal;
-  opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  	-webkit-transition: .3s ease-in-out;
 }
 .home:hover {
-  te
+    text-shadow: 2px 1px #000000;
 }
 
 .gallery {
