@@ -5,6 +5,7 @@ const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
 
 postRouter.get("/", function (req, res) {
   const cite = req.query.sourse;
+  console.log(cite)
   var baseURI = "https://rule34.xxx";
   if (cite == "hypnohub") baseURI = "https://hypnohub.net";
 

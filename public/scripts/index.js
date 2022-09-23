@@ -14,8 +14,11 @@ addEvent(document, "keydown", function (e) {
 
   if (e.keyCode === enter) {
     if (document.activeElement.id === "search") {
-      window.location.replace(
-        `https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}&quality=${data.quality}`);
+      if (search.value.includes("&")) {
+        window.location.replace(`https://spiider34.glitch.me`);
+      } else {
+        window.location.replace(`https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}&quality=${data.quality}`);
+      }
     }
   }
 });

@@ -1,6 +1,6 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
-const tags = document.baseURI.substring(47).replaceAll("%20", " ");
+const tags = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')[0].substring(5).replaceAll("%20", " ");
 const toggle = { true: "display: grid;", false: "display: none;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
@@ -74,7 +74,13 @@ addEvent(document, "keydown", function (e) {
       }
       break;
     case enter:
-       window.location.replace(`https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}`);
+      if (document.activeElement.id === "search") {
+        if (search.value.includes("&")) {
+          window.location.replace(`https://spiider34.glitch.me`);
+        } else {
+          window.location.replace(`https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}&quality=${data.quality}`);
+        }
+      }
       break;
   }
 });
