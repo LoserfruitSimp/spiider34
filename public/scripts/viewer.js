@@ -46,6 +46,8 @@ fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
       figure.classList.add("hover")
       figure.appendChild(img);
       gallery.appendChild(figure);
+      
+      testImage(img)
     }
   });
 
@@ -98,10 +100,10 @@ function checkSearchActive() {
   }
 }
 
-async function testImage(imagege) {
+function testImage(img) {
     var tester = new Image();
-    tester.onerror = imageNotFound;
-    tester.src=URL;
+    tester.onerror = function() { img.parentElement.remove() };
+    tester.src = img.src;
 }
 
 function addEvent(element, eventName, callback) {
