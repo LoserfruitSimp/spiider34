@@ -1,24 +1,18 @@
-const leftArrow = 37;
-const rightArrow = 39;
-const enter = 13;
-const m = 77;
+const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
 const tags = document.baseURI.substring(42).replaceAll("%20", " ");
 const cite = document.baseURI.substring(30).slice(0, 6);
+const toggle = { true: "visibility: visible;", false: "visibility: hidden;" };
 
+var gallery = document.getElementsByClassName("gallery")[0];
+var image = document.getElementById("img");
+var active = false;
 var tagData = [];
 var idx = 0;
-
-const toggle = {
-  true: "visibility: visible;",
-  false: "visibility: hidden;",
-};
-var active = false;
 
 document.getElementById("tags").innerHTML = tags;
 document.getElementById("search").value = tags;
 
-// Sets the tag
 fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
   .then((response) => response.json())
   .then((data) => {
@@ -26,14 +20,11 @@ fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
     idx = 0;
 
     if (tagData.length === 0) {
-      var image = document.getElementById("img");
       image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
       return;
     }
 
-    setActiveImg(tagData[idx]);
-
-    var gallery = document.getElementsByClassName("gallery")[0];
+    setActivePost(tagData[idx]);
     gallery.innerHTML = "";
 
     for (var i = 0; i < tagData.length; i++) {
@@ -42,9 +33,7 @@ fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
 
       img.class = "galleryItem";
       img.src = tagData[i].preview_url;
-      img.onclick = function () {
-        click(img);
-      };
+      img.onclick = function () { click(img) };
       img.id = i;
 
       figure.appendChild(img);
@@ -55,6 +44,15 @@ fetch(`https://spiider34.glitch.me/posts/${cite}?tags=${tags}`)
 addEvent(document, "keydown", function (e) {
   e = e || window.event;
 
+  switch (e.keyCode) {
+    case leftArrow:
+      if (idx > 0) {
+        idx = idx - 1;
+        setActivePost(tagData[idx]);
+      }
+      break;
+    case rightArrow
+  }
   if (e.keyCode === enter) {
     if (document.activeElement.id === "search") {
       window.location.replace(
@@ -64,14 +62,11 @@ addEvent(document, "keydown", function (e) {
       );
     }
   } else if (e.keyCode === leftArrow) {
-    if (idx > 0) {
-      idx = idx - 1;
-      setActiveImg(tagData[idx]);
-    }
+    
   } else if (e.keyCode === rightArrow) {
     if (idx <= tagData.length + 1) {
       idx = idx + 1;
-      setActiveImg(tagData[idx]);
+      setActivePost(tagData[idx]);
     }
   } else if (e.keyCode === m) {
     if (document.activeElement.id !== "search") {
@@ -83,10 +78,10 @@ addEvent(document, "keydown", function (e) {
 
 function click(img) {
   idx = Number(img.id);
-  setActiveImg(tagData[idx]);
+  setActivePost(tagData[idx]);
 }
 
-function setActiveImg(data) {
+function setActivePost(data) {
   var image = document.getElementById("img");
   var tagsText = document.getElementById("curTags");
   var authorText = document.getElementById("author");
