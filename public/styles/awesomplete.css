@@ -68,22 +68,19 @@
 }
 .awesomplete > ul > li:hover,
 .awesomplete > ul > li[aria-selected="true"] {
-  background: #d2ffcd;
+  background: rgba(239, 251, 255, 1);
   color: #009;
 }
 .awesomplete mark {
-  background: rgba(173, 216, 230, 0.9);
+  background: rgba(173, 216, 230, 0.95);
   color: #000;
 }
 .awesomplete > ul {
   background: #fff;
 }
 .awesomplete > ul {
-  background: linear-gradient(
-    to bottom right,
-    hsla(114, 55%, 80%, 1),
-    hsla(114, 55%, 80%, 0.8)
-  );
+    background: rgba(173, 216, 230, 0.9);
+
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
 }
