@@ -468,12 +468,12 @@ window.addEventListener("DOMContentLoaded", function () {
   autocomplete_setup();
 });
 
-addEvent(search, "submit", function () {
-  if (document.getElementById("tags").value.includes("&" || "?")) {
+function searchPosts() {
+  if (tags.value.includes("&" || "?")) {
     window.location.replace(`https://spiider34.glitch.me`);
   } else {
     window.location.replace(
-      `https://spiider34.glitch.me/p?tags=${search.value}&sourse=${data.sourse}&quality=${data.quality}`
+      `https://spiider34.glitch.me/p?tags=${tags.value}&sourse=${data.sourse}&quality=${data.quality}`
     );
   }
-});
+}

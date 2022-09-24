@@ -3,6 +3,7 @@
     <title>spiider34</title>
     <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"/>
     <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
   </head>
   <body>
     <button class="home" id="home"><strong>Home</strong></button>
@@ -15,7 +16,7 @@
         <ul hidden=""></ul>
         <span class="visually-hidden" role="status" aria-live="assertive" aria-relevant="additions"></span>
       </div>  
-      <input name="searchDefault" type="submit" value="Search" id="search">
+      <input name="searchDefault" type="submit" value="Search" id="search" onclick="javascript: searchPosts()">
       <!-- Tags -->
       <p> <strong> Tags:</strong> </p>
       <p id="curTags"></p>
@@ -31,5 +32,7 @@
     </div>
     <script src="/static/scripts/settings.js"></script>
     <script src="/static/scripts/viewer.js"></script>
+    <script src="/static/scripts/autocomplete.js"></script>
+    <script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
-const tags = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')[0].substring(5).replaceAll("%20", " ");
+const tagsQ = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')[0].substring(5).replaceAll("%20", " ");
 const toggle = { true: "display: grid;", false: "display: none;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
@@ -12,15 +12,16 @@ var tagsElement = document.getElementById("tagsH");
 var search = document.getElementById("search");
 var image = document.getElementById("img");
 var home = document.getElementById("home");
+var tags = document.getElementById("tags")
 
 var active = false;
 var tagData = [];
 var idx = 0;
 
-tagsElement.innerHTML = tags;
-search.value = tags;
+tagsElement.innerHTML = tagsQ;
+tags.value = tagsQ;
 
-fetch(`https://spiider34.glitch.me/posts?tags=${tags}&sourse=${data.sourse}`)
+fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${data.sourse}`)
   .then((response) => response.json())
   .then((data) => {
     tagData = data;
@@ -73,6 +74,7 @@ addEvent(document, "keydown", function (e) {
         gallery.style = toggle[active];
       }
       break;
+  }
 });
        
 addEvent(home, "click", function (e) {
