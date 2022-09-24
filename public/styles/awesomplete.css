@@ -28,7 +28,7 @@
 .awesomplete > ul {
   margin: 0.2em 0 0;
   text-shadow: none;
-  background-color: lightblue;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 @supports (transform: scale(0)) {
   .awesomplete > ul {
@@ -61,4 +61,29 @@
   position: relative;
   padding: 0.2em 0.5em;
   cursor: pointer;
+}
+
+.awesomeplete > ul > li {
+  color: #009;
+}
+.awesomplete > ul > li:hover,
+.awesomplete > ul > li[aria-selected="true"] {
+  background: #d2ffcd;
+  color: #009;
+}
+.awesomplete mark {
+  background: rgba(173, 216, 230, 0.9);
+  color: #000;
+}
+.awesomplete > ul {
+  background: #fff;
+}
+.awesomplete > ul {
+  background: linear-gradient(
+    to bottom right,
+    hsla(114, 55%, 80%, 1),
+    hsla(114, 55%, 80%, 0.8)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
 }
