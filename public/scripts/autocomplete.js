@@ -379,8 +379,11 @@ function setUp(elem) {
       if (evt.keyCode == 32) {
         a.list = [];
       } else {
+        var cite = "rule34.xxx"
+        if (data.sourse === "hypnohub") cite = "hypnohub.net"
+        
         var ajax = new XMLHttpRequest();
-        ajax.open("GET", "/autocomplete?q=" + val, true);
+        ajax.open("GET", "/autocomplete?sourse=" + cite + "&q=" + val, true);
         ajax.onload = function () {
           var list = JSON.parse(ajax.responseText);
           a.list = list;

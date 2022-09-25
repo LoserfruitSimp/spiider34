@@ -27,7 +27,7 @@ app.get("/p", function (req, res) {
 
 app.get("/autocomplete", function (req, res) {
   axios
-    .get("https://rule34.xxx/public/autocomplete.php?q=" + req.query.q)
+    .get("https://" + req.query.sourse + "/public/autocomplete.php?q=" + req.query.q)
     .then(function (response) {
       res.send(response.data);
     })
