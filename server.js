@@ -1,6 +1,6 @@
 const path = require("path");
 const postRouter = require("./src/routing/posts");
-const imageRouter = require("./src/routing/images");
+const fileRouter = require("./src/routing/files");
 const commentRouter = require("./src/routing/comments");
 
 const port = process.env.PORT;
@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 app.use("/posts", postRouter);
-app.use("/images", imageRouter);
+app.use("/files", fileRouter);
 app.use("/comments", commentRouter);
 app.use("/static", express.static(path.join(__dirname, "public")));
 

@@ -1,8 +1,8 @@
 const express = require('express');
 const https = require('https');
-const imageRouter = express.Router();
+const fileRouter = express.Router();
 
-imageRouter.get('/', function (req, res) {
+fileRouter.get('/', function (req, res) {
     if (!req.query.url) {
         res.sendStatus(404);
     }
@@ -17,4 +17,4 @@ imageRouter.get('/', function (req, res) {
     });
 });
 
-module.exports = imageRouter;
+module.exports = fileRouter;

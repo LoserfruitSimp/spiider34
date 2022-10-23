@@ -41,19 +41,19 @@ postRouter.get("/", function (req, res) {
           //modify urls
           result.file_url =
             host +
-            "/images/" +
+            "/files/" +
             req.baseUrl.substring(7) +
             "?url=" +
             result.file_url;
           result.preview_url =
             host +
-            "/images/" +
+            "/files/" +
             req.baseUrl.substring(7) +
             "?url=" +
             result.preview_url;
           result.sample_url =
             host +
-            "/images/" +
+            "/files/" +
             req.baseUrl.substring(7) +
             "?url=" +
             result.sample_url;

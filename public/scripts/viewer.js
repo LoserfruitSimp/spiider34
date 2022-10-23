@@ -26,7 +26,7 @@ fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${data.sourse}`)
   .then((data) => {
     tagData = data;
     idx = 0;
-
+  console.log(data)
     if (tagData.length === 0) {
       image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
       return;
