@@ -99,7 +99,7 @@ function setActivePost(data) {
   let activeMedia = image
   if (data.type === "video") {
     activeMedia = video
-    
+    console.log(data.file_url)
     image.style = "display: none;"
     video.style = ""
   } else {
