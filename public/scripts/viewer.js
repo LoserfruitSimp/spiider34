@@ -103,7 +103,7 @@ function setActivePost(data) {
 }
 
 function checkSearchActive() {
-  if (document.activeElement.id === "search") {
+  if (document.activeElement.id === "tags") {
     return true
   } else {
     return false
