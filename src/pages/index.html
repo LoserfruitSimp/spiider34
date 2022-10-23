@@ -1,40 +1,79 @@
 <html>
   <head>
     <title>spiider34</title>
-    <link rel="icon" type="image/png" sizes="any" href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"/>
-    <link rel="stylesheet" href="/static/styles/slider.css"/>
-    <link rel="stylesheet" href="/static/styles/main.css"/>
-    <link rel="stylesheet" href="/static/styles/awesomplete.css">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="any"
+      href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"
+    />
+    <link rel="stylesheet" href="/static/styles/slider.css" />
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/awesomplete.css" />
   </head>
   <body>
-    <img src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336" id="img"/>
+    <img
+      src="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/wallpaper.svg?v=1663801406336"
+      id="img"
+    />
     <div class="gallery" style="visibility: hidden"></div>
-    <p class="wrapper"> <strong>spiider34 is a better way to consume rule34 content!</strong> </p>
+    <p class="wrapper">
+      <strong>spiider34 is a better way to consume rule34 content!</strong>
+    </p>
     <div class="wrapper">
       <label class="settings" id="typesetting">Sourse: Rule34</label>
       <label class="settings">- Settings -</label>
       <label class="settings" id="qualitysetting">Quality: Sample</label>
-      <br>
+      <br />
       <div class="awesomplete">
-        <input id="tags" placeholder="daddy's finder..." name="tags" size="30" type="text" value="" autocomplete="off" aria-autocomplete="list">
+        <input
+          id="tags"
+          placeholder="daddy's finder..."
+          name="tags"
+          size="30"
+          type="text"
+          value=""
+          autocomplete="off"
+          aria-autocomplete="list"
+        />
         <ul hidden=""></ul>
-        <span class="visually-hidden" role="status" aria-live="assertive" aria-relevant="additions"></span>
-      </div><br>
-      <input name="searchDefault" type="submit" value="Search" id="search" onclick="javascript: searchPosts()">
-      <br><br>
-      <h3>
-        Post Settings
-      </h3>
+        <span
+          class="visually-hidden"
+          role="status"
+          aria-live="assertive"
+          aria-relevant="additions"
+        ></span>
+      </div>
+      <br />
+      <input
+        name="searchDefault"
+        type="submit"
+        value="Search"
+        id="search"
+        onclick="javascript: searchPosts()"
+      />
+      <br />
+      <h3>Post Settings</h3>
       <label class="switch">
-         <br><br><strong>Toggle Sourse</strong>
-         <input type="checkbox" id="type"/>
-         <span class="slider round"></span>
-      </label> 
+        <strong>Toggle Quality</strong> 
+        <select name="cars" id="cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
+      </label>
+
+<!--       <label class="switch">
+        <br /><br /><strong>Toggle Sourse</strong>
+        <input type="checkbox" id="type" />
+        <span class="slider round"></span>
+      </label>
       <label class="switch">
-         <br><br><strong>Toggle Quality</strong>
-         <input type="checkbox" id="quality"/>
-         <span class="slider round"></span>
-      </label> 
+        <br /><br /><strong>Toggle Quality</strong>
+        <input type="checkbox" id="quality" />
+        <span class="slider round"></span>
+      </label> -->
     </div>
     <script src="/static/scripts/settings.js"></script>
     <script src="/static/scripts/index.js"></script>

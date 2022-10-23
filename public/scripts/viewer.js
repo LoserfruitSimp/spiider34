@@ -107,6 +107,7 @@ function setActivePost(data) {
     
     video.style = "display: none;"
     image.style = ""
+    video.src = ""
   }
   
   if (data.quality === "Full") {
