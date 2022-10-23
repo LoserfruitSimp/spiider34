@@ -26,7 +26,9 @@ var idx = 0;
 tagsElement.innerHTML = tagsQ;
 tags.value = tagsQ;
 
-fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}`)
+fetch(
+  `https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}`
+)
   .then((response) => response.json())
   .then((data) => {
     tagData = data;
@@ -57,6 +59,23 @@ fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}
       testImage(img);
     }
   });
+
+addEvent(window, "click", function (e) {
+  e = e || window.event;
+  if (document.activeElement.id === "") {
+    if (e.screenX > window.screen.width / 2) {
+      if (idx <= tagData.length + 1) {
+        idx = idx + 1;
+        setActivePost(tagData[idx]);
+      }
+    } else {
+      if (idx > 0) {
+        idx = idx - 1;
+        setActivePost(tagData[idx]);
+      }
+    }
+  }
+});
 
 addEvent(document, "keydown", function (e) {
   e = e || window.event;
@@ -116,15 +135,14 @@ function setActivePost(data) {
   if (settings.quality === "Full") {
     activeMedia.src = data.file_url;
   } else {
-    fetch(data.sample_url)
-      .then((response) => {
-        const dataType = response.headers.get('Content-Type')
-        if (dataType.includes("image") || dataType.includes("video")) {
-          activeMedia.src = data.sample_url;
-        } else {
-          activeMedia.src = data.file_url;
-        }
-    })
+    fetch(data.sample_url).then((response) => {
+      const dataType = response.headers.get("Content-Type");
+      if (dataType.includes("image") || dataType.includes("video")) {
+        activeMedia.src = data.sample_url;
+      } else {
+        activeMedia.src = data.file_url;
+      }
+    });
   }
 }
 
