@@ -29,6 +29,7 @@ app.get("/autocomplete", function (req, res) {
   axios
     .get("https://" + req.query.sourse + "/public/autocomplete.php?q=" + req.query.q)
     .then(function (response) {
+      console.log()
       res.send(response.data);
     })
     .catch(function (error) {
