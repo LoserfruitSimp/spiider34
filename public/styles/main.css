@@ -1,5 +1,4 @@
 body {
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +15,7 @@ img {
 }
 
 .wrapper {
+  text-align: center;
   padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
   overflow-wrap: normal;
@@ -68,3 +68,21 @@ img {
   display: grid;
   grid-template-columns: auto auto auto;
 }
+
+fieldset {
+    display: table;
+    border: none;
+}
+fieldset p {
+    display: table-row;
+}
+fieldset input, 
+fieldset select, 
+fieldset label {
+    display: table-cell;
+    margin: 3px;
+}
+fieldset label {
+    text-align: right;
+}
+
