@@ -3,13 +3,14 @@ const scraper = require("../misc/scraper");
 const postRouter = express.Router({ mergeParams: true });
 const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
 
+const urls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com"]
+
 postRouter.get("/", function (req, res) {
   const cite = req.query.sourse;
 
-  var baseURI = "https://rule34.xxx";
-  if (cite === "hypnohub") baseURI = "https://hypnohub.net";
+  let baseURI = ""
 
-  const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
+  const baseUrl = "https://" + baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
 
   scraper(

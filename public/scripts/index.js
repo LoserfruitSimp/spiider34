@@ -6,43 +6,29 @@ var qualityCombo = document.getElementById("quality");
 var typeCombo = document.getElementById("type");
 var search = document.getElementById("search");
 
-addEvent(typeSwitch, "change", updateCite);
-addEvent(qualitySwitch, "change", updateQuality);
+addEvent(typeCombo, "change", updateCite);
+addEvent(qualityCombo, "change", updateQuality);
 
 function updateCite(e) {
-  if (e.srcElement.checked) {
-    setSourse("hypnohub");
-  } else {
-    setSourse("Rule34");
-  }
+  setSourse(e.srcElement.value);
   typeSetting.innerHTML = "Sourse: " + data.sourse;
 }
 
 function updateQuality(e) {
-  if (e.srcElement.checked) {
-    setQuality("Full");
-  } else {
-    setQuality("Sample");
-  }
+  setQuality(e.srcElement.value);
   qualitySetting.innerHTML = "Quality: " + data.quality;
 }
 
-function findChild(element, child) {
-  let res = "";
+function setSelected(element, child) {
   for (var i = 0; i < element.children.length; i++) {
     if (element.children[i].value === child) {
-      res = child;
+      element.children[i].setAttribute("selected", null);
     }
   }
-  return res;
 }
 
 typeSetting.innerHTML = "Sourse: " + data.sourse;
 qualitySetting.innerHTML = "Quality: " + data.quality;
 
-if (data.sourse === "hypnohub") {
-  typeSwitch.checked = true;
-}
-
-findChild(qualityCombo, data.quality).setAttribute(name, value)
-
+setSelected(qualityCombo, data.quality);
+setSelected(typeCombo, data.sourse);
