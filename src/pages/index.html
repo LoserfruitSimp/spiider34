@@ -54,26 +54,27 @@
       />
       <br />
       <h3>Post Settings</h3>
-      <label class="switch">
-        <strong>Toggle Quality</strong> 
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
-      </label>
-
-<!--       <label class="switch">
-        <br /><br /><strong>Toggle Sourse</strong>
-        <input type="checkbox" id="type" />
-        <span class="slider round"></span>
-      </label>
-      <label class="switch">
-        <br /><br /><strong>Toggle Quality</strong>
-        <input type="checkbox" id="quality" />
-        <span class="slider round"></span>
-      </label> -->
+      <fieldset>
+        <p>
+          <label><strong>Toggle Type</strong></label>
+          <select name="type" id="type">
+            <option value="rule34">rule34</option>
+            <option value="hypnohub">hypnohub</option>
+            <option value="xbooru">xbooru</option>
+            <option value="realbooru">realbooru</option>
+            <option value="safebooru">safebooru</option>
+          </select>
+        </p>
+        <p>
+          <label><strong>Toggle Quality</strong></label>
+          <select name="quality" id="quality">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+          </select>
+        </p>
+      </fieldset>
     </div>
     <script src="/static/scripts/settings.js"></script>
     <script src="/static/scripts/index.js"></script>
