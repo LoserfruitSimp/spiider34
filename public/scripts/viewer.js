@@ -10,6 +10,7 @@ var dateText = document.getElementById("uploaded");
 var tagsText = document.getElementById("curTags");
 var tagsElement = document.getElementById("tagsH");
 var search = document.getElementById("search");
+var video = document.getElementById("video");
 var image = document.getElementById("img");
 var home = document.getElementById("home");
 var tags = document.getElementById("tags")
@@ -38,7 +39,7 @@ fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${data.sourse}`)
     for (var i = 0; i < tagData.length; i++) {
       const figure = document.createElement("figure");
       const img = document.createElement("img");
-      
+
       img.classList.add("galleryItem");
       img.src = tagData[i].preview_url;
       img.onclick = function () { click(img) };
@@ -95,10 +96,23 @@ function setActivePost(data) {
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
   
-  if (data.quality === "Full") {
-      image.src = data.file_url;
+  let activeMedia = image
+  if (data.type === "video") {
+    activeMedia = video
+    
+    image.style = "display: none;"
+    video.style = ""
   } else {
-      image.src = data.sample_url;
+    activeMedia = image
+    
+    video.style = "display: none;"
+    image.style = ""
+  }
+  
+  if (data.quality === "Full") {
+    activeMedia.src = data.file_url;
+  } else {
+    activeMedia.src = data.sample_url;
   }
 }
 
