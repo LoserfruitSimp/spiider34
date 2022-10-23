@@ -20,4 +20,12 @@ function updateQuality(e) {
 }
 
 typeSetting.innerHTML = 'Sourse: ' + data.sourse 
-qualitySetting.innerHTML = 'Quality: ' + data.quality 
+qualitySetting.innerHTML = 'Quality: ' + data.quality
+
+if (data.sourse === "hypnohub") {
+  typeSwitch.checked = true
+}
+
+if (data.quality === "Full") {
+  qualitySwitch.checked = true
+}

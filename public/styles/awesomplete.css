@@ -11,6 +11,7 @@
 }
 .awesomplete > input {
   display: block;
+    margin: auto;
 }
 .awesomplete > ul {
   position: absolute;
