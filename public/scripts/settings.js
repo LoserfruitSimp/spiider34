@@ -1,30 +1,30 @@
-let data = {
+let settings = {
   sourse: "Rule34",
   quality: "Sample"
 }
 
 if (localStorage.getItem("settings") === null) {
-  setData();
+  setSettings();
 } else {
-  data = getData();
+  settings = getSettings();
 }
 
 function setSourse(sourse) {
-  data.sourse = sourse;
-  setData();
+  settings.sourse = sourse;
+  setSettings();
 }
 
 function setQuality(quality) {
-  data.quality = quality;
-  setData();
+  settings.quality = quality;
+  setSettings();
 }
 
-function getData() {
+function getSettings() {
     return JSON.parse(localStorage.getItem("settings"));
 }
 
-function setData() {
-    localStorage.setItem("settings", JSON.stringify(data));
+function setSettings() {
+    localStorage.setItem("settings", JSON.stringify(settings));
 }
 
 function addEvent(element, eventName, callback) {

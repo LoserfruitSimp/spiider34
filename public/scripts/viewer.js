@@ -26,12 +26,11 @@ var idx = 0;
 tagsElement.innerHTML = tagsQ;
 tags.value = tagsQ;
 
-fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${data.sourse}`)
+fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}`)
   .then((response) => response.json())
   .then((data) => {
     tagData = data;
     idx = 0;
-    console.log(data);
     if (tagData.length === 0) {
       image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
       return;
@@ -105,7 +104,6 @@ function setActivePost(data) {
   let activeMedia = image;
   if (data.type === "video") {
     activeMedia = video;
-    console.log(data.file_url);
     image.style = "display: none;";
     video.style = "";
   } else {
@@ -115,13 +113,18 @@ function setActivePost(data) {
     image.style = "";
     video.src = "";
   }
-
-  if (data.quality === "Full") {
+  if (settings.quality === "Full") {
     activeMedia.src = data.file_url;
   } else {
     fetch(data.sample_url)
-      .then((response) => console.log(...response.headers.get('Content')))
-      .then((data) => console.log(data));
+      .then((response) => {
+        const dataType = response.headers.get('Content-Type')
+        if (dataType.includes("image") || dataType.includes("video")) {
+          activeMedia.src = data.sample_url;
+        } else {
+          activeMedia.src = data.file_url;
+        }
+    })
   }
 }
 

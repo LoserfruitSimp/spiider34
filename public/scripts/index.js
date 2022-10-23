@@ -11,12 +11,12 @@ addEvent(qualityCombo, "change", updateQuality);
 
 function updateCite(e) {
   setSourse(e.srcElement.value);
-  typeSetting.innerHTML = "Sourse: " + data.sourse;
+  typeSetting.innerHTML = "Sourse: " + settings.sourse;
 }
 
 function updateQuality(e) {
   setQuality(e.srcElement.value);
-  qualitySetting.innerHTML = "Quality: " + data.quality;
+  qualitySetting.innerHTML = "Quality: " + settings.quality;
 }
 
 function setSelected(element, child) {
@@ -27,8 +27,8 @@ function setSelected(element, child) {
   }
 }
 
-typeSetting.innerHTML = "Sourse: " + data.sourse;
-qualitySetting.innerHTML = "Quality: " + data.quality;
+typeSetting.innerHTML = "Sourse: " + settings.sourse;
+qualitySetting.innerHTML = "Quality: " + settings.quality;
 
-setSelected(qualityCombo, data.quality);
-setSelected(typeCombo, data.sourse);
+setSelected(qualityCombo, settings.quality);
+setSelected(typeCombo, settings.sourse);

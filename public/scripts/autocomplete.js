@@ -383,7 +383,7 @@ function setUp(elem) {
 
 let cite = ""
   for (var i = 0; i < urls.length; i++) {
-    if (urls[i].includes(data.sourse)) {
+    if (urls[i].includes(settings.sourse)) {
       cite = urls[i];
       break;
     }
@@ -483,7 +483,7 @@ function searchPosts() {
     window.location.replace(`https://spiider34.glitch.me`);
   } else {
     window.location.replace(
-      `https://spiider34.glitch.me/p?tags=${tags.value}&sourse=${data.sourse}&quality=${data.quality}`
+      `https://spiider34.glitch.me/p?tags=${tags.value}&sourse=${settings.sourse}&quality=${settings.quality}`
     );
   }
 }
