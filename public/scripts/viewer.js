@@ -1,6 +1,10 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 
-const tagsQ = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')[0].substring(5).replaceAll("%20", " ");
+const tagsQ = window.location.href
+  .slice(window.location.href.indexOf("?") + 1)
+  .split("&")[0]
+  .substring(5)
+  .replaceAll("%20", " ");
 const toggle = { true: "display: grid;", false: "display: none;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
@@ -13,7 +17,7 @@ var search = document.getElementById("search");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
 var home = document.getElementById("home");
-var tags = document.getElementById("tags")
+var tags = document.getElementById("tags");
 
 var active = false;
 var tagData = [];
@@ -27,7 +31,7 @@ fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${data.sourse}`)
   .then((data) => {
     tagData = data;
     idx = 0;
-  console.log(data)
+    console.log(data);
     if (tagData.length === 0) {
       image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
       return;
@@ -42,14 +46,16 @@ fetch(`https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${data.sourse}`)
 
       img.classList.add("galleryItem");
       img.src = tagData[i].preview_url;
-      img.onclick = function () { click(img) };
+      img.onclick = function () {
+        click(img);
+      };
       img.id = i;
-      
-      figure.classList.add("hover")
+
+      figure.classList.add("hover");
       figure.appendChild(img);
       gallery.appendChild(figure);
-      
-      testImage(img)
+
+      testImage(img);
     }
   });
 
@@ -64,7 +70,7 @@ addEvent(document, "keydown", function (e) {
       }
       break;
     case rightArrow:
-      if (idx <= (tagData.length + 1) && !checkSearchActive()){
+      if (idx <= tagData.length + 1 && !checkSearchActive()) {
         idx = idx + 1;
         setActivePost(tagData[idx]);
       }
@@ -77,7 +83,7 @@ addEvent(document, "keydown", function (e) {
       break;
   }
 });
-       
+
 addEvent(home, "click", function (e) {
   window.location.replace(`https://spiider34.glitch.me`);
 });
@@ -85,7 +91,7 @@ addEvent(home, "click", function (e) {
 function click(img) {
   idx = Number(img.id);
   setActivePost(tagData[idx]);
-  
+
   active = !active;
   gallery.style = toggle[active];
 }
@@ -95,38 +101,42 @@ function setActivePost(data) {
   authorText.innerHTML = data.creator_url;
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
-  
-  let activeMedia = image
+
+  let activeMedia = image;
   if (data.type === "video") {
-    activeMedia = video
-    console.log(data.file_url)
-    image.style = "display: none;"
-    video.style = ""
+    activeMedia = video;
+    console.log(data.file_url);
+    image.style = "display: none;";
+    video.style = "";
   } else {
-    activeMedia = image
-    
-    video.style = "display: none;"
-    image.style = ""
-    video.src = ""
+    activeMedia = image;
+
+    video.style = "display: none;";
+    image.style = "";
+    video.src = "";
   }
-  
+
   if (data.quality === "Full") {
     activeMedia.src = data.file_url;
   } else {
-    activeMedia.src = data.sample_url;
+    fetch(data.sample_url)
+      .then((response) => console.log(...response.headers.get('Content')))
+      .then((data) => console.log(data));
   }
 }
 
 function checkSearchActive() {
   if (document.activeElement.id === "tags") {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
 function testImage(img) {
-    var tester = new Image();
-    tester.onerror = function() { img.parentElement.remove() };
-    tester.src = img.src;
+  var tester = new Image();
+  tester.onerror = function () {
+    img.parentElement.remove();
+  };
+  tester.src = img.src;
 }
