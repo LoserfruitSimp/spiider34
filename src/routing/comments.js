@@ -1,14 +1,20 @@
 const express = require("express");
 const scraper = require("../misc/scraper");
 const commentRouter = express.Router({ mergeParams: true });
+const urls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com"]
 
 commentRouter.get("/", function (req, res) {
-  var baseURI = "https://rule34.xxx";
-  if (req.query.sourse == "hypnohub") {
-    baseURI = "https://hypnohub.net";
-  }
+ const cite = req.query.sourse;
 
-  const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
+  let baseURI = ""
+  for (var i = 0; i < urls.length; i++) {
+    if (urls[i].includes(cite)) {
+      baseURI = urls[i];
+      break;
+    }
+  }
+  
+  const baseUrl = "https://" + baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = baseUrl;
 
   if (req.query.post_id) {

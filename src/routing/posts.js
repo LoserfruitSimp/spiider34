@@ -9,7 +9,13 @@ postRouter.get("/", function (req, res) {
   const cite = req.query.sourse;
 
   let baseURI = ""
-
+  for (var i = 0; i < urls.length; i++) {
+    if (urls[i].includes(cite)) {
+      baseURI = urls[i];
+      break;
+    }
+  }
+  
   const baseUrl = "https://" + baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
 
@@ -75,12 +81,15 @@ postRouter.get("/", function (req, res) {
 function getUrl(req) {
   const cite = req.query.sourse;
 
-  var baseURI = "https://rule34.xxx";
-  if (cite === "hypnohub") baseURI = "https://hypnohub.net";
-
-
-  const baseUrl = baseURI + "/index.php?page=dapi&s=post&q=index";
-
+  let baseURI = ""
+  for (var i = 0; i < urls.length; i++) {
+    if (urls[i].includes(cite)) {
+      baseURI = urls[i];
+      break;
+    }
+  }
+  
+  const baseUrl = "https://" + baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = baseUrl;
 
   if (req.query.limit) {

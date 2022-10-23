@@ -379,9 +379,16 @@ function setUp(elem) {
       if (evt.keyCode == 32) {
         a.list = [];
       } else {
-        var cite = "rule34.xxx"
-        if (data.sourse === "hypnohub") cite = "hypnohub.net"
-        
+        const urls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com"]
+
+let cite = ""
+  for (var i = 0; i < urls.length; i++) {
+    if (urls[i].includes(data.sourse)) {
+      cite = urls[i];
+      break;
+    }
+  }
+  
         var ajax = new XMLHttpRequest();
         ajax.open("GET", "/autocomplete?sourse=" + cite + "&q=" + val, true);
         ajax.onload = function () {
