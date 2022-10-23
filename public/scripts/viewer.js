@@ -63,7 +63,10 @@ fetch(
 addEvent(window, "click", function (e) {
   e = e || window.event;
   if (document.activeElement.id === "") {
-    if (e.screenX > window.screen.width / 2) {
+    if (
+      e.screenX > window.screen.width / 2 &&
+      e.screenY < (window.screen.height / 3) * 2
+    ) {
       if (idx <= tagData.length + 1) {
         idx = idx + 1;
         setActivePost(tagData[idx]);
