@@ -25,13 +25,13 @@ postRouter.get("/", function (req, res) {
   }
   
   getData(req).then(async function(data) {
-    var totalRequests = 0
-    if(Math.floor(data.attributes.count)/100 != data.attributes.count) {
-      totalRequests = Math.floor(data.attributes.count) + 1
-    } else {
-      totalRequests = Math.floor(data.attributes.count)
+    const totalRequests = Math.floor(parseInt(data.attributes.count)/100)
+        console.log(data.attributes.count)
+
+    for (var i = 0; i < totalRequests; i++) {
+      const data = await getData(req, i*100) 
+      console.log(data.children)
     }
-    
   })
   
 //     scraper(
