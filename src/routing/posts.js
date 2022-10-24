@@ -23,9 +23,15 @@ postRouter.get("/", function (req, res) {
       break;
     }
   }
-
-  getData(req).then((data) => {
-    console.log(data)
+  
+  getData(req).then(async function(data) {
+    var totalRequests = 0
+    if(Math.floor(data.attributes.count)/100 != data.attributes.count) {
+      totalRequests = Math.floor(data.attributes.count) + 1
+    } else {
+      totalRequests = Math.floor(data.attributes.count)
+    }
+    
   })
   
 //     scraper(
@@ -87,7 +93,7 @@ postRouter.get("/", function (req, res) {
   //   );
 });
 
-async function getData(req) {
+async function getData(req, idx) {
   const cite = req.query.sourse;
 
   let baseURI = "";
@@ -102,11 +108,13 @@ async function getData(req) {
     "https://" +
       baseURI +
       "/index.php?page=dapi&s=post&q=index&tags=" +
-      req.query.tags,
+      req.query.tags +
+      "&pid=" +
+      idx,
     "text/xml"
   );
   
-  return parse(response.data).root.children;
+  return parse(response.data).root;
 }
 
 module.exports = postRouter;
