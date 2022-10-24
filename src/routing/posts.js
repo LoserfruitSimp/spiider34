@@ -1,7 +1,9 @@
 const express = require("express");
 const scraper = require("../misc/scraper");
+const parse = require('xml-parser');
 const postRouter = express.Router({ mergeParams: true });
 const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
+const axios = require("axios").default;
 
 const urls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com"]
 
@@ -18,9 +20,14 @@ postRouter.get("/", function (req, res) {
   
   const baseUrl = "https://" + baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
-
-  var parser = new DOMParser();  
-  console.log(parser.parseFromString("https://"+ baseURI + "/index.php?page=dapi&s=post&q=index&tags=stepfordization", 'text/xml'))
+  
+  axios
+    .get("https://"+ baseURI + "/index.php?page=dapi&s=post&q=index&tags=stepfordization", 'text/xml')
+    .then(function (response) {
+    console.log(response.data)
+       console.log(parse(response.data))
+    });
+ 
   scraper(
     url,
     function ($) {
