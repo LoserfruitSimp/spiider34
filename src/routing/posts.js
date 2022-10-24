@@ -19,6 +19,8 @@ postRouter.get("/", function (req, res) {
   const baseUrl = "https://" + baseURI + "/index.php?page=dapi&s=post&q=index";
   let url = getUrl(req);
 
+  var parser = new DOMParser();  
+  console.log(parser.parseFromString("https://"+ baseURI + "/index.php?page=dapi&s=post&q=index&tags=stepfordization", 'text/xml'))
   scraper(
     url,
     function ($) {
