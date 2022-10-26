@@ -3,6 +3,8 @@ let settings = {
   quality: "Sample"
 }
 
+const hostURL = window.location.host
+
 if (localStorage.getItem("settings") === null) {
   setSettings();
 } else {

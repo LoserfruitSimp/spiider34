@@ -26,6 +26,7 @@ app.get("/p", function (req, res) {
 });
 
 app.get("/autocomplete", function (req, res) {
+  console.log(req.baseUrl.substring(7))
   let path = "/autocomplete.php?q="
   if (req.query.sourse === "hypnohub" || req.query.sourse === "rule34") { path = "/public/autocomplete.php?q=" }
   axios

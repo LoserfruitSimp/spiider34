@@ -25,9 +25,7 @@ postRouter.get("/", async function (req, res) {
     }
   }
   
-  const data = await getData(req, pid)
-  console.log(data)
-
+  res.json(await getData(req, pid))
   })
   
 //     scraper(

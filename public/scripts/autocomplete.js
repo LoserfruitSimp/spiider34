@@ -480,10 +480,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
 function searchPosts() {
   if (tags.value.includes("&" || "?")) {
-    window.location.replace(`https://spiider34.glitch.me`);
+    window.location.replace(`https://${hostURL}`);
   } else {
     window.location.replace(
-      `https://spiider34.glitch.me/p?tags=${tags.value}&sourse=${settings.sourse}&quality=${settings.quality}`
+      `https://${hostURL}/p?tags=${tags.value}&sourse=${settings.sourse}&quality=${settings.quality}`
     );
   }
 }

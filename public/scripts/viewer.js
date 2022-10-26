@@ -27,11 +27,12 @@ tagsElement.innerHTML = tagsQ;
 tags.value = tagsQ;
 
 fetch(
-  `https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}&pid=0`
+  `https://${hostURL}/posts?tags=${tagsQ}&sourse=${settings.sourse}&pid=0`
 )
   .then((response) => response.json())
   .then((data) => {
-    tagData = data;
+  console.log(data)
+    tagData = data.children;
     idx = 0;
     if (tagData.length === 0) {
       image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
@@ -46,7 +47,7 @@ fetch(
       const img = document.createElement("img");
 
       img.classList.add("galleryItem");
-      img.src = tagData[i].preview_url;
+      img.src = tagData[i].attributes.preview_url;
       img.onclick = function () {
         click(img);
       };
@@ -106,7 +107,7 @@ addEvent(document, "keydown", function (e) {
 });
 
 addEvent(home, "click", function (e) {
-  window.location.replace(`https://spiider34.glitch.me`);
+  window.location.replace(`https://${hostURL}`);
 });
 
 function click(img) {
@@ -118,7 +119,8 @@ function click(img) {
 }
 
 function setActivePost(data) {
-  tagsText.innerHTML = data.tags.join(" ");
+  data = data.attributes
+  tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.creator_url;
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
@@ -147,6 +149,10 @@ function setActivePost(data) {
       }
     });
   }
+}
+
+function convertURL(url) {
+  return `https://${hostURL}/files/`
 }
 
 function checkSearchActive() {
