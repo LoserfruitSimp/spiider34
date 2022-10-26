@@ -27,7 +27,7 @@ tagsElement.innerHTML = tagsQ;
 tags.value = tagsQ;
 
 fetch(
-  `https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}`
+  `https://spiider34.glitch.me/posts?tags=${tagsQ}&sourse=${settings.sourse}&pid=0`
 )
   .then((response) => response.json())
   .then((data) => {

@@ -13,9 +13,10 @@ const urls = [
   "xbooru.com",
 ];
 
-postRouter.get("/", function (req, res) {
+postRouter.get("/", async function (req, res) {
   const cite = req.query.sourse;
-
+  const pid = req.query.pid
+  
   let baseURI = "";
   for (var i = 0; i < urls.length; i++) {
     if (urls[i].includes(cite)) {
@@ -24,14 +25,9 @@ postRouter.get("/", function (req, res) {
     }
   }
   
-  getData(req).then(async function(data) {
-    const totalRequests = Math.floor(parseInt(data.attributes.count)/100)
-        console.log(data.attributes.count)
+  const data = await getData(req, pid)
+  console.log(data)
 
-    for (var i = 0; i < totalRequests; i++) {
-      const data = await getData(req, i*100) 
-      console.log(data.children)
-    }
   })
   
 //     scraper(
@@ -91,7 +87,7 @@ postRouter.get("/", function (req, res) {
   //       res.json(comments);
   //     }
   //   );
-});
+//});
 
 async function getData(req, idx) {
   const cite = req.query.sourse;
