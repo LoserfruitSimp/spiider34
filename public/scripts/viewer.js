@@ -47,7 +47,7 @@ fetch(
       const img = document.createElement("img");
 
       img.classList.add("galleryItem");
-      img.src = tagData[i].attributes.preview_url;
+      img.src = convertURL(tagData[i].attributes.preview_url);
       img.onclick = function () {
         click(img);
       };
@@ -126,7 +126,7 @@ function setActivePost(data) {
   dateText.innerHTML = data.created_at;
 
   let activeMedia = image;
-  if (data.type === "video") {
+  if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
     activeMedia = video;
     image.style = "display: none;";
     video.style = "";
@@ -140,19 +140,25 @@ function setActivePost(data) {
   if (settings.quality === "Full") {
     activeMedia.src = data.file_url;
   } else {
-    fetch(data.sample_url).then((response) => {
+    fetch(convertURL(data.sample_url)).then((response) => {
       const dataType = response.headers.get("Content-Type");
       if (dataType.includes("image") || dataType.includes("video")) {
-        activeMedia.src = data.sample_url;
+        activeMedia.src = convertURL(data.sample_url);
       } else {
-        activeMedia.src = data.file_url;
+        activeMedia.src = convertURL(data.file_url);
       }
     });
   }
 }
 
+function nextImage() {
+  
+}
+
+fu
+
 function convertURL(url) {
-  return `https://${hostURL}/files/`
+  return `https://${hostURL}/files?url=${url}`
 }
 
 function checkSearchActive() {
