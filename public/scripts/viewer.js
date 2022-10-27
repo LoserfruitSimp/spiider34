@@ -21,6 +21,7 @@ var tags = document.getElementById("tags");
 
 var active = false;
 var totalPages = 0;
+var activePid = 0;
 var tagData = [];
 var idx = 0;
 
@@ -72,6 +73,7 @@ function click(img) {
 }
 
 function setActivePost(data) {
+  console.log(data)
   data = data.attributes;
   tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.creator_url;
@@ -105,16 +107,28 @@ function setActivePost(data) {
 }
 
 function nextImage() {
-  if (idx <= tagData.length + 1 && !checkSearchActive()) {
-    idx = idx + 1;
-    setActivePost(tagData[idx]);
+  if (!checkSearchActive()) {
+    if(idx <= tagData.length + 1) {
+      idx = idx + 1;
+      setActivePost(tagData[idx]);
+    } else {
+      if (activePid < totalPages) {
+        getData(tagsQ, activePid + 100)
+      }
+    }
   }
 }
 
 function prevImage() {
-  if (idx > 0 && !checkSearchActive()) {
-    idx = idx - 1;
-    setActivePost(tagData[idx]);
+  if (!checkSearchActive()) {
+    if(idx > 0) {
+      idx = idx - 1;
+      setActivePost(tagData[idx]);
+    } else {
+      if (activePid != 0) {
+        getData(tagsQ, activePid - 100)
+      }
+    }
   }
 }
 
@@ -139,11 +153,15 @@ function testImage(img) {
 }
 
 async function getData(tags, PID) {
+  console.log(tags, PID)
   const response = await fetch(`https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`);
   const data = await response.json();
+  console.log(data)
+  totalPages = data.attributes.count;
   tagData = data.children;
+  activePid = PID;
   idx = 0;
-
+  
   console.log(data);
   
   if (tagData.length === 0) {
