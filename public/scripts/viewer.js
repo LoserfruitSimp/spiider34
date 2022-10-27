@@ -20,82 +20,24 @@ var home = document.getElementById("home");
 var tags = document.getElementById("tags");
 
 var active = false;
+var totalPages = 0;
 var tagData = [];
 var idx = 0;
 
 tagsElement.innerHTML = tagsQ;
 tags.value = tagsQ;
 
-fetch(
-  `https://${hostURL}/posts?tags=${tagsQ}&sourse=${settings.sourse}&pid=0`
-)
-  .then((response) => response.json())
-  .then((data) => {
-  console.log(data)
-    tagData = data.children;
-    idx = 0;
-    if (tagData.length === 0) {
-      image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
-      return;
-    }
-
-    setActivePost(tagData[idx]);
-    gallery.innerHTML = "";
-
-    for (var i = 0; i < tagData.length; i++) {
-      const figure = document.createElement("figure");
-      const img = document.createElement("img");
-
-      img.classList.add("galleryItem");
-      img.src = convertURL(tagData[i].attributes.preview_url);
-      img.onclick = function () {
-        click(img);
-      };
-      img.id = i;
-
-      figure.classList.add("hover");
-      figure.appendChild(img);
-      gallery.appendChild(figure);
-
-      testImage(img);
-    }
-  });
-
-addEvent(window, "click", function (e) {
-  e = e || window.event;
-  if (document.activeElement.id === "") {
-    if (
-      e.screenX > window.screen.width / 2 &&
-      e.screenY < (window.screen.height / 3) * 2
-    ) {
-      if (idx <= tagData.length + 1) {
-        idx = idx + 1;
-        setActivePost(tagData[idx]);
-      }
-    } else {
-      if (idx > 0) {
-        idx = idx - 1;
-        setActivePost(tagData[idx]);
-      }
-    }
-  }
-});
+getData(tagsQ, 0)
 
 addEvent(document, "keydown", function (e) {
   e = e || window.event;
 
   switch (e.keyCode) {
     case leftArrow:
-      if (idx > 0 && !checkSearchActive()) {
-        idx = idx - 1;
-        setActivePost(tagData[idx]);
-      }
+      prevImage();
       break;
     case rightArrow:
-      if (idx <= tagData.length + 1 && !checkSearchActive()) {
-        idx = idx + 1;
-        setActivePost(tagData[idx]);
-      }
+      nextImage();
       break;
     case m:
       if (!checkSearchActive()) {
@@ -103,6 +45,17 @@ addEvent(document, "keydown", function (e) {
         gallery.style = toggle[active];
       }
       break;
+  }
+});
+
+addEvent(window, "click", function (e) {
+  e = e || window.event;
+  if (document.activeElement.id === "" && e.screenY < (window.screen.height / 3) * 2) {
+    if (e.x > window.screen.width / 2) {
+      nextImage();
+    } else {
+      prevImage();
+    }
   }
 });
 
@@ -119,7 +72,7 @@ function click(img) {
 }
 
 function setActivePost(data) {
-  data = data.attributes
+  data = data.attributes;
   tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.creator_url;
   sourseText.innerHTML = data.source;
@@ -152,13 +105,21 @@ function setActivePost(data) {
 }
 
 function nextImage() {
-  
+  if (idx <= tagData.length + 1 && !checkSearchActive()) {
+    idx = idx + 1;
+    setActivePost(tagData[idx]);
+  }
 }
 
-fu
+function prevImage() {
+  if (idx > 0 && !checkSearchActive()) {
+    idx = idx - 1;
+    setActivePost(tagData[idx]);
+  }
+}
 
 function convertURL(url) {
-  return `https://${hostURL}/files?url=${url}`
+  return `https://${hostURL}/files?url=${url}`;
 }
 
 function checkSearchActive() {
@@ -175,4 +136,39 @@ function testImage(img) {
     img.parentElement.remove();
   };
   tester.src = img.src;
+}
+
+async function getData(tags, PID) {
+  const response = await fetch(`https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`);
+  const data = await response.json();
+  tagData = data.children;
+  idx = 0;
+
+  console.log(data);
+  
+  if (tagData.length === 0) {
+    image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
+    return;
+  }
+
+  setActivePost(tagData[idx]);
+  gallery.innerHTML = "";
+
+  for (var i = 0; i < tagData.length; i++) {
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+
+    img.classList.add("galleryItem");
+    img.src = convertURL(tagData[i].attributes.preview_url);
+    img.onclick = function () {
+      click(img);
+    };
+    img.id = i;
+
+    figure.classList.add("hover");
+    figure.appendChild(img);
+    gallery.appendChild(figure);
+
+    testImage(img);
+  }
 }
