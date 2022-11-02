@@ -51,7 +51,7 @@ addEvent(document, "keydown", function (e) {
 
 addEvent(window, "click", function (e) {
   e = e || window.event;
-  if (document.activeElement.id === "" && e.screenY < (window.screen.height / 3) * 2) {
+  if (document.activeElement.id === "" && !active && e.screenY < (window.screen.height / 3) * 2) {
     if (e.x > window.screen.width / 2) {
       nextImage();
     } else {
