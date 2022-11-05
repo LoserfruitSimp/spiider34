@@ -75,16 +75,12 @@ function setActivePost(data) {
   tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.owner;
 
-  console.log(data.file_url)
   let activeMedia = image;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
-    console.log("E")
     activeMedia = video;
     image.style = "display: none;";
     video.style = "";
   } else {
-        console.log("A")
-
     activeMedia = image;
 
     video.style = "display: none;";
@@ -92,12 +88,10 @@ function setActivePost(data) {
     video.src = "";
   }
   
-  if (settings.quality === "Full" || ) {
-    activeMedia.src = data.file_url;
+  if (settings.quality === "Full" || activeMedia.id === "video") {
+    activeMedia.src = convertURL(data.file_url);
   } else {
-    console.log("ea")
     fetch(convertURL(data.sample_url)).then((response) => {
-      console.log(response)
       const dataType = response.headers.get("Content-Type");
       if (dataType.includes("image") || dataType.includes("video")) {
         activeMedia.src = convertURL(data.sample_url);
@@ -110,11 +104,12 @@ function setActivePost(data) {
 
 function nextImage() {
   if (!checkSearchActive()) {
-    if(idx <= tagData.length + 1) {
+    if(idx < tagData.length - 1) {
+      console.log(tagData.length)
       idx = idx + 1;
       setActivePost(tagData[idx]);
     } else {
-      if (activePid < totalPages) {
+      if (tagData.length === 100) {
         getData(tagsQ, activePid + 100)
       }
     }
