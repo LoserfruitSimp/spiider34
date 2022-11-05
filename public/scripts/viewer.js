@@ -182,5 +182,13 @@ async function getData(tags, PID) {
     gallery.appendChild(figure);
 
     testImage(img);
+    
+    // File URL Preload
+    const file = new Image();
+    file.src = tagData[i].file_url
+    file.remove()
+    
+    // Sample URL Preload
+
   }
 }

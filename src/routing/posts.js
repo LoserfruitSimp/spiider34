@@ -1,5 +1,4 @@
 const express = require("express");
-const scraper = require("../misc/scraper");
 const parse = require("xml-parser");
 const postRouter = express.Router({ mergeParams: true });
 const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
@@ -104,7 +103,7 @@ async function getData(req, idx) {
       "/index.php?page=dapi&s=post&q=index&tags=" +
       req.query.tags +
       "&pid=" +
-      idx +
+      (idx/100) +
       "&json=1",
     "application/json"
   );
