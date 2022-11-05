@@ -104,11 +104,12 @@ async function getData(req, idx) {
       "/index.php?page=dapi&s=post&q=index&tags=" +
       req.query.tags +
       "&pid=" +
-      idx,
-    "text/xml"
+      idx +
+      "&json=1",
+    "application/json"
   );
   
-  return parse(response.data).root;
+  return response.data;
 }
 
 module.exports = postRouter;
