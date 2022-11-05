@@ -9,8 +9,6 @@ const toggle = { true: "display: grid;", false: "display: none;" };
 
 var gallery = document.getElementsByClassName("gallery")[0];
 var authorText = document.getElementById("author");
-var sourseText = document.getElementById("sourse");
-var dateText = document.getElementById("uploaded");
 var tagsText = document.getElementById("curTags");
 var tagsElement = document.getElementById("tagsH");
 var search = document.getElementById("search");
@@ -76,25 +74,30 @@ function setActivePost(data) {
   console.log(data)
   tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.owner;
-  sourseText.innerHTML = data.source;
-  dateText.innerHTML = data.created_at;
 
+  console.log(data.file_url)
   let activeMedia = image;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
+    console.log("E")
     activeMedia = video;
     image.style = "display: none;";
     video.style = "";
   } else {
+        console.log("A")
+
     activeMedia = image;
 
     video.style = "display: none;";
     image.style = "";
     video.src = "";
   }
-  if (settings.quality === "Full") {
+  
+  if (settings.quality === "Full" || ) {
     activeMedia.src = data.file_url;
   } else {
+    console.log("ea")
     fetch(convertURL(data.sample_url)).then((response) => {
+      console.log(response)
       const dataType = response.headers.get("Content-Type");
       if (dataType.includes("image") || dataType.includes("video")) {
         activeMedia.src = convertURL(data.sample_url);
