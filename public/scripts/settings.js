@@ -1,5 +1,5 @@
 let settings = {
-  sourse: "Rule34",
+  sourse: "rule34",
   quality: "Sample"
 }
 

@@ -186,7 +186,7 @@ async function getData(tags, PID) {
     
     // File URL Preload
     if (settings.quality === "Full") {
-      if (!data.file_url.endsWith(".webm") || !data.file_url.endsWith(".mp4")) {
+      if (!tagData[i].file_url.endsWith(".webm") || !tagData[i].file_url.endsWith(".mp4")) {
         const file = new Image();
         file.src = convertURL(tagData[i].file_url)
         file.remove()
