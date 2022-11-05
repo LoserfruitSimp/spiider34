@@ -74,9 +74,8 @@ function click(img) {
 
 function setActivePost(data) {
   console.log(data)
-  data = data.attributes;
   tagsText.innerHTML = data.tags;
-  authorText.innerHTML = data.creator_url;
+  authorText.innerHTML = data.owner;
   sourseText.innerHTML = data.source;
   dateText.innerHTML = data.created_at;
 
@@ -157,13 +156,10 @@ async function getData(tags, PID) {
   const response = await fetch(`https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`);
   const data = await response.json();
   console.log(data)
-  totalPages = data.attributes.count;
-  tagData = data.children;
+  tagData = data
   activePid = PID;
   idx = 0;
-  
-  console.log(data);
-  
+    
   if (tagData.length === 0) {
     image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
     return;
@@ -177,7 +173,7 @@ async function getData(tags, PID) {
     const img = document.createElement("img");
 
     img.classList.add("galleryItem");
-    img.src = convertURL(tagData[i].attributes.preview_url);
+    img.src = convertURL(tagData[i].preview_url);
     img.onclick = function () {
       click(img);
     };
