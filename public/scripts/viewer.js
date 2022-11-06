@@ -16,6 +16,7 @@ var video = document.getElementById("video");
 var image = document.getElementById("img");
 var home = document.getElementById("home");
 var tags = document.getElementById("tags");
+var page = document.getElementById("page");
 
 var active = false;
 var totalPages = 0;
@@ -157,7 +158,9 @@ async function getData(tags, PID) {
   tagData = data
   activePid = PID;
   idx = 0;
-    
+  
+  page.innerHTML = PID/100 + 1
+  
   if (tagData.length === 0) {
     image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
     return;
@@ -165,7 +168,7 @@ async function getData(tags, PID) {
 
   setActivePost(tagData[idx]);
   gallery.innerHTML = "";
-
+  
   for (var i = 0; i < tagData.length; i++) {
     const figure = document.createElement("figure");
     const img = document.createElement("img");

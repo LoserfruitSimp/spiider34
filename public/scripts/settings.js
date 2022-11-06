@@ -3,6 +3,8 @@ let settings = {
   quality: "Sample"
 }
 
+var controlKeyPressed = false
+
 const hostURL = window.location.host
 
 if (localStorage.getItem("settings") === null) {
@@ -28,6 +30,8 @@ function getSettings() {
 function setSettings() {
     localStorage.setItem("settings", JSON.stringify(settings));
 }
+
+addEvent(document, "keydown", function() =)
 
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
