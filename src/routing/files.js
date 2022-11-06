@@ -3,9 +3,7 @@ const https = require('https');
 const fileRouter = express.Router();
 
 fileRouter.get('/', function (req, res) {
-    if (!req.query.url) {
-        res.sendStatus(404);
-    }
+    if (!req.query.url) res.sendStatus(404);
 
     const request = https.get(req.query.url, function(response) {
         res.setHeader('Content-Type', response.headers['content-type']);

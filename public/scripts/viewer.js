@@ -66,7 +66,7 @@ addEvent(home, "click", function (e) {
 function click(img) {
   if (controlKeyPressed) {
     // New Tab
-    
+      window.open(convertURL(tagData[img.id].file_url));
   } else {
     // Regular
     idx = Number(img.id);
