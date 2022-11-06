@@ -2,12 +2,13 @@
 
 spiider34 is a free to use [`booru`](https://booru.org/top) viewer that is made to be hosted for free on [`glitch.com`](https://glitch.com).
 
-Eaisly switch between sourses including [rule34](https://rule34.xxx), [hypnohub](https://hypnohub.net), [safebooru](https://safebooru.org) and [many more](#Sourses).
-Learn how to set it up for yourself [here](#Setup)!
+Eaisly switch between sourses including [rule34](https://rule34.xxx), [hypnohub](https://hypnohub.net), [safebooru](https://safebooru.org) and [many more](#sourses).
+
+Learn how to set it up for yourself [here](#setup)!
 
 # Features
 spiider34 booru viewer comes with a wide set of features including
- - Proxy requests
+ - Proxy requests ()
  - Easy sourse switching
  - Easy quality switching
  - Easy post switching
@@ -19,7 +20,7 @@ spiider34 booru viewer comes with a wide set of features including
  Because this project is hosted on glitch.com servers, we can make all of our requests on the servers themselves instead of the hosts machine. This means that firewalls that would block sites like rule34 would be inefective.
  
  ### Easy sourse switching
- On the spiider34 home page which can be found by clicking the home icon in the viewer or navigating to the base url there is an easy to use drop down box labled "Toggle Sourse" which automaticly switches the search output and autocomplete to the sourse of your choosing. Supported sourses can be found [here](#Sourses).
+ On the spiider34 home page which can be found by clicking the home icon in the viewer or navigating to the base url there is an easy to use drop down box labled "Toggle Sourse" which automaticly switches the search output and autocomplete to the sourse of your choosing. Supported sourses can be found [here](#sourses).
  
  ### Easy quality switching
  On the spiider34 home page which can be found by clicking the home icon in the viewer or navigating to the base url there is an easy to use drop down box labled "Toggle Quality" which automaticly switches the search output to either Full quality or Sample quality.
