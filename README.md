@@ -8,13 +8,13 @@ Learn how to set it up for yourself [here](#setup)!
 
 # Features
 spiider34 booru viewer comes with a wide set of features including
- - Proxy requests ()
- - Easy sourse switching
- - Easy quality switching
- - Easy post switching
- - Video and image support
- - Auto complete tags (on supporting sourses)
- - Tag gallery
+ - [Proxy requests](#proxy-requests)
+ - [Easy sourse switching](#easy-sourse-switching)
+ - [Easy quality switching](#easy-quality-switching)
+ - [Easy post switching](#easy-post-switching)
+ - [Video and image support](#video-and-image-support)
+ - [Auto complete tags (on supporting sourses)](#auto-complete-tags)
+ - [Tag gallery](#tag-gallery)
  
  ### Proxy requests
  Because this project is hosted on glitch.com servers, we can make all of our requests on the servers themselves instead of the hosts machine. This means that firewalls that would block sites like rule34 would be inefective.
