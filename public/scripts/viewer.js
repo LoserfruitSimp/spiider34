@@ -27,7 +27,7 @@ var idx = 0;
 tagsElement.innerHTML = tagsQ;
 tags.value = tagsQ;
 
-getData(tagsQ, 0)
+getData(tagsQ, 0);
 
 addEvent(document, "keydown", function (e) {
   e = e || window.event;
@@ -50,7 +50,11 @@ addEvent(document, "keydown", function (e) {
 
 addEvent(window, "click", function (e) {
   e = e || window.event;
-  if (document.activeElement.id === "" && !active && e.screenY < (window.screen.height / 3) * 2) {
+  if (
+    document.activeElement.id === "" &&
+    !active &&
+    e.screenY < (window.screen.height / 3) * 2
+  ) {
     if (e.x > window.screen.width / 2) {
       nextImage();
     } else {
@@ -66,7 +70,7 @@ addEvent(home, "click", function (e) {
 function click(img) {
   if (controlKeyPressed) {
     // New Tab
-      window.open(convertURL(tagData[img.id].file_url));
+    window.open(convertURL(tagData[img.id].file_url));
   } else {
     // Regular
     idx = Number(img.id);
@@ -78,7 +82,6 @@ function click(img) {
 }
 
 function setActivePost(data) {
-  console.log(data)
   tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.owner;
 
@@ -94,7 +97,7 @@ function setActivePost(data) {
     image.style = "";
     video.src = "";
   }
-  
+
   if (settings.quality === "Full" || activeMedia.id === "video") {
     activeMedia.src = convertURL(data.file_url);
   } else {
@@ -111,13 +114,13 @@ function setActivePost(data) {
 
 function nextImage() {
   if (!checkSearchActive()) {
-    if(idx < tagData.length - 1) {
-      console.log(tagData.length)
+    if (idx < tagData.length - 1) {
+      console.log(tagData.length);
       idx = idx + 1;
       setActivePost(tagData[idx]);
     } else {
       if (tagData.length === 100) {
-        getData(tagsQ, activePid + 100)
+        getData(tagsQ, activePid + 100);
       }
     }
   }
@@ -125,12 +128,12 @@ function nextImage() {
 
 function prevImage() {
   if (!checkSearchActive()) {
-    if(idx > 0) {
+    if (idx > 0) {
       idx = idx - 1;
       setActivePost(tagData[idx]);
     } else {
       if (activePid != 0) {
-        getData(tagsQ, activePid - 100)
+        getData(tagsQ, activePid - 100);
       }
     }
   }
@@ -148,25 +151,19 @@ function checkSearchActive() {
   }
 }
 
-function testImage(img) {
-  var tester = new Image();
-  tester.onerror = function () {
-    img.parentElement.remove();
-  };
-  tester.src = img.src;
-}
-
 async function getData(tags, PID) {
-  console.log(tags, PID)
-  const response = await fetch(`https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`);
+  const response = await fetch(
+    `https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`
+  );
+  
   const data = await response.json();
-  console.log(data)
-  tagData = data
+  console.log(data);
+  tagData = data;
   activePid = PID;
   idx = 0;
-  
-  page.innerHTML = PID/100 + 1
-  
+
+  page.innerHTML = PID / 100 + 1;
+
   if (tagData.length === 0) {
     image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
     return;
@@ -174,7 +171,7 @@ async function getData(tags, PID) {
 
   setActivePost(tagData[idx]);
   gallery.innerHTML = "";
-  
+
   for (var i = 0; i < tagData.length; i++) {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
@@ -190,23 +187,29 @@ async function getData(tags, PID) {
     figure.appendChild(img);
     gallery.appendChild(figure);
 
-    testImage(img);
-    
-    
+    var tester = new Image();
+    tester.onerror = function () {
+      img.parentElement.remove();
+    };
+    tester.src = img.src;
+
     // File URL Preload
     if (settings.quality === "Full") {
-      if (!tagData[i].file_url.endsWith(".webm") || !tagData[i].file_url.endsWith(".mp4")) {
+      if (
+        !tagData[i].file_url.endsWith(".webm") ||
+        !tagData[i].file_url.endsWith(".mp4")
+      ) {
         const file = new Image();
-        file.src = convertURL(tagData[i].file_url)
-        file.remove()
+        file.src = convertURL(tagData[i].file_url);
+        file.remove();
       }
     }
-    
+
     // Sample URL Preload
     if (settings.quality === "Sample") {
-        const sample = new Image();
-        sample.src = convertURL(tagData[i].sample_url);
-        sample.remove()
+      const sample = new Image();
+      sample.src = convertURL(tagData[i].sample_url);
+      sample.remove();
     }
   }
 }
