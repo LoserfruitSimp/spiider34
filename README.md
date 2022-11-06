@@ -3,6 +3,7 @@
 spiider34 is a free to use [`booru`](https://booru.org/top) viewer that is made to be hosted for free on [`glitch.com`](https://glitch.com).
 
 Eaisly switch between sourses including [rule34](https://rule34.xxx), [hypnohub](https://hypnohub.net), [safebooru](https://safebooru.org) and [many more](#Sourses).
+Learn how to set it up for yourself [here](#Setup)!
 
 # Features
 spiider34 booru viewer comes with a wide set of features including
@@ -15,7 +16,7 @@ spiider34 booru viewer comes with a wide set of features including
  - Tag gallery
  
  ### Proxy requests
- Because this project is hosted on glitch.com servers, we can make all of our requests on the servers themsel
+ Because this project is hosted on glitch.com servers, we can make all of our requests on the servers themselves instead of the hosts machine. This means that firewalls that would block sites like rule34 would be inefective.
  
  ### Easy sourse switching
  On the spiider34 home page which can be found by clicking the home icon in the viewer or navigating to the base url there is an easy to use drop down box labled "Toggle Sourse" which automaticly switches the search output and autocomplete to the sourse of your choosing. Supported sourses can be found [here](#Sourses).
@@ -35,6 +36,9 @@ On supported sourses spiider34 uses [`Awesomplete`](https://github.com/LeaVerou/
 ### Tag gallery
 By clicking 'M' in the viewer, you are displayed with a gallery of all posts related to the inputed tag. By clicking a post, the selected file will be displayed in the viewer and by holding the left control key and clicking, the file will be sent to a new tab.
 
+# Setup
+Setting up your own spiider34 is as easy as clicking remix on [this project](https://glitch.com/~spiider34)! Glitch provides free accounts for you to use and host this project.
+
 # Sourses
 spiider34 uses many of the top booru sourses that support API requests. These include:
  - [rule34](https://rule34.xxx)
@@ -42,10 +46,3 @@ spiider34 uses many of the top booru sourses that support API requests. These in
  - [safebooru](https://safebooru.org)
  - [realbooru](https://realbooru.com)
  - [xbooru](https://xbooru.com)
- const urls = [
-  "rule34.xxx",
-  "hypnohub.net",
-  "safebooru.org",
-  "realbooru.com",
-  "xbooru.com",
-];
