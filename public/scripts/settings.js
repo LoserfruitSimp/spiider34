@@ -31,7 +31,17 @@ function setSettings() {
     localStorage.setItem("settings", JSON.stringify(settings));
 }
 
-addEvent(document, "keydown", function() =)
+addEvent(document, "keydown", (e) => {
+  if (e.keyCode === 17) {
+    controlKeyPressed = true
+  }
+});
+
+addEvent(document, "keyup", (e) => {
+  if (e.keyCode === 17) {
+    controlKeyPressed = false
+  }
+});
 
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
