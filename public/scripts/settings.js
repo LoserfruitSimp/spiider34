@@ -44,7 +44,7 @@ addEvent(document, "keyup", (e) => {
 });
 
 // Sneaky Timeout so you dont get caught
-let activeTimeout = setTimeout(hideScreen, 3000);
+let activeTimeout = setTimeout(hideScreen, 6);
 function hideScreen() {
   document.body.style = "display: none"
   window.location.replace(`https://twitter.com`);
@@ -52,14 +52,18 @@ function hideScreen() {
 
 function resetTimeout(){
   clearTimeout(activeTimeout);
-  activeTimeout = setTimeout(hideScreen, 3000);
+  activeTimeout = setTimeout(hideScreen, 240000);
 }
 
+addEvent(window, "click", resetTimeout);
 addEvent(document, "keydown", function (e) {
-  if (e.keyCode == 32 && !checkSearchActive()) {
-    
+  if (e.keyCode == 32 && !(document.activeElement.id === "tags")) {
+    hideScreen()
+  } else {
+    resetTimeout()
   }
 });
+
 
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
