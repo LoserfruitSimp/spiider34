@@ -44,7 +44,7 @@ addEvent(document, "keyup", (e) => {
 });
 
 // Sneaky Timeout so you dont get caught
-let activeTimeout = setTimeout(hideScreen, 6);
+let activeTimeout = setTimeout(hideScreen, 60000);
 function hideScreen() {
   document.body.style = "display: none"
   window.location.replace(`https://twitter.com`);
