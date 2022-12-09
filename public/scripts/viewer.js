@@ -6,9 +6,17 @@ const tagsQ = window.location.href
   .substring(5)
   .replaceAll("%20", " ");
 const toggle = { true: "display: grid;", false: "display: none;" };
+const urls = {
+  "rule34": "rule34.xxx",
+  "hypnohub": "hypnohub.net",
+  "safebooru": "safebooru.org",
+  "realbooru": "realbooru.com",
+  "xbooru": "xbooru.com",
+};
 
 var gallery = document.getElementsByClassName("gallery")[0];
 var authorText = document.getElementById("author");
+var sourseText = document.getElementById("sourse");
 var tagsText = document.getElementById("curTags");
 var tagsElement = document.getElementById("tagsH");
 var search = document.getElementById("search");
@@ -84,6 +92,8 @@ function click(img) {
 function setActivePost(data) {
   tagsText.innerHTML = data.tags;
   authorText.innerHTML = data.owner;
+  sourseText.innerHTML = "https://" + urls[settings.sourse] + "/index.php?page=post&s=view&id=" + data.id
+  page.innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
 
   let activeMedia = image;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
@@ -161,8 +171,6 @@ async function getData(tags, PID) {
   tagData = data;
   activePid = PID;
   idx = 0;
-
-  page.innerHTML = PID / 100 + 1;
 
   if (tagData.length === 0) {
     image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
