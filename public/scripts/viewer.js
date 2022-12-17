@@ -201,23 +201,23 @@ async function getData(tags, PID) {
     };
     tester.src = img.src;
 
-    // File URL Preload
-    if (settings.quality === "Full") {
-      if (
-        !tagData[i].file_url.endsWith(".webm") ||
-        !tagData[i].file_url.endsWith(".mp4")
-      ) {
-        const file = new Image();
-        file.src = convertURL(tagData[i].file_url);
-        file.remove();
-      }
-    }
+//     // File URL Preload
+//     if (settings.quality === "Full") {
+//       if (
+//         !tagData[i].file_url.endsWith(".webm") ||
+//         !tagData[i].file_url.endsWith(".mp4")
+//       ) {
+//         const file = new Image();
+//         file.src = convertURL(tagData[i].file_url);
+//         file.remove();
+//       }
+//     }
 
-    // Sample URL Preload
-    if (settings.quality === "Sample") {
-      const sample = new Image();
-      sample.src = convertURL(tagData[i].sample_url);
-      sample.remove();
-    }
+//     // Sample URL Preload
+//     if (settings.quality === "Sample") {
+//       const sample = new Image();
+//       sample.src = convertURL(tagData[i].sample_url);
+//       sample.remove();
+//     }
   }
 }
