@@ -113,6 +113,12 @@ function setActivePost(data) {
   } else {
     fetch(convertURL(data.sample_url)).then((response) => {
       const dataType = response.headers.get("Content-Type");
+      if (dataType.includes("text")) {
+        data.file_url = data.file_url.slice(0, -4) + "mp4";
+        setActivePost(data);
+        return
+      }
+      
       if (dataType.includes("image") || dataType.includes("video")) {
         activeMedia.src = convertURL(data.sample_url);
       } else {
