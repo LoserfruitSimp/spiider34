@@ -63,7 +63,7 @@ postRouter.get("/", async function (req, res) {
 
     data = api.data;
   }
-
+  console.log(data)
   res.json(data);
 });
 
