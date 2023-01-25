@@ -10,10 +10,12 @@ const urls = [
   "safebooru.org",
   "realbooru.com",
   "xbooru.com",
+  "gelbooru.com",
+  "furry.booru.org"
 ];
 
 // List of urls that dont display the URL to file when using JSON request
-const XMLhash = ["safebooru.org", "realbooru.com", "xbooru.com"];
+const XMLhash = ["safebooru.org", "realbooru.com", "xbooru.com", "furry.booru.org"];
 
 postRouter.get("/", async function (req, res) {
   const cite = req.query.sourse;
@@ -63,7 +65,7 @@ postRouter.get("/", async function (req, res) {
 
     data = api.data;
   }
-  console.log(data)
+
   res.json(data);
 });
 
