@@ -44,7 +44,7 @@ postRouter.get("/", async function (req, res) {
         "&json=0",
       "text/xml"
     );
-
+    console.log(api.data)
     parseString(api.data, function (err, result) {
       for (let i = 0; i < result.posts.post.length; i++) result.posts.post[i] = result.posts.post[i].$
       data = result.posts.post;

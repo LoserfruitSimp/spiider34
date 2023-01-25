@@ -110,7 +110,7 @@ function setActivePost(data) {
     video.src = "";
   }
 
-  if (settings.quality === "Full" || activeMedia.id === "video") {
+  if (settings.quality === "Full" || activeMedia.id === "video" || data.sample_url === "") {
     activeMedia.src = convertURL(data.file_url);
   } else {
     fetch(convertURL(data.sample_url)).then((response) => {
@@ -175,8 +175,15 @@ async function getData(tags, PID) {
   );
   
   const data = await response.json();
-  console.log(data);
-  tagData = data;
+  
+  if (Array.isArray(data)) {
+    tagData = data;
+  } else {
+    tagData = data.post
+  }
+  
+  console.log(tagData);
+  
   activePid = PID;
   idx = 0;
 
