@@ -4,7 +4,6 @@ const fileRouter = require("./src/routing/files");
 
 const port = process.env.PORT;
 
-const axios = require("axios").default;
 const express = require("express");
 const cors = require("cors");
 
@@ -24,16 +23,7 @@ app.get("/p", function (req, res) {
 });
 
 app.get("/autocomplete", function (req, res) {
-  let path = "/autocomplete.php?q="
-  if (req.query.sourse === "hypnohub" || req.query.sourse === "rule34") { path = "/public/autocomplete.php?q=" }
-  axios
-    .get("https://" + req.query.sourse + path + req.query.q)
-    .then(function (response) {
-      res.send(response.data);
-    })
-    .catch(function (error) {
-      res.send(error.message);
-    });
+  
 });
 
 app.listen(port, function () {

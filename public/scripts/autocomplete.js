@@ -379,12 +379,11 @@ function setUp(elem) {
       if (evt.keyCode == 32) {
         a.list = [];
       } else {
-        const urls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com"]
 
 let cite = ""
-  for (var i = 0; i < urls.length; i++) {
-    if (urls[i].includes(settings.sourse)) {
-      cite = urls[i];
+  for (var i = 0; i < autoCompleteUrls.length; i++) {
+    if (autoCompleteUrls[i].includes(settings.sourse)) {
+      cite = autoCompleteUrls[i];
       break;
     }
   }

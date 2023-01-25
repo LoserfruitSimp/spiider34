@@ -1,3 +1,6 @@
+const autoCompleteUrls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com", "gelbooru.com"]
+
+
 let settings = {
   sourse: "rule34",
   quality: "Sample"
