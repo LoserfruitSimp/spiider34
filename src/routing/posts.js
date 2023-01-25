@@ -11,11 +11,10 @@ const urls = [
   "realbooru.com",
   "xbooru.com",
   "gelbooru.com",
-  "furry.booru.org"
 ];
 
 // List of urls that dont display the URL to file when using JSON request
-const XMLhash = ["safebooru.org", "realbooru.com", "xbooru.com", "furry.booru.org"];
+const XMLhash = ["safebooru.org", "realbooru.com", "xbooru.com"];
 
 postRouter.get("/", async function (req, res) {
   const cite = req.query.sourse;
@@ -32,8 +31,7 @@ postRouter.get("/", async function (req, res) {
   let data = [];
 
   if (XMLhash.find((e) => e === baseURI)) {
-    // XML
-
+    // XML 
     const api = await axios.get(
       "https://" +
         baseURI +
@@ -43,7 +41,10 @@ postRouter.get("/", async function (req, res) {
         pid / 100 +
         "&json=0",
       "text/xml"
-    );
+    ).catch(e=>{
+      console.log(e)
+    });
+    
     console.log(api.data)
     parseString(api.data, function (err, result) {
       for (let i = 0; i < result.posts.post.length; i++) result.posts.post[i] = result.posts.post[i].$
@@ -51,7 +52,6 @@ postRouter.get("/", async function (req, res) {
     });
   } else {
     // JSON
-
     const api = await axios.get(
       "https://" +
         baseURI +

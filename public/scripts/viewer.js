@@ -12,7 +12,6 @@ const urls = {
   "safebooru": "safebooru.org",
   "realbooru": "realbooru.com",
   "xbooru": "xbooru.com",
-  "furrybooru": "furry.booru.org",
   "gelbooru": "gelbooru.com"
 };
 
