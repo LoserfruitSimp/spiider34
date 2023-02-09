@@ -60,7 +60,7 @@ function resetTimeout(){
 
 addEvent(window, "click", resetTimeout);
 addEvent(document, "keydown", function (e) {
-  if (e.keyCode == 32 && !(document.activeElement.id === "tags")) {
+  if (e.keyCode == 32 || e.keyCode == 45 && !(document.activeElement.id === "tags")) {
     hideScreen()
   } else {
     resetTimeout()
