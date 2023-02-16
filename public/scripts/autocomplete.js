@@ -381,9 +381,9 @@ function setUp(elem) {
       } else {
 
 let cite = ""
-  for (var i = 0; i < autoCompleteUrls.length; i++) {
-    if (autoCompleteUrls[i].includes(settings.sourse)) {
-      cite = autoCompleteUrls[i];
+  for (var i = 0; i < booruUrls.length; i++) {
+    if (booruUrls[i].includes(settings.sourse)) {
+      cite = booruUrls[i];
       break;
     }
   }
@@ -482,7 +482,7 @@ function searchPosts() {
     window.location.replace(`https://${hostURL}`);
   } else {
     window.location.replace(
-      `https://${hostURL}/p?tags=${tags.value}&sourse=${settings.sourse}&quality=${settings.quality}`
+      `https://${hostURL}/p?tags=${tags.value}`
     );
   }
 }

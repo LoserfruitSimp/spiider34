@@ -20,7 +20,6 @@ var authorText = document.getElementById("author");
 var sourseText = document.getElementById("sourse");
 var tagsText = document.getElementById("curTags");
 var tagsElement = document.getElementById("tagsH");
-var search = document.getElementById("search");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
 var home = document.getElementById("home");

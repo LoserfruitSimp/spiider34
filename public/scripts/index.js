@@ -4,7 +4,6 @@ var qualitySetting = document.getElementById("qualitysetting");
 var typeSetting = document.getElementById("typesetting");
 var qualityCombo = document.getElementById("quality");
 var typeCombo = document.getElementById("type");
-var search = document.getElementById("search");
 
 addEvent(typeCombo, "change", updateCite);
 addEvent(qualityCombo, "change", updateQuality);

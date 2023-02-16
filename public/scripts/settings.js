@@ -1,5 +1,5 @@
-const autoCompleteUrls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com", "gelbooru.com"]
-
+const booruUrls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com", "gelbooru.com"]
+const spoofUrl = "https://twitter.com"
 
 let settings = {
   sourse: "rule34",
@@ -50,7 +50,7 @@ addEvent(document, "keyup", (e) => {
 let activeTimeout = setTimeout(hideScreen, 60000);
 function hideScreen() {
   document.body.style = "display: none"
-  window.location.replace(`https://twitter.com`);
+  window.location.replace(spoofUrl);
 }
 
 function resetTimeout(){
