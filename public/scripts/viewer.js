@@ -109,22 +109,27 @@ function setActivePost(data) {
     video.src = "";
   }
   
-  fetch(convertURL(data.sample_url)).then((response) => {
-          const dataType = response.headers.get("Content-Type");
-    
+  fetch(convertURL(data.file_url)).then((response) => {
+    console.log(data.file_url)
+    const dataType = response.headers.get("Content-Type");
     if (settings.quality === "Full" || activeMedia.id === "video" || data.sample_url === "") {
-    activeMedia.src = convertURL(data.file_url);
-  } else {
-    if (dataType.includes("text")) {
-        data.file_url = data.file_url.slice(0, -4) + "mp4";
-        setActivePost(data);
-        return
-      }
-      
-      if (dataType.includes("image") || dataType.includes("video")) {
-        activeMedia.src = convertURL(data.sample_url);
+      if (dataType.includes("text")) {
+          console.log("Trying file as gif...")
+          data.sa = data.file_url.slice(0, -3) + "gif";
+          setActivePost(data);
       } else {
-        activeMedia.src = convertURL(data.file_url);
+          console.log("Set file to " + data.file_url)
+          activeMedia.src = convertURL(data.file_url);
+      }
+    } else {
+      if (dataType.includes("text")) {
+          console.log("Trying file as mp4...")
+          data.file_url = data.file_url.slice(0, -4) + "mp4";
+          setActivePost(data);
+      } else if (dataType.includes("image") || dataType.includes("video")) {
+          activeMedia.src = convertURL(data.sample_url);
+      } else {
+          activeMedia.src = convertURL(data.file_url);
       }
   }
   });
