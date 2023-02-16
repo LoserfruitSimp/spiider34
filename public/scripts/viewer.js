@@ -108,13 +108,14 @@ function setActivePost(data) {
     image.style = "";
     video.src = "";
   }
-
-  if (settings.quality === "Full" || activeMedia.id === "video" || data.sample_url === "") {
+  
+  fetch(convertURL(data.sample_url)).then((response) => {
+          const dataType = response.headers.get("Content-Type");
+    
+    if (settings.quality === "Full" || activeMedia.id === "video" || data.sample_url === "") {
     activeMedia.src = convertURL(data.file_url);
   } else {
-    fetch(convertURL(data.sample_url)).then((response) => {
-      const dataType = response.headers.get("Content-Type");
-      if (dataType.includes("text")) {
+    if (dataType.includes("text")) {
         data.file_url = data.file_url.slice(0, -4) + "mp4";
         setActivePost(data);
         return
@@ -125,8 +126,9 @@ function setActivePost(data) {
       } else {
         activeMedia.src = convertURL(data.file_url);
       }
-    });
   }
+  });
+  
 }
 
 function nextImage() {
