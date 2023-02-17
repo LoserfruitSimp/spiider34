@@ -71,12 +71,21 @@ img {
 }
 
 .spoofText {
-  color: lime;
   text-shadow: 1.5px 1px #333333;
   position: fixed;
   z-index: 3;
   bottom: 1%;
   right: 1%;
+}
+
+.spoofText[enabled="true"] {
+    color: lime;
+    content:"Spoof Enabled"
+}
+
+.spoofText[enabled="false"] {
+    color: red;
+    content:"Spoof Disabled"
 }
 
 fieldset {
