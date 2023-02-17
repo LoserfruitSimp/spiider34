@@ -28,6 +28,11 @@ function setQuality(quality) {
   setSettings();
 }
 
+function setSpoof(value) {
+  settings.spoofToggle = value;
+  setSettings();
+}
+
 function getSettings() {
     return JSON.parse(localStorage.getItem("settings"));
 }
@@ -41,8 +46,9 @@ addEvent(document, "keydown", (e) => {
   if (e.keyCode === 17) {
     controlKeyPressed = true
   } else if (e.keyCode === toggleSpoofKeycode) {
-    spoofToggle = !spoofToggle
-    document.getElementById("spoofText").enabled = spoofToggle
+    setSpoof(!settings.spoofToggle)
+    console.log(document.getElementById("spoofText").test)
+    document.getElementById("spoofText").enabled = settings.spoofToggle.toString()
   } else if (e.keyCode == spoofKeycode && !(document.activeElement.id === "tags")) { // e.keyCode == 32 ||
     hideScreen()
   } else {
@@ -61,7 +67,7 @@ addEvent(window, "click", resetTimeout);
 // Sneaky Timeout so you dont get caught
 let activeTimeout = setTimeout(hideScreen, 60000);
 function hideScreen() {
-  if (!spoofToggle) return;
+  if (!settings.spoofToggle) return;
   document.body.style = "display: none"
   window.location.replace(spoofUrl);
 }
