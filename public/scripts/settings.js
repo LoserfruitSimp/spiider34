@@ -41,14 +41,14 @@ function setSettings() {
     localStorage.setItem("settings", JSON.stringify(settings));
 }
 
+console.dir(document.getElementById("spoofText"))
+//document.getElementById("spoofText").enabled = settings.spoofToggle.toString()
 var controlKeyPressed = false
 addEvent(document, "keydown", (e) => {
   if (e.keyCode === 17) {
     controlKeyPressed = true
   } else if (e.keyCode === toggleSpoofKeycode) {
     setSpoof(!settings.spoofToggle)
-    console.log(document.getElementById("spoofText").test)
-    document.getElementById("spoofText").enabled = settings.spoofToggle.toString()
   } else if (e.keyCode == spoofKeycode && !(document.activeElement.id === "tags")) { // e.keyCode == 32 ||
     hideScreen()
   } else {
