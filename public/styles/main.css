@@ -78,12 +78,12 @@ img {
   right: 1%;
 }
 
-.spoofText[enabled="true"] {
+.spoofText[enabled=true]:after {
     color: lime;
     content:"Spoof Enabled"
 }
 
-.spoofText[enabled="false"] {
+.spoofText[enabled=false]:after {
     color: red;
     content:"Spoof Disabled"
 }

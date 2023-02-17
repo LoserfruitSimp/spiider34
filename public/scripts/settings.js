@@ -1,10 +1,12 @@
 const booruUrls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com", "gelbooru.com"]
 const spoofUrl = "https://twitter.com"
 const spoofKeycode = 45 // NumPad Insert/0
+const toggleSpoofKeycode = 46 // NumPad Del/.
 
 let settings = {
   sourse: "rule34",
-  quality: "Sample"
+  quality: "Sample",
+  spoofToggle: true
 }
 
 
@@ -38,6 +40,13 @@ var controlKeyPressed = false
 addEvent(document, "keydown", (e) => {
   if (e.keyCode === 17) {
     controlKeyPressed = true
+  } else if (e.keyCode === toggleSpoofKeycode) {
+    spoofToggle = !spoofToggle
+    document.getElementById("spoofText").enabled = spoofToggle
+  } else if (e.keyCode == spoofKeycode && !(document.activeElement.id === "tags")) { // e.keyCode == 32 ||
+    hideScreen()
+  } else {
+    resetTimeout()
   }
 });
 
@@ -47,9 +56,12 @@ addEvent(document, "keyup", (e) => {
   }
 });
 
+addEvent(window, "click", resetTimeout);
+
 // Sneaky Timeout so you dont get caught
 let activeTimeout = setTimeout(hideScreen, 60000);
 function hideScreen() {
+  if (!spoofToggle) return;
   document.body.style = "display: none"
   window.location.replace(spoofUrl);
 }
@@ -58,16 +70,6 @@ function resetTimeout(){
   clearTimeout(activeTimeout);
   activeTimeout = setTimeout(hideScreen, 240000);
 }
-
-addEvent(window, "click", resetTimeout);
-addEvent(document, "keydown", function (e) {
-  if (e.keyCode == spoofKeycode && !(document.activeElement.id === "tags")) { // e.keyCode == 32 ||
-    hideScreen()
-  } else {
-    resetTimeout()
-  }
-});
-
 
 function addEvent(element, eventName, callback) {
   if (element.addEventListener) {
