@@ -1,5 +1,3 @@
-const enter = 13;
-
 var qualitySetting = document.getElementById("qualitysetting");
 var typeSetting = document.getElementById("typesetting");
 var qualityCombo = document.getElementById("quality");

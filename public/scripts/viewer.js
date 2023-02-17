@@ -1,11 +1,12 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
+const toggle = { true: "display: grid;", false: "display: none;" };
 
 const tagsQ = window.location.href
   .slice(window.location.href.indexOf("?") + 1)
   .split("&")[0]
   .substring(5)
   .replaceAll("%20", " ");
-const toggle = { true: "display: grid;", false: "display: none;" };
+
 const urls = {
   "rule34": "rule34.xxx",
   "hypnohub": "hypnohub.net",
@@ -16,15 +17,9 @@ const urls = {
 };
 
 var gallery = document.getElementsByClassName("gallery")[0];
-var authorText = document.getElementById("author");
-var sourseText = document.getElementById("sourse");
-var tagsText = document.getElementById("curTags");
-var tagsElement = document.getElementById("tagsH");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
-var home = document.getElementById("home");
 var tags = document.getElementById("tags");
-var page = document.getElementById("page");
 
 var active = false;
 var totalPages = 0;
@@ -32,7 +27,7 @@ var activePid = 0;
 var tagData = [];
 var idx = 0;
 
-tagsElement.innerHTML = tagsQ;
+document.getElementById("tagsH").innerHTML = tagsQ;
 tags.value = tagsQ;
 
 getData(tagsQ, 0);
@@ -71,7 +66,7 @@ addEvent(window, "click", function (e) {
   }
 });
 
-addEvent(home, "click", function (e) {
+addEvent(document.getElementById("home"), "click", function (e) {
   window.location.replace(`https://${hostURL}`);
 });
 
@@ -90,10 +85,10 @@ function click(img) {
 }
 
 function setActivePost(data) {
-  tagsText.innerHTML = data.tags;
-  authorText.innerHTML = data.owner;
-  sourseText.innerHTML = "https://" + urls[settings.sourse] + "/index.php?page=post&s=view&id=" + data.id
-  page.innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
+  document.getElementById("curTags").innerHTML = data.tags;
+  document.getElementById("author").innerHTML = data.owner;
+  document.getElementById("sourse").innerHTML = "https://" + urls[settings.sourse] + "/index.php?page=post&s=view&id=" + data.id
+  document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
 
   let activeMedia = image;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {

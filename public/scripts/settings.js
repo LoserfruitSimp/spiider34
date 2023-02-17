@@ -1,12 +1,12 @@
 const booruUrls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com", "gelbooru.com"]
 const spoofUrl = "https://twitter.com"
+const spoofKeycode = 45 // NumPad Insert/0
 
 let settings = {
   sourse: "rule34",
   quality: "Sample"
 }
 
-var controlKeyPressed = false
 
 const hostURL = window.location.host
 
@@ -34,6 +34,7 @@ function setSettings() {
     localStorage.setItem("settings", JSON.stringify(settings));
 }
 
+var controlKeyPressed = false
 addEvent(document, "keydown", (e) => {
   if (e.keyCode === 17) {
     controlKeyPressed = true
@@ -60,7 +61,7 @@ function resetTimeout(){
 
 addEvent(window, "click", resetTimeout);
 addEvent(document, "keydown", function (e) {
-  if (e.keyCode == 45 && !(document.activeElement.id === "tags")) { // e.keyCode == 32 ||
+  if (e.keyCode == spoofKeycode && !(document.activeElement.id === "tags")) { // e.keyCode == 32 ||
     hideScreen()
   } else {
     resetTimeout()

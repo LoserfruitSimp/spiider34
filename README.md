@@ -40,7 +40,7 @@ Booru content on spiider34 has support for both images and videos to be displaye
 
 ### Auto complete tags
 
-On supported sourses spiider34 uses [`Awesomplete`](https://github.com/LeaVerou/awesomplete) for better tag navigating in the search bar.
+On supported sourses spiider34 uses [`Awesomplete`](https://github.com/LeaVerou/awesomplete) for better tag navigating in the search bar. (NOTE: Some sourses do not support awesomplete)
 
 ### Tag gallery
 
@@ -59,3 +59,4 @@ spiider34 uses many of the top booru sourses that support API requests. These in
 - [safebooru](https://safebooru.org)
 - [realbooru](https://realbooru.com)
 - [xbooru](https://xbooru.com)
+- [gelbooru](https://gelbooru.com)
