@@ -29,6 +29,9 @@ function setQuality(quality) {
 }
 
 function setSpoof(value) {
+  console.log(value)
+  document.getElementById("spoofText").a = '<p class="spoofText" id="spoofText" enabled="' + value + '"></p>'
+  console.dir(document.getElementById("spoofText"))
   settings.spoofToggle = value;
   setSettings();
 }
@@ -41,8 +44,7 @@ function setSettings() {
     localStorage.setItem("settings", JSON.stringify(settings));
 }
 
-console.dir(document.getElementById("spoofText"))
-//document.getElementById("spoofText").enabled = settings.spoofToggle.toString()
+
 var controlKeyPressed = false
 addEvent(document, "keydown", (e) => {
   if (e.keyCode === 17) {
