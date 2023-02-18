@@ -9,7 +9,6 @@ let settings = {
   spoofToggle: true
 }
 
-
 const hostURL = window.location.host
 
 if (localStorage.getItem("settings") === null) {
@@ -29,9 +28,7 @@ function setQuality(quality) {
 }
 
 function setSpoof(value) {
-  console.log(value)
-  document.getElementById("spoofText").a = '<p class="spoofText" id="spoofText" enabled="' + value + '"></p>'
-  console.dir(document.getElementById("spoofText"))
+  document.getElementById("spoofText").outerHTML = '<p class="spoofText" id="spoofText" enabled="' + value + '"></p>'
   settings.spoofToggle = value;
   setSettings();
 }
@@ -88,3 +85,5 @@ function addEvent(element, eventName, callback) {
     element["on" + eventName] = callback;
   }
 }
+
+document.getElementById("spoofText").outerHTML = '<p class="spoofText" id="spoofText" enabled="' + settings.spoofToggle + '"></p>'
