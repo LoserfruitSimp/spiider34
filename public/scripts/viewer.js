@@ -13,6 +13,7 @@ const urls = {
 };
 
 var gallery = document.getElementsByClassName("gallery")[0];
+var topBar = document.getElementById("topBar");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
 var tags = document.getElementById("tags");
@@ -85,7 +86,9 @@ function setActivePost(data) {
   document.getElementById("author").innerHTML = data.owner;
   document.getElementById("sourse").innerHTML = `https://${urls[settings.sourse]}/index.php?page=post&s=view&id=${data.id}`
   document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
-
+  
+  topBar.style.transform = "scaleX(0.5)";
+  
   let activeMedia = image;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
     activeMedia = video;
@@ -100,6 +103,8 @@ function setActivePost(data) {
   }
   
   fetch(convertURL(data.file_url)).then((response) => {
+    topBar.style.transform = "scaleX(0.8)";
+    
     const dataType = response.headers.get("Content-Type");
     if (settings.quality === "Full" || activeMedia.id === "video" || data.sample_url === "") {
       if (dataType.includes("text")) {

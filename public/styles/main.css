@@ -94,15 +94,16 @@ img {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
 }
 
-.topBar {
+#topBar {
   background-color: #24a0ed;
+  height: 100%;
   transform-origin: left;
   transform: scaleX(0);
   transition-property: transform;
-  transition-duration: 0.08s;
+  transition-duration: 0.2s;
   transition-timing-function: ease;
 }
 
