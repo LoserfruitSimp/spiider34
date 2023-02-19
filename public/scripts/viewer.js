@@ -1,11 +1,7 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 const toggle = { true: "display: grid;", false: "display: none;" };
 
-const tagsQ = window.location.href
-  .slice(window.location.href.indexOf("?") + 1)
-  .split("&")[0]
-  .substring(5)
-  .replaceAll("%20", " ");
+const tagsQ = new URLSearchParams(window.location.search).get('tags')
 
 const urls = {
   "rule34": "rule34.xxx",
@@ -87,7 +83,7 @@ function click(img) {
 function setActivePost(data) {
   document.getElementById("curTags").innerHTML = data.tags;
   document.getElementById("author").innerHTML = data.owner;
-  document.getElementById("sourse").innerHTML = "https://" + urls[settings.sourse] + "/index.php?page=post&s=view&id=" + data.id
+  document.getElementById("sourse").innerHTML = `https://" + urls[settings.sourse] + "/index.php?page=post&s=view&id=" + data.id
   document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
 
   let activeMedia = image;
