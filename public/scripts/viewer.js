@@ -83,7 +83,7 @@ function click(img) {
 function setActivePost(data) {
   document.getElementById("curTags").innerHTML = data.tags;
   document.getElementById("author").innerHTML = data.owner;
-  document.getElementById("sourse").innerHTML = `https://" + urls[settings.sourse] + "/index.php?page=post&s=view&id=" + data.id
+  document.getElementById("sourse").innerHTML = `https://${urls[settings.sourse]}/index.php?page=post&s=view&id=${data.id}`
   document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
 
   let activeMedia = image;

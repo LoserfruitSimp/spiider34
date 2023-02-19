@@ -88,6 +88,10 @@ img {
     content:"Spoof Disabled"
 }
 
+.topBarContainer {
+  background: blue'
+}
+
 fieldset {
   text-align: none;
   overflow-wrap: normal;
