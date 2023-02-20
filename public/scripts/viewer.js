@@ -63,9 +63,8 @@ addEvent(window, "click", function (e) {
   }
 });
 
-addEvent(image, "onload", function (e){
-  topBar.style.transform = "scaleX(0)"
-});
+addEvent(image, "load", () => (topBar.style.transform = "scaleX(0)"));
+addEvent(video, "load", () => (topBar.style.transform = "scaleX(0)"));
 
 addEvent(document.getElementById("home"), "click", function (e) {
   window.location.replace(`https://${hostURL}`);
@@ -120,7 +119,7 @@ function setActivePost(data) {
       data.sample_url === ""
     ) {
       if (dataType.includes("text")) {
-        topBar.style.transform = "scaleX(0.95)";
+        topBar.style.transform = "scaleX(0.9)";
         console.log("Trying file as gif...");
         data.file_url = data.file_url.slice(0, -3) + "gif";
         data.sample_url = data.file_url.slice(0, -3) + "gif";
@@ -131,7 +130,7 @@ function setActivePost(data) {
       }
     } else {
       if (dataType.includes("text")) {
-        topBar.style.transform = "scaleX(0.95)";
+        topBar.style.transform = "scaleX(0.9)";
         console.log("Trying file as mp4...");
         data.file_url = data.file_url.slice(0, -4) + "mp4";
         setActivePost(data);
@@ -143,13 +142,9 @@ function setActivePost(data) {
         activeMedia.src = convertURL(data.file_url);
       }
     }
-    topBar.style.transform = "scaleX(1)";
+    topBar.style.transform = "scaleX(0.95)";
   });
 }
-
-window.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
-});
 
 function nextImage() {
   if (!checkSearchActive()) {
