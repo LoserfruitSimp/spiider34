@@ -1,15 +1,15 @@
 const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
 const toggle = { true: "display: grid;", false: "display: none;" };
 
-const tagsQ = new URLSearchParams(window.location.search).get('tags')
+const tagsQ = new URLSearchParams(window.location.search).get("tags");
 
 const urls = {
-  "rule34": "rule34.xxx",
-  "hypnohub": "hypnohub.net",
-  "safebooru": "safebooru.org",
-  "realbooru": "realbooru.com",
-  "xbooru": "xbooru.com",
-  "gelbooru": "gelbooru.com"
+  rule34: "rule34.xxx",
+  hypnohub: "hypnohub.net",
+  safebooru: "safebooru.org",
+  realbooru: "realbooru.com",
+  xbooru: "xbooru.com",
+  gelbooru: "gelbooru.com",
 };
 
 var gallery = document.getElementsByClassName("gallery")[0];
@@ -63,6 +63,8 @@ addEvent(window, "click", function (e) {
   }
 });
 
+addEvent(image, "onload", () => topBar.style.transform = "scaleX(1)");
+
 addEvent(document.getElementById("home"), "click", function (e) {
   window.location.replace(`https://${hostURL}`);
 });
@@ -84,11 +86,15 @@ function click(img) {
 function setActivePost(data) {
   document.getElementById("curTags").innerHTML = data.tags;
   document.getElementById("author").innerHTML = data.owner;
-  document.getElementById("sourse").innerHTML = `https://${urls[settings.sourse]}/index.php?page=post&s=view&id=${data.id}`
-  document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${idx + 1}`;
-  
+  document.getElementById("sourse").innerHTML = `https://${
+    urls[settings.sourse]
+  }/index.php?page=post&s=view&id=${data.id}`;
+  document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${
+    idx + 1
+  }`;
+
   topBar.style.transform = "scaleX(0.5)";
-  
+
   let activeMedia = image;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
     activeMedia = video;
@@ -101,40 +107,47 @@ function setActivePost(data) {
     image.style = "";
     video.src = "";
   }
-  
+
   fetch(convertURL(data.file_url)).then((response) => {
     topBar.style.transform = "scaleX(0.8)";
-    
+
     const dataType = response.headers.get("Content-Type");
-    if (settings.quality === "Full" || activeMedia.id === "video" || data.sample_url === "") {
+    if (
+      settings.quality === "Full" ||
+      activeMedia.id === "video" ||
+      data.sample_url === ""
+    ) {
       if (dataType.includes("text")) {
-          topBar.style.transform = "scaleX(0.95)";
-          console.log("Trying file as gif...")
-          data.file_url = data.file_url.slice(0, -3) + "gif";
-          data.sample_url = data.file_url.slice(0, -3) + "gif";
-          setActivePost(data);
+        topBar.style.transform = "scaleX(0.95)";
+        console.log("Trying file as gif...");
+        data.file_url = data.file_url.slice(0, -3) + "gif";
+        data.sample_url = data.file_url.slice(0, -3) + "gif";
+        setActivePost(data);
       } else {
-          console.log("Set file to " + data.file_url)
-          activeMedia.src = convertURL(data.file_url);
+        console.log("Set file to " + data.file_url);
+        activeMedia.src = convertURL(data.file_url);
       }
     } else {
       if (dataType.includes("text")) {
-          topBar.style.transform = "scaleX(0.95)";
-          console.log("Trying file as mp4...")
-          data.file_url = data.file_url.slice(0, -4) + "mp4";
-          setActivePost(data);
+        topBar.style.transform = "scaleX(0.95)";
+        console.log("Trying file as mp4...");
+        data.file_url = data.file_url.slice(0, -4) + "mp4";
+        setActivePost(data);
       } else if (dataType.includes("image") || dataType.includes("video")) {
-          console.log("Set file to " + data.sample_url)
-          activeMedia.src = convertURL(data.sample_url);
+        console.log("Set file to " + data.sample_url);
+        activeMedia.src = convertURL(data.sample_url);
       } else {
-          console.log("Set file to " + data.file_url)
-          activeMedia.src = convertURL(data.file_url);
+        console.log("Set file to " + data.file_url);
+        activeMedia.src = convertURL(data.file_url);
       }
-  }
-   topBar.style.transform = "scaleX(0)";
+    }
+    topBar.style.transform = "scaleX(1)";
   });
-  
 }
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+});
 
 function nextImage() {
   if (!checkSearchActive()) {
@@ -178,17 +191,17 @@ async function getData(tags, PID) {
   const response = await fetch(
     `https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`
   );
-  
+
   const data = await response.json();
-  
+
   if (Array.isArray(data)) {
     tagData = data;
   } else {
-    tagData = data.post
+    tagData = data.post;
   }
-  
+
   console.log(tagData);
-  
+
   activePid = PID;
   idx = 0;
 
@@ -221,23 +234,23 @@ async function getData(tags, PID) {
     };
     tester.src = img.src;
 
-//     // File URL Preload
-//     if (settings.quality === "Full") {
-//       if (
-//         !tagData[i].file_url.endsWith(".webm") ||
-//         !tagData[i].file_url.endsWith(".mp4")
-//       ) {
-//         const file = new Image();
-//         file.src = convertURL(tagData[i].file_url);
-//         file.remove();
-//       }
-//     }
+    //     // File URL Preload
+    //     if (settings.quality === "Full") {
+    //       if (
+    //         !tagData[i].file_url.endsWith(".webm") ||
+    //         !tagData[i].file_url.endsWith(".mp4")
+    //       ) {
+    //         const file = new Image();
+    //         file.src = convertURL(tagData[i].file_url);
+    //         file.remove();
+    //       }
+    //     }
 
-//     // Sample URL Preload
-//     if (settings.quality === "Sample") {
-//       const sample = new Image();
-//       sample.src = convertURL(tagData[i].sample_url);
-//       sample.remove();
-//     }
+    //     // Sample URL Preload
+    //     if (settings.quality === "Sample") {
+    //       const sample = new Image();
+    //       sample.src = convertURL(tagData[i].sample_url);
+    //       sample.remove();
+    //     }
   }
 }
