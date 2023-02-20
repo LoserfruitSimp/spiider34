@@ -63,7 +63,9 @@ addEvent(window, "click", function (e) {
   }
 });
 
-addEvent(image, "onload", () => topBar.style.transform = "scaleX(1)");
+addEvent(image, "onload", function (e){
+  topBar.style.transform = "scaleX(0)"
+});
 
 addEvent(document.getElementById("home"), "click", function (e) {
   window.location.replace(`https://${hostURL}`);
