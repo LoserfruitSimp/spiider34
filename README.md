@@ -20,7 +20,7 @@ spiider34 booru viewer comes with a wide set of features including
 
 ### Proxy requests
 
-Because this project is hosted on glitch.com servers, we can make all of our requests on the servers themselves instead of the hosts machine. This means that firewalls that would block sites like rule34 would be inefective.
+Because this project is hosted on glitch.com servers, we can make all of our requests on the servers rather than the hosts machine. This means firewalls that would block sites like rule34 will have a harder time catching on.
 
 ### Easy sourse switching
 
