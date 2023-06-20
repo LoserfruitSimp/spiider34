@@ -69,18 +69,18 @@
 }
 .awesomplete > ul > li:hover,
 .awesomplete > ul > li[aria-selected="true"] {
-  background: rgba(239, 251, 255, 1);
+  background: rgba(255, 156, 156, 1);
   color: #009;
 }
 .awesomplete mark {
-  background: rgba(173, 216, 230, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   color: #000;
 }
 .awesomplete > ul {
   background: #fff;
 }
 .awesomplete > ul {
-    background: rgba(173, 216, 230, 0.9);
+    background: rgba(24, 24, 24, 0.9);
 
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
