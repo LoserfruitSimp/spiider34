@@ -90,9 +90,9 @@ function setActivePost(data) {
   document.getElementById("sourse").innerHTML = `https://${
     urls[settings.sourse]
   }/index.php?page=post&s=view&id=${data.id}`;
-  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> of <strong>${a}</strong> | ${
+  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> | <strong>${
     idx + 1
-  }`;
+  }</strong> of <strong>${tagData.length}</strong>`;
 
   topBar.style.transform = "scaleX(0.5)";
 
