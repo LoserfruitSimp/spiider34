@@ -90,7 +90,7 @@ function setActivePost(data) {
   document.getElementById("sourse").innerHTML = `https://${
     urls[settings.sourse]
   }/index.php?page=post&s=view&id=${data.id}`;
-  document.getElementById("page").innerHTML = `${activePid / 100 + 1} | ${
+  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> of <strong>${a}</strong> | ${
     idx + 1
   }`;
 

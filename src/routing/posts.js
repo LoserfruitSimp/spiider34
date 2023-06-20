@@ -29,7 +29,7 @@ postRouter.get("/", async function (req, res) {
   }
 
   let data = [];
-
+  console.log("test")
   if (XMLhash.find((e) => e === baseURI)) {
     // XML 
     const api = await axios.get(
@@ -63,6 +63,7 @@ postRouter.get("/", async function (req, res) {
     );
 
     data = api.data;
+    console.log(data)
   }
 
   res.json(data);
