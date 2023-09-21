@@ -108,6 +108,10 @@ img {
   transition-timing-function: ease;
 }
 
+.content {
+  position: absolute;
+}
+
 fieldset {
   text-align: none;
   overflow-wrap: normal;
