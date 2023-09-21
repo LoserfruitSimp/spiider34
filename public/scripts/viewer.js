@@ -13,6 +13,7 @@ const urls = {
 };
 
 var gallery = document.getElementsByClassName("gallery")[0];
+var contentWrap = document.getElementById("contentWrap");
 var topBar = document.getElementById("topBar");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
@@ -90,9 +91,11 @@ function setActivePost(data) {
   document.getElementById("sourse").innerHTML = `https://${
     urls[settings.sourse]
   }/index.php?page=post&s=view&id=${data.id}`;
-  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> | <strong>${
-    idx + 1
-  }</strong> of <strong>${tagData.length}</strong>`;
+  document.getElementById("page").innerHTML = `Page <strong>${
+    activePid / 100 + 1
+  }</strong> | <strong>${idx + 1}</strong> of <strong>${
+    tagData.length
+  }</strong>`;
 
   topBar.style.transform = "scaleX(0.5)";
 
@@ -207,7 +210,7 @@ async function getData(tags, PID) {
     return;
   }
 
-  setActivePost(tagData[idx]);
+  //setActivePost(tagData[idx]);
   gallery.innerHTML = "";
 
   for (var i = 0; i < tagData.length; i++) {
@@ -225,12 +228,56 @@ async function getData(tags, PID) {
     figure.appendChild(img);
     gallery.appendChild(figure);
 
-    var tester = new Image();
-    tester.onerror = function () {
-      img.parentElement.remove();
-    };
-    tester.src = img.src;
+    let activeMedia = image;
+    if (tagData[i].file_url.endsWith(".webm") || tagData[i].file_url.endsWith(".mp4")) {
+      activeMedia = video;
+      image.style = "display: none;";
+      video.style = "";
+    } else {
+      activeMedia = image;
 
+      video.style = "display: none;";
+      video.src = "";
+    }
+
+    function getFile(data) {
+      fetch(convertURL(data.file_url)).then((response) => {
+      const dataType = response.headers.get("Content-Type");
+      if (
+        settings.quality === "Full" ||
+        activeMedia.id === "video" ||
+        data.sample_url === ""
+      ) {
+        if (dataType.includes("text")) {
+          console.log("Trying file as gif...");
+          data.file_url = data.file_url.slice(0, -3) + "gif";
+          data.sample_url = data.file_url.slice(0, -3) + "gif";
+          getFile(data);
+        } else {
+          console.log("Set file to " + data.file_url);
+          activeMedia.src = convertURL(data.file_url);
+        }
+      } else {
+        if (dataType.includes("text")) {
+          console.log("Trying file as mp4...");
+          data.file_url = data.file_url.slice(0, -4) + "mp4";
+          getFile(data);
+        } else if (dataType.includes("image") || dataType.includes("video")) {
+          console.log("Set file to " + data.sample_url);
+          activeMedia.src = convertURL(data.sample_url);
+        } else {
+          console.log("Set file to " + data.file_url);
+          activeMedia.src = convertURL(data.file_url);
+        }
+      }
+    });
+    }
+    
+    getFile(tagData[i])
+    activeMedia.classList.add("content");
+    activeMedia.status = "inactive"
+  
+    contentWrap.appendChild(activeMedia)
     //     // File URL Preload
     //     if (settings.quality === "Full") {
     //       if (
