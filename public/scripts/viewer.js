@@ -217,7 +217,7 @@ async function getData(tags, PID) {
           if (dataType.includes("text")) {
             console.log("Trying file as mp4...");
             console.log(data.file_url)
-            data.file_url = data.file_url.slice(0, -4) + "mp4";
+            data.file_url = data.file_url.slice(0, -3) + "mp4";
             setTimeout(function () {
               getFile(data);
             }, 1000);
