@@ -110,6 +110,15 @@ img {
 
 .content {
   position: absolute;
+  transform: scale(0);
+}
+
+.content[status="active"] {
+    visibility: visible;
+}
+
+.content[status="inactive"] {
+    visibility: hidden;
 }
 
 fieldset {
