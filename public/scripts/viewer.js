@@ -101,7 +101,7 @@ function setActivePost(data) {
   topBar.style.transform = "scaleX(0.5)";
 
   contentWrap.childNodes[oldIdx + 1].setAttribute("status", "inactive");
-  contentWrap.childNodes[idx  + 1].setAttribute("status", "active");
+  contentWrap.childNodes[idx + 1].setAttribute("status", "active");
   oldIdx = idx;
 }
 
@@ -169,22 +169,8 @@ async function getData(tags, PID) {
   //setActivePost(tagData[idx]);
   gallery.innerHTML = "";
   contentWrap.innerHTML = "";
-  
+
   for (var i = 0; i < tagData.length; i++) {
-    const figure = document.createElement("figure");
-    const img = document.createElement("img");
-
-    img.classList.add("galleryItem");
-    img.src = convertURL(tagData[i].preview_url);
-    img.onclick = function () {
-      click(img);
-    };
-    img.id = i;
-
-    figure.classList.add("hover");
-    figure.appendChild(img);
-    gallery.appendChild(figure);
-
     let activeMedia = image;
     if (
       tagData[i].file_url.endsWith(".webm") ||
@@ -198,6 +184,7 @@ async function getData(tags, PID) {
     function getFile(data) {
       fetch(convertURL(data.file_url)).then((response) => {
         const dataType = response.headers.get("Content-Type");
+        console.log(dataType)
         if (
           settings.quality === "Full" ||
           activeMedia.id === "video" ||
@@ -207,7 +194,9 @@ async function getData(tags, PID) {
             console.log("Trying file as gif...");
             data.file_url = data.file_url.slice(0, -3) + "gif";
             data.sample_url = data.file_url.slice(0, -3) + "gif";
-            getFile(data);
+            setTimeout(function () {
+              getFile(data);
+            }, 1000);
           } else {
             console.log("Set file to " + data.file_url);
             activeMedia.src = convertURL(data.file_url);
@@ -216,8 +205,10 @@ async function getData(tags, PID) {
           if (dataType.includes("text")) {
             console.log("Trying file as mp4...");
             data.file_url = data.file_url.slice(0, -4) + "mp4";
-            getFile(data);
-          } else if (dataType.includes("image") || dataType.includes("video")) {
+            setTimeout(function () {
+              getFile(data);
+            }, 1000);
+          } else if (dataType.includes("image")) {
             console.log("Set file to " + data.sample_url);
             activeMedia.src = convertURL(data.sample_url);
           } else {
@@ -233,6 +224,21 @@ async function getData(tags, PID) {
     activeMedia.setAttribute("status", "inactive");
 
     contentWrap.appendChild(activeMedia);
+
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+
+    img.classList.add("galleryItem");
+    img.src = convertURL(tagData[i].preview_url);
+    img.onclick = function () {
+      click(img);
+    };
+    img.id = i;
+
+    figure.classList.add("hover");
+    figure.appendChild(img);
+    gallery.appendChild(figure);
+
     //     // File URL Preload
     //     if (settings.quality === "Full") {
     //       if (
