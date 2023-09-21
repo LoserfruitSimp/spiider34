@@ -23,6 +23,7 @@ var active = false;
 var totalPages = 0;
 var activePid = 0;
 var tagData = [];
+var oldIdx = 0;
 var idx = 0;
 
 document.getElementById("tagsH").innerHTML = tagsQ;
@@ -85,8 +86,7 @@ function click(img) {
   }
 }
 
-function setActivePost(index) {
-  const data = tagData[index]
+function setActivePost(data) {
   document.getElementById("curTags").innerHTML = data.tags;
   document.getElementById("author").innerHTML = data.owner;
   document.getElementById("sourse").innerHTML = `https://${
@@ -100,9 +100,9 @@ function setActivePost(index) {
 
   topBar.style.transform = "scaleX(0.5)";
 
-  
-console.dir(Array.from(contentWrap.children).map)
-
+  contentWrap.childNodes[oldIdx + 1].setAttribute("status", "inactive");
+  contentWrap.childNodes[idx  + 1].setAttribute("status", "active");
+  oldIdx = idx;
 }
 
 function nextImage() {
@@ -168,7 +168,8 @@ async function getData(tags, PID) {
 
   //setActivePost(tagData[idx]);
   gallery.innerHTML = "";
-
+  contentWrap.innerHTML = "";
+  
   for (var i = 0; i < tagData.length; i++) {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
@@ -185,7 +186,10 @@ async function getData(tags, PID) {
     gallery.appendChild(figure);
 
     let activeMedia = image;
-    if (tagData[i].file_url.endsWith(".webm") || tagData[i].file_url.endsWith(".mp4")) {
+    if (
+      tagData[i].file_url.endsWith(".webm") ||
+      tagData[i].file_url.endsWith(".mp4")
+    ) {
       activeMedia = document.createElement("video");
     } else {
       activeMedia = document.createElement("img");
@@ -193,42 +197,42 @@ async function getData(tags, PID) {
 
     function getFile(data) {
       fetch(convertURL(data.file_url)).then((response) => {
-      const dataType = response.headers.get("Content-Type");
-      if (
-        settings.quality === "Full" ||
-        activeMedia.id === "video" ||
-        data.sample_url === ""
-      ) {
-        if (dataType.includes("text")) {
-          console.log("Trying file as gif...");
-          data.file_url = data.file_url.slice(0, -3) + "gif";
-          data.sample_url = data.file_url.slice(0, -3) + "gif";
-          getFile(data);
+        const dataType = response.headers.get("Content-Type");
+        if (
+          settings.quality === "Full" ||
+          activeMedia.id === "video" ||
+          data.sample_url === ""
+        ) {
+          if (dataType.includes("text")) {
+            console.log("Trying file as gif...");
+            data.file_url = data.file_url.slice(0, -3) + "gif";
+            data.sample_url = data.file_url.slice(0, -3) + "gif";
+            getFile(data);
+          } else {
+            console.log("Set file to " + data.file_url);
+            activeMedia.src = convertURL(data.file_url);
+          }
         } else {
-          console.log("Set file to " + data.file_url);
-          activeMedia.src = convertURL(data.file_url);
+          if (dataType.includes("text")) {
+            console.log("Trying file as mp4...");
+            data.file_url = data.file_url.slice(0, -4) + "mp4";
+            getFile(data);
+          } else if (dataType.includes("image") || dataType.includes("video")) {
+            console.log("Set file to " + data.sample_url);
+            activeMedia.src = convertURL(data.sample_url);
+          } else {
+            console.log("Set file to " + data.file_url);
+            activeMedia.src = convertURL(data.file_url);
+          }
         }
-      } else {
-        if (dataType.includes("text")) {
-          console.log("Trying file as mp4...");
-          data.file_url = data.file_url.slice(0, -4) + "mp4";
-          getFile(data);
-        } else if (dataType.includes("image") || dataType.includes("video")) {
-          console.log("Set file to " + data.sample_url);
-          activeMedia.src = convertURL(data.sample_url);
-        } else {
-          console.log("Set file to " + data.file_url);
-          activeMedia.src = convertURL(data.file_url);
-        }
-      }
-    });
+      });
     }
-    
-    getFile(tagData[i])
+
+    getFile(tagData[i]);
     activeMedia.classList.add("content");
     activeMedia.setAttribute("status", "inactive");
-  
-    contentWrap.appendChild(activeMedia)
+
+    contentWrap.appendChild(activeMedia);
     //     // File URL Preload
     //     if (settings.quality === "Full") {
     //       if (
