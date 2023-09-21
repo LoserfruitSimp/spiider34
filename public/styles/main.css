@@ -108,17 +108,26 @@ img {
   transition-timing-function: ease;
 }
 
+.contentWrapper {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  height: 90%;
+}
+
 .content {
   position: absolute;
-  transform: scale(0);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .content[status="active"] {
-    visibility: visible;
+  transform: scale(1);
 }
 
 .content[status="inactive"] {
-    visibility: hidden;
+  transform: scale(0);
 }
 
 fieldset {
