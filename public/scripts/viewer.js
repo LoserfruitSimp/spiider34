@@ -85,7 +85,8 @@ function click(img) {
   }
 }
 
-function setActivePost(data) {
+function setActivePost(index) {
+  const data = tagData[index]
   document.getElementById("curTags").innerHTML = data.tags;
   document.getElementById("author").innerHTML = data.owner;
   document.getElementById("sourse").innerHTML = `https://${
@@ -99,54 +100,9 @@ function setActivePost(data) {
 
   topBar.style.transform = "scaleX(0.5)";
 
-  let activeMedia = image;
-  if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
-    activeMedia = video;
-    image.style = "display: none;";
-    video.style = "";
-  } else {
-    activeMedia = image;
+  
+console.dir(Array.from(contentWrap.children).map)
 
-    video.style = "display: none;";
-    image.style = "";
-    video.src = "";
-  }
-
-  fetch(convertURL(data.file_url)).then((response) => {
-    topBar.style.transform = "scaleX(0.8)";
-
-    const dataType = response.headers.get("Content-Type");
-    if (
-      settings.quality === "Full" ||
-      activeMedia.id === "video" ||
-      data.sample_url === ""
-    ) {
-      if (dataType.includes("text")) {
-        topBar.style.transform = "scaleX(0.9)";
-        console.log("Trying file as gif...");
-        data.file_url = data.file_url.slice(0, -3) + "gif";
-        data.sample_url = data.file_url.slice(0, -3) + "gif";
-        setActivePost(data);
-      } else {
-        console.log("Set file to " + data.file_url);
-        activeMedia.src = convertURL(data.file_url);
-      }
-    } else {
-      if (dataType.includes("text")) {
-        topBar.style.transform = "scaleX(0.9)";
-        console.log("Trying file as mp4...");
-        data.file_url = data.file_url.slice(0, -4) + "mp4";
-        setActivePost(data);
-      } else if (dataType.includes("image") || dataType.includes("video")) {
-        console.log("Set file to " + data.sample_url);
-        activeMedia.src = convertURL(data.sample_url);
-      } else {
-        console.log("Set file to " + data.file_url);
-        activeMedia.src = convertURL(data.file_url);
-      }
-    }
-    topBar.style.transform = "scaleX(0.95)";
-  });
 }
 
 function nextImage() {
@@ -230,14 +186,9 @@ async function getData(tags, PID) {
 
     let activeMedia = image;
     if (tagData[i].file_url.endsWith(".webm") || tagData[i].file_url.endsWith(".mp4")) {
-      activeMedia = video;
-      image.style = "display: none;";
-      video.style = "";
+      activeMedia = document.createElement("video");
     } else {
-      activeMedia = image;
-
-      video.style = "display: none;";
-      video.src = "";
+      activeMedia = document.createElement("img");
     }
 
     function getFile(data) {
@@ -275,7 +226,7 @@ async function getData(tags, PID) {
     
     getFile(tagData[i])
     activeMedia.classList.add("content");
-    activeMedia.status = "inactive"
+    activeMedia.setAttribute("status", "inactive");
   
     contentWrap.appendChild(activeMedia)
     //     // File URL Preload
