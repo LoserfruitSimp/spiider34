@@ -8,13 +8,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-img {
+/* img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: 99%;
   max-height: 99%;
-}
+} */
 
 .wrapper {
   text-align: center;
@@ -113,21 +113,28 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  height: 90%;
+  height: 85%;
+    position: relative;
 }
 
 .content {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  top: 50%;
+  left: 50%;
+  max-width: 99%;
+  max-height: 99%;
 }
 
 .content[status="active"] {
-  transform: scale(1);
+  top: 50%;
+  left: 50%;
+  transform: scale(1) translate(-50%, -50%);
 }
 
 .content[status="inactive"] {
-  transform: scale(0);
+  top: 50%;
+  left: 50%;
+  transform: scale(0) translate(-50%, -50%);
 }
 
 fieldset {
