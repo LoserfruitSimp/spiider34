@@ -177,6 +177,18 @@ async function getData(tags, PID) {
       tagData[i].file_url.endsWith(".mp4")
     ) {
       activeMedia = document.createElement("video");
+      activeMedia.setAttribute("loop", "");
+      //activeMedia.setAttribute("autoplay", "");
+
+      activeMedia.setAttribute("controls", "");
+      activeMedia.addEventListener("hidden", () => {
+        console.log("test")
+        activeMedia.pause();
+      });
+
+      activeMedia.addEventListener("shown", () => {
+        activeMedia.play();
+      });
     } else {
       activeMedia = document.createElement("img");
     }
@@ -184,7 +196,7 @@ async function getData(tags, PID) {
     function getFile(data) {
       fetch(convertURL(data.file_url)).then((response) => {
         const dataType = response.headers.get("Content-Type");
-        console.log(dataType)
+        console.log(dataType);
         if (
           settings.quality === "Full" ||
           activeMedia.id === "video" ||
@@ -204,6 +216,7 @@ async function getData(tags, PID) {
         } else {
           if (dataType.includes("text")) {
             console.log("Trying file as mp4...");
+            console.log(data.file_url)
             data.file_url = data.file_url.slice(0, -4) + "mp4";
             setTimeout(function () {
               getFile(data);
