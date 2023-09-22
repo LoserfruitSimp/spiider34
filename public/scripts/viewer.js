@@ -242,7 +242,7 @@ async function getData(tags, PID) {
     };
     tester.src = img.src;
 
-    topTags = tagData[idx].tags.split(" ").concat(topTags);
+    topTags = tagData[i].tags.split(" ").concat(topTags);
 
     //     // File URL Preload
     //     if (settings.quality === "Full") {
@@ -264,19 +264,12 @@ async function getData(tags, PID) {
     //     }
   }
 
-  const counts = {};
+  const count = topTags.reduce((acc, curr) => {
+    acc[curr] = (acc[curr] || 0) + 1;
+    return acc;
+  }, {});
+  
+  const sortedCount = Object.keys(count).sort((a, b) => count[b] - count[a]);
 
-  for (const value of topTags) {
-    if (counts[value]) {
-      counts[value]++;
-    } else {
-      counts[value] = 1;
-    }
-  }
-
-  const sortedArray = Object.keys(counts)
-    .sort((a, b) => counts[b] - counts[a])
-    .map((value) => counts[value]);
-  console.log(sortedArray)
-  console.log(counts)
+  console.log(sortedCount)
 }
