@@ -18,6 +18,8 @@ var video = document.getElementById("video");
 var image = document.getElementById("img");
 var tags = document.getElementById("tags");
 
+var topTags = [];
+
 var active = false;
 var totalPages = 0;
 var activePid = 0;
@@ -90,9 +92,11 @@ function setActivePost(data) {
   document.getElementById("sourse").innerHTML = `https://${
     urls[settings.sourse]
   }/index.php?page=post&s=view&id=${data.id}`;
-  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> | <strong>${
-    idx + 1
-  }</strong> of <strong>${tagData.length}</strong>`;
+  document.getElementById("page").innerHTML = `Page <strong>${
+    activePid / 100 + 1
+  }</strong> | <strong>${idx + 1}</strong> of <strong>${
+    tagData.length
+  }</strong>`;
 
   topBar.style.transform = "scaleX(0.5)";
 
@@ -214,8 +218,15 @@ async function getData(tags, PID) {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
 
-    img.classList.add("galleryItem");
+    if (
+      tagData[i].file_url.endsWith(".webm") ||
+      tagData[i].file_url.endsWith(".mp4")
+    ) {
+      img.style = "border: solid red; border-width: thin;";
+    }
+
     img.src = convertURL(tagData[i].preview_url);
+    img.classList.add("galleryItem");
     img.onclick = function () {
       click(img);
     };
@@ -230,6 +241,8 @@ async function getData(tags, PID) {
       img.parentElement.remove();
     };
     tester.src = img.src;
+
+    topTags = tagData[idx].tags.split(" ").concat(topTags);
 
     //     // File URL Preload
     //     if (settings.quality === "Full") {
@@ -250,4 +263,20 @@ async function getData(tags, PID) {
     //       sample.remove();
     //     }
   }
+
+  const counts = {};
+
+  for (const value of topTags) {
+    if (counts[value]) {
+      counts[value]++;
+    } else {
+      counts[value] = 1;
+    }
+  }
+
+  const sortedArray = Object.keys(counts)
+    .sort((a, b) => counts[b] - counts[a])
+    .map((value) => counts[value]);
+  console.log(sortedArray)
+  console.log(counts)
 }
