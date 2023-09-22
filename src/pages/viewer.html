@@ -1,51 +1,85 @@
 <html>
+  <head>
+    <title>spiider34</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="any"
+      href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png"
+    />
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/awesomplete.css" />
+  </head>
 
-<head>
-  <title>spiider34</title>
-  <link rel="icon" type="image/png" sizes="any"
-    href="https://cdn.glitch.global/38681b80-02c2-4aec-bed4-f79cdfdda113/favicon.png" />
-  <link rel="stylesheet" href="/static/styles/main.css" />
-  <link rel="stylesheet" href="/static/styles/awesomplete.css" />
-</head>
-
-<body>
-  <button class="home" id="home"><strong>Home</strong></button>
-  <h2 id="tagsH" class="wrapper" style="color: white"></h2>
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif?20140201131911"
-    id="img" />
-  <div>
-    <video loop autoplay controls preload="auto" src="" id="video" style="display: none;" />
-  </div>
-  <div class="gallery" style="display: none;"></div>
-  <p></p>
-  <div class="wrapper">
-    <div class="awesomplete">
-      <input id="tags" placeholder="daddy's finder..." name="tags" size="30" type="text" value="" autocomplete="off"
-        aria-autocomplete="list" />
-      <ul hidden=""></ul>
-      <span class="visually-hidden" role="status" aria-live="assertive" aria-relevant="additions"></span>
+  <body>
+    <div class="topBarContainer">
+      <div id="topBar" style="transform: scaleX(0)"></div>
     </div>
-    <input name="searchDefault" type="submit" value="Search" id="search" onclick="javascript: searchPosts()" />
-  </div>
-  <div class="wrapper">
-    <!-- Tags -->
-    <p><strong> Tags:</strong></p>
-    <p id="curTags"></p>
-    <!-- Author -->
-    <p><strong> Author:</strong></p>
-    <p id="author"></p>
-    <!-- Sourse -->
-    <p><strong> Sourse:</strong></p>
-    <p id="sourse"></p>
-    <!-- Page -->
-    <p><strong> Page Information:</strong></p>
-    <p id="page"></p>
-  </div>
-  <script src="/static/scripts/settings.js"></script>
-  <script src="/static/scripts/viewer.js"></script>
-  <script src="/static/scripts/autocomplete.js"></script>
-  <script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
-</body>
-
+    <button id="home"><strong>Home</strong></button>
+    <h2 id="tagsH" class="wrapper" style="color: white"></h2>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif?20140201131911"
+      id="img"
+    />
+    <div>
+      <video
+        loop
+        autoplay
+        controls
+        preload="auto"
+        src=""
+        id="video"
+        style="display: none"
+      />
+    </div>
+    <div class="gallery" style="display: none"></div>
+    <p></p>
+    <div class="wrapper">
+      <div class="awesomplete">
+        <input
+          id="tags"
+          placeholder="daddy's finder..."
+          name="tags"
+          size="30"
+          type="text"
+          value=""
+          autocomplete="off"
+          aria-autocomplete="list"
+        />
+        <ul hidden=""></ul>
+        <span
+          class="visually-hidden"
+          role="status"
+          aria-live="assertive"
+          aria-relevant="additions"
+        ></span>
+      </div>
+      <input
+        name="searchDefault"
+        type="submit"
+        value="Search"
+        id="search"
+        onclick="javascript: searchPosts()"
+      />
+    </div>
+    <div class="wrapper">
+      <!-- Tags -->
+      <p><strong> Tags:</strong></p>
+      <p id="curTags"></p>
+      <!-- Author -->
+      <p><strong> Author:</strong></p>
+      <p id="author"></p>
+      <!-- Sourse -->
+      <p><strong> Sourse:</strong></p>
+      <p id="sourse"></p>
+      <!-- Page -->
+      <p><strong> Page Information:</strong></p>
+      <p id="page"></p>
+    </div>
+    <p id="spoofText" enabled="true"></p>
+    <script src="/static/scripts/settings.js"></script>
+    <script src="/static/scripts/viewer.js"></script>
+    <script src="/static/scripts/autocomplete.js"></script>
+    <script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
+  </body>
 </html>

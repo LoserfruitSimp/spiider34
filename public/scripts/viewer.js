@@ -13,7 +13,6 @@ const urls = {
 };
 
 var gallery = document.getElementsByClassName("gallery")[0];
-var contentWrap = document.getElementById("contentWrap");
 var topBar = document.getElementById("topBar");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
@@ -23,7 +22,6 @@ var active = false;
 var totalPages = 0;
 var activePid = 0;
 var tagData = [];
-var oldIdx = 0;
 var idx = 0;
 
 document.getElementById("tagsH").innerHTML = tagsQ;
@@ -92,17 +90,60 @@ function setActivePost(data) {
   document.getElementById("sourse").innerHTML = `https://${
     urls[settings.sourse]
   }/index.php?page=post&s=view&id=${data.id}`;
-  document.getElementById("page").innerHTML = `Page <strong>${
-    activePid / 100 + 1
-  }</strong> | <strong>${idx + 1}</strong> of <strong>${
-    tagData.length
-  }</strong>`;
+  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> | <strong>${
+    idx + 1
+  }</strong> of <strong>${tagData.length}</strong>`;
 
   topBar.style.transform = "scaleX(0.5)";
 
-  contentWrap.childNodes[oldIdx + 1].setAttribute("status", "inactive");
-  contentWrap.childNodes[idx + 1].setAttribute("status", "active");
-  oldIdx = idx;
+  let activeMedia = image;
+  if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
+    activeMedia = video;
+    image.style = "display: none;";
+    video.style = "";
+  } else {
+    activeMedia = image;
+
+    video.style = "display: none;";
+    image.style = "";
+    video.src = "";
+  }
+
+  fetch(convertURL(data.file_url)).then((response) => {
+    topBar.style.transform = "scaleX(0.8)";
+
+    const dataType = response.headers.get("Content-Type");
+    if (
+      settings.quality === "Full" ||
+      activeMedia.id === "video" ||
+      data.sample_url === ""
+    ) {
+      if (dataType.includes("text")) {
+        topBar.style.transform = "scaleX(0.9)";
+        console.log("Trying file as gif...");
+        data.file_url = data.file_url.slice(0, -3) + "gif";
+        data.sample_url = data.file_url.slice(0, -3) + "gif";
+        setActivePost(data);
+      } else {
+        console.log("Set file to " + data.file_url);
+        activeMedia.src = convertURL(data.file_url);
+      }
+    } else {
+      if (dataType.includes("text")) {
+        topBar.style.transform = "scaleX(0.9)";
+        console.log("Trying file as mp4...");
+        data.file_url = data.file_url.slice(0, -4) + "mp4";
+        setActivePost(data);
+      } else if (dataType.includes("image") || dataType.includes("video")) {
+        console.log("Set file to " + data.sample_url);
+        activeMedia.src = convertURL(data.sample_url);
+      } else {
+        console.log("Set file to " + data.file_url);
+        activeMedia.src = convertURL(data.file_url);
+      }
+    }
+    topBar.style.transform = "scaleX(0.95)";
+  });
 }
 
 function nextImage() {
@@ -166,78 +207,10 @@ async function getData(tags, PID) {
     return;
   }
 
-  //setActivePost(tagData[idx]);
+  setActivePost(tagData[idx]);
   gallery.innerHTML = "";
-  contentWrap.innerHTML = "";
 
   for (var i = 0; i < tagData.length; i++) {
-    let activeMedia = image;
-    if (
-      tagData[i].file_url.endsWith(".webm") ||
-      tagData[i].file_url.endsWith(".mp4")
-    ) {
-      activeMedia = document.createElement("video");
-      activeMedia.setAttribute("loop", "");
-      //activeMedia.setAttribute("autoplay", "");
-
-      activeMedia.setAttribute("controls", "");
-      activeMedia.addEventListener("hidden", () => {
-        console.log("test")
-        activeMedia.pause();
-      });
-
-      activeMedia.addEventListener("shown", () => {
-        activeMedia.play();
-      });
-    } else {
-      activeMedia = document.createElement("img");
-    }
-
-    function getFile(data) {
-      fetch(convertURL(data.file_url)).then((response) => {
-        const dataType = response.headers.get("Content-Type");
-        console.log(dataType);
-        if (
-          settings.quality === "Full" ||
-          activeMedia.id === "video" ||
-          data.sample_url === ""
-        ) {
-          if (dataType.includes("text")) {
-            console.log("Trying file as gif...");
-            data.file_url = data.file_url.slice(0, -3) + "gif";
-            data.sample_url = data.file_url.slice(0, -3) + "gif";
-            setTimeout(function () {
-              getFile(data);
-            }, 1000);
-          } else {
-            console.log("Set file to " + data.file_url);
-            activeMedia.src = convertURL(data.file_url);
-          }
-        } else {
-          if (dataType.includes("text")) {
-            console.log("Trying file as mp4...");
-            console.log(data.file_url)
-            data.file_url = data.file_url.slice(0, -3) + "mp4";
-            setTimeout(function () {
-              getFile(data);
-            }, 1000);
-          } else if (dataType.includes("image")) {
-            console.log("Set file to " + data.sample_url);
-            activeMedia.src = convertURL(data.sample_url);
-          } else {
-            console.log("Set file to " + data.file_url);
-            activeMedia.src = convertURL(data.file_url);
-          }
-        }
-      });
-    }
-
-    getFile(tagData[i]);
-    activeMedia.classList.add("content");
-    activeMedia.setAttribute("status", "inactive");
-
-    contentWrap.appendChild(activeMedia);
-
     const figure = document.createElement("figure");
     const img = document.createElement("img");
 
@@ -251,6 +224,12 @@ async function getData(tags, PID) {
     figure.classList.add("hover");
     figure.appendChild(img);
     gallery.appendChild(figure);
+
+    var tester = new Image();
+    tester.onerror = function () {
+      img.parentElement.remove();
+    };
+    tester.src = img.src;
 
     //     // File URL Preload
     //     if (settings.quality === "Full") {

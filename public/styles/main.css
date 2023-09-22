@@ -8,13 +8,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* img {
+img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: 99%;
   max-height: 99%;
-} */
+}
 
 .wrapper {
   text-align: center;
@@ -106,35 +106,6 @@ body {
   transition-property: transform;
   transition-duration: 0.2s;
   transition-timing-function: ease;
-}
-
-.contentWrapper {
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  height: 85%;
-    position: relative;
-}
-
-.content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  max-width: 99%;
-  max-height: 99%;
-}
-
-.content[status="active"] {
-  top: 50%;
-  left: 50%;
-  transform: scale(1) translate(-50%, -50%);
-}
-
-.content[status="inactive"] {
-  top: 50%;
-  left: 50%;
-  transform: scale(0) translate(-50%, -50%);
 }
 
 fieldset {
