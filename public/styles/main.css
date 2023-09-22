@@ -74,17 +74,21 @@ img {
 #topTags {
   z-index: 3;
   background: rgba(105, 105, 105, 0.75);
- position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 90%;
   width: 90%;
 }
 
 #topTags h1 {
   text-align: center;
 }
+
+#topTags ol {
+  column-count: 8;
+}
+
 #spoofText {
   text-shadow: 1.5px 1px #333333;
   position: fixed;

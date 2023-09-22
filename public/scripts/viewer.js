@@ -1,5 +1,6 @@
-const [leftArrow, rightArrow, enter, m] = [37, 39, 13, 77];
+const [leftArrow, rightArrow, enter, m, t] = [37, 39, 13, 77, 84];
 const toggle = { true: "display: grid;", false: "display: none;" };
+const Ttoggle = { true: "", false: "display: none;" };
 
 const tagsQ = new URLSearchParams(window.location.search).get("tags");
 
@@ -14,6 +15,7 @@ const urls = {
 
 var gallery = document.getElementsByClassName("gallery")[0];
 var orderdList = document.getElementById("orderdList");
+var topTagss = document.getElementById("topTags");
 var topBar = document.getElementById("topBar");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
@@ -21,6 +23,7 @@ var tags = document.getElementById("tags");
 
 var topTags = [];
 
+var tActive = false;
 var active = false;
 var totalPages = 0;
 var activePid = 0;
@@ -48,6 +51,12 @@ addEvent(document, "keydown", function (e) {
         gallery.style = toggle[active];
       }
       break;
+    case t:
+      if (!checkSearchActive()) {
+        tActive = !tActive;
+        topTagss.style = toggle[tActive];
+      }
+      break;
   }
 });
 
@@ -55,7 +64,7 @@ addEvent(window, "click", function (e) {
   e = e || window.event;
   if (
     document.activeElement.id === "" &&
-    !active &&
+    !active && !tActive &&
     e.screenY < (window.screen.height / 3) * 2
   ) {
     if (e.x > window.screen.width / 2) {
@@ -83,7 +92,7 @@ function click(img) {
     setActivePost(tagData[idx]);
 
     active = !active;
-    gallery.style = toggle[active];
+    gallery.style = Ttoggle[active];
   }
 }
 
@@ -271,7 +280,7 @@ async function getData(tags, PID) {
   }, {});
 
   const sortedCount = Object.keys(count).sort((a, b) => count[b] - count[a]);
-
+  console.log(count);
   console.log(sortedCount);
 
   for (let i = 0; i < sortedCount.length; i++) {
