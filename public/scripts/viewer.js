@@ -64,7 +64,8 @@ addEvent(window, "click", function (e) {
   e = e || window.event;
   if (
     document.activeElement.id === "" &&
-    !active && !tActive &&
+    !active &&
+    !tActive &&
     e.screenY < (window.screen.height / 3) * 2
   ) {
     if (e.x > window.screen.width / 2) {
@@ -280,13 +281,12 @@ async function getData(tags, PID) {
   }, {});
 
   const sortedCount = Object.keys(count).sort((a, b) => count[b] - count[a]);
-  console.log(count);
-  console.log(sortedCount);
 
   for (let i = 0; i < sortedCount.length; i++) {
     const li = document.createElement("li");
-    //li.innerHTML = `<a style="text-decoration: none; color: inherit;" href="p?tags=${sortedCount[i]}">${sortedCount[i]} (${count[sortedCount[i]]})</a>`
-    li.innerHTML = `${sortedCount[i]} (${count[sortedCount[i]]})`
+    li.innerHTML = `<a style="text-decoration: none; color: pink;" href="p?tags=${
+      sortedCount[i]
+    }">${sortedCount[i]} (${count[sortedCount[i]]})</a>`;
     orderdList.appendChild(li);
   }
 }
