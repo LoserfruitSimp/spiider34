@@ -13,6 +13,7 @@ const urls = {
 };
 
 var gallery = document.getElementsByClassName("gallery")[0];
+var orderdList = document.getElementById("orderdList");
 var topBar = document.getElementById("topBar");
 var video = document.getElementById("video");
 var image = document.getElementById("img");
@@ -268,8 +269,14 @@ async function getData(tags, PID) {
     acc[curr] = (acc[curr] || 0) + 1;
     return acc;
   }, {});
-  
+
   const sortedCount = Object.keys(count).sort((a, b) => count[b] - count[a]);
 
-  console.log(sortedCount)
+  console.log(sortedCount);
+
+  for (let i = 0; i < sortedCount.length; i++) {
+    const li = document.createElement("li");
+    li.innerHTML = sortedCount[i]
+    orderdList.appendChild(li);
+  }
 }
