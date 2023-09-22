@@ -86,6 +86,7 @@ img {
 }
 
 #topTags ol {
+  list-style: none;
   column-count: 8;
 }
 

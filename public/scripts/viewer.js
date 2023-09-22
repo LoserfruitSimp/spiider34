@@ -54,7 +54,7 @@ addEvent(document, "keydown", function (e) {
     case t:
       if (!checkSearchActive()) {
         tActive = !tActive;
-        topTagss.style = toggle[tActive];
+        topTagss.style = Ttoggle[tActive];
       }
       break;
   }
@@ -92,7 +92,7 @@ function click(img) {
     setActivePost(tagData[idx]);
 
     active = !active;
-    gallery.style = Ttoggle[active];
+    gallery.style = toggle[active];
   }
 }
 
@@ -285,7 +285,8 @@ async function getData(tags, PID) {
 
   for (let i = 0; i < sortedCount.length; i++) {
     const li = document.createElement("li");
-    li.innerHTML = sortedCount[i]
+    //li.innerHTML = `<a style="text-decoration: none; color: inherit;" href="p?tags=${sortedCount[i]}">${sortedCount[i]} (${count[sortedCount[i]]})</a>`
+    li.innerHTML = `${sortedCount[i]} (${count[sortedCount[i]]})`
     orderdList.appendChild(li);
   }
 }
