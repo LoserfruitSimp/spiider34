@@ -125,7 +125,7 @@ img {
 }
 
 fieldset {
-  text-align: none;
+  text-align: center;
   overflow-wrap: normal;
   display: table;
   border: none;
@@ -141,7 +141,5 @@ fieldset label {
   display: table-cell;
   padding-right: 5px;
   margin: 3px;
-}
-fieldset label {
   text-align: right;
 }
