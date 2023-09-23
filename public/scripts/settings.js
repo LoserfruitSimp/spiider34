@@ -6,7 +6,8 @@ const toggleSpoofKeycode = 46 // NumPad Del/.
 let settings = {
   sourse: "rule34",
   quality: "Sample",
-  spoofToggle: true
+  spoofToggle: true,
+  proxy: "Off"
 }
 
 const hostURL = window.location.host
@@ -24,6 +25,11 @@ function setSourse(sourse) {
 
 function setQuality(quality) {
   settings.quality = quality;
+  setSettings();
+}
+
+function setProxy(bool) {
+  settings.proxy = bool;
   setSettings();
 }
 

@@ -124,41 +124,46 @@ function setActivePost(data) {
     video.src = "";
   }
 
-  fetch(convertURL(data.file_url)).then((response) => {
-    topBar.style.transform = "scaleX(0.8)";
+  if (settings.proxy === "On") {
+    fetch(convertURL(data.file_url)).then((response) => {
+      topBar.style.transform = "scaleX(0.8)";
 
-    const dataType = response.headers.get("Content-Type");
-    if (
-      settings.quality === "Full" ||
-      activeMedia.id === "video" ||
-      data.sample_url === ""
-    ) {
-      if (dataType.includes("text")) {
-        topBar.style.transform = "scaleX(0.9)";
-        console.log("Trying file as gif...");
-        data.file_url = data.file_url.slice(0, -3) + "gif";
-        data.sample_url = data.file_url.slice(0, -3) + "gif";
-        setActivePost(data);
+      const dataType = response.headers.get("Content-Type");
+      if (
+        settings.quality === "Full" ||
+        activeMedia.id === "video" ||
+        data.sample_url === ""
+      ) {
+        if (dataType.includes("text")) {
+          topBar.style.transform = "scaleX(0.9)";
+          console.log("Trying file as gif...");
+          data.file_url = data.file_url.slice(0, -3) + "gif";
+          data.sample_url = data.file_url.slice(0, -3) + "gif";
+          setActivePost(data);
+        } else {
+          console.log("Set file to " + data.file_url);
+          activeMedia.src = convertURL(data.file_url);
+        }
       } else {
-        console.log("Set file to " + data.file_url);
-        activeMedia.src = convertURL(data.file_url);
+        if (dataType.includes("text")) {
+          topBar.style.transform = "scaleX(0.9)";
+          console.log("Trying file as mp4...");
+          data.file_url = data.file_url.slice(0, -4) + "mp4";
+          setActivePost(data);
+        } else if (dataType.includes("image") || dataType.includes("video")) {
+          console.log("Set file to " + data.sample_url);
+          activeMedia.src = convertURL(data.sample_url);
+        } else {
+          console.log("Set file to " + data.file_url);
+          activeMedia.src = convertURL(data.file_url);
+        }
       }
-    } else {
-      if (dataType.includes("text")) {
-        topBar.style.transform = "scaleX(0.9)";
-        console.log("Trying file as mp4...");
-        data.file_url = data.file_url.slice(0, -4) + "mp4";
-        setActivePost(data);
-      } else if (dataType.includes("image") || dataType.includes("video")) {
-        console.log("Set file to " + data.sample_url);
-        activeMedia.src = convertURL(data.sample_url);
-      } else {
-        console.log("Set file to " + data.file_url);
-        activeMedia.src = convertURL(data.file_url);
-      }
-    }
+      topBar.style.transform = "scaleX(0.95)";
+    });
+  } else {
     topBar.style.transform = "scaleX(0.95)";
-  });
+    activeMedia.src = convertURL(data.file_url);
+  }
 }
 
 function nextImage() {
@@ -188,7 +193,11 @@ function prevImage() {
 }
 
 function convertURL(url) {
-  return `https://${hostURL}/files?url=${url}`;
+  if (settings.proxy === "On") {
+    return `https://${hostURL}/files?url=${url}`;
+  } else {
+    return url;
+  }
 }
 
 function checkSearchActive() {
