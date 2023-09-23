@@ -44,7 +44,7 @@ On supported sourses spiider34 uses [`Awesomplete`](https://github.com/LeaVerou/
 
 ### Tag gallery
 
-By clicking 'M' in the viewer, you are displayed with a gallery of all posts related to the inputed tag. By clicking a post, the selected file will be displayed in the viewer and by holding the left control key and clicking, the file will be sent to a new tab.
+By clicking 'M' in the viewer, you are displayed with a gallery of all posts related to the inputed tag. By clicking a post, the selected file will be displayed in the viewer and by holding the left control key and clicking, the file will be sent to a new tab. Clicking 'T' brings you to the tag viewer. This pages shows you the top tags found in your search.
 
 # Setup
 
