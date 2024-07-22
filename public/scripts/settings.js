@@ -1,13 +1,12 @@
 const booruUrls = ["rule34.xxx", "hypnohub.net", "safebooru.org", "realbooru.com", "xbooru.com", "gelbooru.com"]
 const spoofUrl = "https://twitter.com"
-const spoofKeycode = 45 // NumPad Insert/0
-const toggleSpoofKeycode = 46 // NumPad Del/.
+const spoofKeycode = 27 // esc
+const toggleSpoofKeycode = 192 // ~.
 
 let settings = {
   sourse: "rule34",
   quality: "Sample",
   spoofToggle: true,
-  proxy: "Off"
 }
 
 const hostURL = window.location.host
@@ -25,11 +24,6 @@ function setSourse(sourse) {
 
 function setQuality(quality) {
   settings.quality = quality;
-  setSettings();
-}
-
-function setProxy(bool) {
-  settings.proxy = bool;
   setSettings();
 }
 

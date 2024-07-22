@@ -1,9 +1,10 @@
 const path = require("path");
 const postRouter = require("./src/routing/posts");
 const fileRouter = require("./src/routing/files");
+const checktagsRouter = require("./src/routing/checktags");
 const autocompleteRouter = require("./src/routing/autocomplete");
 
-const port = process.env.PORT;
+const port = 6969;
 
 const express = require("express");
 const cors = require("cors");
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use("/posts", postRouter);
 app.use("/files", fileRouter);
+app.use("/checktags", checktagsRouter);
 app.use("/autocomplete", autocompleteRouter);
 app.use("/static", express.static(path.join(__dirname, "public")));
 

@@ -1,6 +1,6 @@
 # spiider34
 
-spiider34 is a free to use [`booru`](https://booru.org/top) viewer that is made to be hosted for free on [`glitch.com`](https://glitch.com).
+spiider34 is a free to use [`booru`](https://booru.org/top) viewer.
 
 Eaisly switch between sourses including [rule34](https://rule34.xxx), [hypnohub](https://hypnohub.net), [safebooru](https://safebooru.org) and [many more](#sourses).
 
@@ -20,7 +20,7 @@ spiider34 booru viewer comes with a wide set of features including
 
 ### Proxy requests
 
-Because this project is hosted on glitch.com servers, we can make all of our requests on the servers rather than the hosts machine. This means firewalls that would block sites like rule34 will have a harder time catching on.
+All requests made are piped through the express server so no unwanted connections to rule34 will be detected!
 
 ### Easy sourse switching
 
@@ -48,7 +48,20 @@ By clicking 'M' in the viewer, you are displayed with a gallery of all posts rel
 
 # Setup
 
-Setting up your own spiider34 is as easy as clicking remix on [this project](https://glitch.com/~spiider34)! Glitch provides free accounts for you to use and host this project.
+### 1. Clone this repository
+```
+git clone https://github.com/LoserfruitSimp/spiider34.git
+```
+### 2. Run npm install
+```
+npm install
+```
+### 3. Run node server.js
+```
+node server.js
+```
+### 4. Visit [http://localhost:6969](http://localhost:6969)
+
 
 # Sourses
 

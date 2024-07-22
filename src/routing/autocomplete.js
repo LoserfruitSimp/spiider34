@@ -1,6 +1,4 @@
-const express = require("express");
-const https = require("https");
-const fileRouter = express.Router({ mergeParams: true });
+const fileRouter = require("express").Router({ mergeParams: true });
 const axios = require("axios").default;
 
 fileRouter.get("/", async function (req, res) {

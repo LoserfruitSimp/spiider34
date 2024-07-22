@@ -1,6 +1,5 @@
-const express = require('express');
+const fileRouter = require('express').Router();
 const https = require('https');
-const fileRouter = express.Router();
 
 fileRouter.get('/', function (req, res) {
     if (!req.query.url) res.sendStatus(404);

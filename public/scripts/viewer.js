@@ -1,8 +1,8 @@
+// Lookup Tables
 const [leftArrow, rightArrow, enter, m, t] = [37, 39, 13, 77, 84];
-const toggle = { true: "display: grid;", false: "display: none;" };
-const Ttoggle = { true: "", false: "display: none;" };
 
-const tagsQ = new URLSearchParams(window.location.search).get("tags");
+const GalleryToggle = { true: "display: grid;", false: "display: none;" };
+const TagsToggle = { true: "", false: "display: none;" };
 
 const urls = {
   rule34: "rule34.xxx",
@@ -13,28 +13,44 @@ const urls = {
   gelbooru: "gelbooru.com",
 };
 
-var gallery = document.getElementsByClassName("gallery")[0];
-var orderdList = document.getElementById("orderdList");
-var topTagss = document.getElementById("topTags");
-var topBar = document.getElementById("topBar");
-var video = document.getElementById("video");
-var image = document.getElementById("img");
-var tags = document.getElementById("tags");
+// Document Elements
+let GalleryElement = document.getElementsByClassName("gallery")[0];
+let OrderdListElement = document.getElementById("orderdList");
+let TagGalleryElement = document.getElementById("topTags");
+let TopBarElement = document.getElementById("topBar");
+let SearchElement = document.getElementById("tags");
+let VideoElement = document.getElementById("video");
+let ImageElement = document.getElementById("img");
 
-var topTags = [];
+// Data Arrays
+let topTags = [];
+let tagData = [];
 
-var tActive = false;
-var active = false;
-var totalPages = 0;
-var activePid = 0;
-var tagData = [];
-var idx = 0;
+// Gallery Toggles
+let tagsGalActive = false;
+let galleryActive = false;
 
-document.getElementById("tagsH").innerHTML = tagsQ;
-tags.value = tagsQ;
+// Post Info Numbers
+let totalPages = 0;
+let totalPosts = 0;
+let activePid = 0;
+let idx = 0;
 
-getData(tagsQ, 0);
+// Inital Tags Setup
+const TagsParam = new URLSearchParams(window.location.search).get("tags");
+document.getElementById("tagsH").innerHTML = TagsParam;
+SearchElement.value = TagsParam;
 
+// Inital call
+getData(TagsParam, 0).then(() => {
+  // If no posts were found...
+  if (tagData.length === 0) {
+    ImageElement.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
+    return;
+  }
+});
+
+// User Input Events
 addEvent(document, "keydown", function (e) {
   e = e || window.event;
 
@@ -47,14 +63,14 @@ addEvent(document, "keydown", function (e) {
       break;
     case m:
       if (!checkSearchActive()) {
-        active = !active;
-        gallery.style = toggle[active];
+        galleryActive = !galleryActive;
+        GalleryElement.style = GalleryToggle[galleryActive];
       }
       break;
     case t:
       if (!checkSearchActive()) {
-        tActive = !tActive;
-        topTagss.style = Ttoggle[tActive];
+        tagsGalActive = !tagsGalActive;
+        TagGalleryElement.style = TagsToggle[tagsGalActive];
       }
       break;
   }
@@ -64,11 +80,11 @@ addEvent(window, "click", function (e) {
   e = e || window.event;
   if (
     document.activeElement.id === "" &&
-    !active &&
-    !tActive &&
+    !galleryActive &&
+    !tagsGalActive &&
     e.screenY < (window.screen.height / 3) * 2
   ) {
-    if (e.x > window.screen.width / 2) {
+    if (e.x > window.innerWidth / 2) {
       nextImage();
     } else {
       prevImage();
@@ -76,14 +92,14 @@ addEvent(window, "click", function (e) {
   }
 });
 
-addEvent(image, "load", () => (topBar.style.transform = "scaleX(0)"));
-addEvent(video, "load", () => (topBar.style.transform = "scaleX(0)"));
+addEvent(ImageElement, "load", () => (TopBarElement.style.transform = "scaleX(0)"));
+addEvent(VideoElement, "play", () => (TopBarElement.style.transform = "scaleX(0)"));
 
 addEvent(document.getElementById("home"), "click", function (e) {
-  window.location.replace(`https://${hostURL}`);
+  window.location.replace(`http://${hostURL}`);
 });
 
-function click(img) {
+function GalleryImageClicked(img) {
   if (controlKeyPressed) {
     // New Tab
     window.open(convertURL(tagData[img.id].file_url));
@@ -92,78 +108,93 @@ function click(img) {
     idx = Number(img.id);
     setActivePost(tagData[idx]);
 
-    active = !active;
-    gallery.style = toggle[active];
+    galleryActive = !galleryActive;
+    GalleryElement.style = GalleryToggle[galleryActive];
   }
 }
 
 function setActivePost(data) {
-  document.getElementById("curTags").innerHTML = data.tags;
-  document.getElementById("author").innerHTML = data.owner;
-  document.getElementById("sourse").innerHTML = `https://${
-    urls[settings.sourse]
-  }/index.php?page=post&s=view&id=${data.id}`;
-  document.getElementById("page").innerHTML = `Page <strong>${
-    activePid / 100 + 1
-  }</strong> | <strong>${idx + 1}</strong> of <strong>${
-    tagData.length
-  }</strong>`;
+  //document.getElementById("curTags").innerHTML = data.tags;
+  document.getElementById("sourse").innerHTML = `https://${urls[settings.sourse]
+    }/index.php?page=post&s=view&id=${data.id}`;
+  document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> of <strong>${totalPages}</strong> | Post <strong>${(idx + 1) + activePid}</strong> of <strong>${totalPosts}</strong>`
 
-  topBar.style.transform = "scaleX(0.5)";
+  TopBarElement.style.transform = "scaleX(0.5)";
 
-  let activeMedia = image;
+  let activeMedia = ImageElement;
   if (data.file_url.endsWith(".webm") || data.file_url.endsWith(".mp4")) {
-    activeMedia = video;
-    image.style = "display: none;";
-    video.style = "";
+    activeMedia = VideoElement;
+    ImageElement.style = "display: none;";
+    VideoElement.style = "";
   } else {
-    activeMedia = image;
+    activeMedia = ImageElement;
 
-    video.style = "display: none;";
-    image.style = "";
-    video.src = "";
+    VideoElement.style = "display: none;";
+    ImageElement.style = "";
+    VideoElement.src = "";
   }
 
-  if (settings.proxy === "On") {
-    fetch(convertURL(data.file_url)).then((response) => {
-      topBar.style.transform = "scaleX(0.8)";
+  const staticIndex = idx
+  fetch(`/checktags?sourse=${settings.sourse}&tags=${data.tags}`).then(async (response) => {
+    const data = await response.json();
+    // 4 == Char, 3 == copyright, 5 == meta 1 == artist, 0 == general
 
-      const dataType = response.headers.get("Content-Type");
-      if (
-        settings.quality === "Full" ||
-        activeMedia.id === "video" ||
-        data.sample_url === ""
-      ) {
-        if (dataType.includes("text")) {
-          topBar.style.transform = "scaleX(0.9)";
-          console.log("Trying file as gif...");
-          data.file_url = data.file_url.slice(0, -3) + "gif";
-          data.sample_url = data.file_url.slice(0, -3) + "gif";
-          setActivePost(data);
-        } else {
-          console.log("Set file to " + data.file_url);
-          activeMedia.src = convertURL(data.file_url);
-        }
-      } else {
-        if (dataType.includes("text")) {
-          topBar.style.transform = "scaleX(0.9)";
-          console.log("Trying file as mp4...");
-          data.file_url = data.file_url.slice(0, -4) + "mp4";
-          setActivePost(data);
-        } else if (dataType.includes("image") || dataType.includes("video")) {
-          console.log("Set file to " + data.sample_url);
-          activeMedia.src = convertURL(data.sample_url);
-        } else {
-          console.log("Set file to " + data.file_url);
-          activeMedia.src = convertURL(data.file_url);
-        }
+    if (staticIndex !== idx) return
+
+    const typeArrays = [];
+    for (let i = 0; i <= 6; i++) {
+      typeArrays.push([]);
+    }
+
+    data.forEach(obj => {
+      if (obj.type >= 0 && obj.type <= 6) {
+        typeArrays[obj.type].push(obj.name);
       }
-      topBar.style.transform = "scaleX(0.95)";
     });
-  } else {
-    topBar.style.transform = "scaleX(0.95)";
-    activeMedia.src = convertURL(data.file_url);
-  }
+
+    document.getElementById("curTags").innerHTML = `<span class="red"> ${typeArrays[3].join(" ")}</span >`
+    document.getElementById("curTags").innerHTML += `<span class="orange"> ${typeArrays[4].join(" ")}</span >`
+    document.getElementById("curTags").innerHTML += `<span class="yellow"> ${typeArrays[1].join(" ")}</span >`
+    document.getElementById("curTags").innerHTML += `<span class="green"> ${typeArrays[5].join(" ")}</span >`
+    document.getElementById("curTags").innerHTML += `<span class="blue"> ${typeArrays[0].join(" ")}</span >`
+    document.getElementById("curTags").innerHTML += `<span class="purple"> ${typeArrays[2].join(" ")}</span >`
+  })
+
+  fetch(convertURL(data.file_url)).then((response) => {
+    TopBarElement.style.transform = "scaleX(0.8)";
+
+    const dataType = response.headers.get("Content-Type");
+    if (
+      settings.quality === "Full" ||
+      activeMedia.id === "video" ||
+      data.sample_url === ""
+    ) {
+      if (dataType.includes("text")) {
+        TopBarElement.style.transform = "scaleX(0.9)";
+        console.log("Trying file as gif...");
+        data.file_url = data.file_url.slice(0, -3) + "gif";
+        data.sample_url = data.file_url.slice(0, -3) + "gif";
+        setActivePost(data);
+      } else {
+        console.log("Set file to " + data.file_url);
+        activeMedia.src = convertURL(data.file_url);
+      }
+    } else {
+      if (dataType.includes("text")) {
+        TopBarElement.style.transform = "scaleX(0.9)";
+        console.log("Trying file as mp4...");
+        data.file_url = data.file_url.slice(0, -4) + "mp4";
+        setActivePost(data);
+      } else if (dataType.includes("image") || dataType.includes("video")) {
+        console.log("Set file to " + data.sample_url);
+        activeMedia.src = convertURL(data.sample_url);
+      } else {
+        console.log("Set file to " + data.file_url);
+        activeMedia.src = convertURL(data.file_url);
+      }
+    }
+    TopBarElement.style.transform = "scaleX(0.95)";
+  });
 }
 
 function nextImage() {
@@ -172,9 +203,7 @@ function nextImage() {
       idx = idx + 1;
       setActivePost(tagData[idx]);
     } else {
-      if (tagData.length === 100) {
-        getData(tagsQ, activePid + 100);
-      }
+      getData(TagsParam, activePid + 100);
     }
   }
 }
@@ -186,18 +215,14 @@ function prevImage() {
       setActivePost(tagData[idx]);
     } else {
       if (activePid != 0) {
-        getData(tagsQ, activePid - 100);
+        getData(TagsParam, activePid - 100);
       }
     }
   }
 }
 
 function convertURL(url) {
-  if (settings.proxy === "On") {
-    return `https://${hostURL}/files?url=${url}`;
-  } else {
-    return url;
-  }
+  return `http://${hostURL}/files?url=${url}`;
 }
 
 function checkSearchActive() {
@@ -210,12 +235,17 @@ function checkSearchActive() {
 
 async function getData(tags, PID) {
   const response = await fetch(
-    `https://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`
+    `http://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`
   );
 
-  const data = await response.json();
+  const json = await response.json();
+  const data = json.data
 
   if (Array.isArray(data)) {
+    if (data.length === 0) {
+      return
+    }
+
     tagData = data;
   } else {
     tagData = data.post;
@@ -223,18 +253,16 @@ async function getData(tags, PID) {
 
   console.log(tagData);
 
+  totalPosts = json.total
+  totalPages = Math.ceil(totalPosts / 100)
+
   activePid = PID;
   idx = 0;
 
-  if (tagData.length === 0) {
-    image.src = "https://cdn-icons-png.flaticon.com/512/103/103085.png";
-    return;
-  }
-
   setActivePost(tagData[idx]);
-  gallery.innerHTML = "";
+  GalleryElement.innerHTML = "";
 
-  for (var i = 0; i < tagData.length; i++) {
+  for (let i = 0; i < tagData.length; i++) {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
 
@@ -248,40 +276,21 @@ async function getData(tags, PID) {
     img.src = convertURL(tagData[i].preview_url);
     img.classList.add("galleryItem");
     img.onclick = function () {
-      click(img);
+      GalleryImageClicked(img);
     };
     img.id = i;
 
     figure.classList.add("hover");
     figure.appendChild(img);
-    gallery.appendChild(figure);
+    GalleryElement.appendChild(figure);
 
-    var tester = new Image();
+    let tester = new Image();
     tester.onerror = function () {
       img.parentElement.remove();
     };
     tester.src = img.src;
 
     topTags = tagData[i].tags.split(" ").concat(topTags);
-
-    //     // File URL Preload
-    //     if (settings.quality === "Full") {
-    //       if (
-    //         !tagData[i].file_url.endsWith(".webm") ||
-    //         !tagData[i].file_url.endsWith(".mp4")
-    //       ) {
-    //         const file = new Image();
-    //         file.src = convertURL(tagData[i].file_url);
-    //         file.remove();
-    //       }
-    //     }
-
-    //     // Sample URL Preload
-    //     if (settings.quality === "Sample") {
-    //       const sample = new Image();
-    //       sample.src = convertURL(tagData[i].sample_url);
-    //       sample.remove();
-    //     }
   }
 
   const count = topTags.reduce((acc, curr) => {
@@ -293,9 +302,8 @@ async function getData(tags, PID) {
 
   for (let i = 0; i < sortedCount.length; i++) {
     const li = document.createElement("li");
-    li.innerHTML = `<a style="text-decoration: none; color: pink;" href="p?tags=${
-      sortedCount[i]
-    }">${sortedCount[i]} (${count[sortedCount[i]]})</a>`;
-    orderdList.appendChild(li);
+    li.innerHTML = `<a style="text-decoration: none; color: pink;" href="p?tags=${sortedCount[i]
+      }">${sortedCount[i]} (${count[sortedCount[i]]})</a>`;
+    OrderdListElement.appendChild(li);
   }
 }

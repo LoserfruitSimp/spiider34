@@ -1,8 +1,6 @@
-const express = require("express");
-const postRouter = express.Router({ mergeParams: true });
-const host = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
-const axios = require("axios").default;
+const postRouter = require("express").Router({ mergeParams: true });
 var parseString = require("xml2js").parseString;
+const axios = require("axios").default;
 
 const urls = [
   "rule34.xxx",
@@ -12,9 +10,6 @@ const urls = [
   "xbooru.com",
   "gelbooru.com",
 ];
-
-// List of urls that dont display the URL to file when using JSON request
-const XMLhash = ["safebooru.org", "realbooru.com", "xbooru.com"];
 
 postRouter.get("/", async function (req, res) {
   const cite = req.query.sourse;
@@ -29,44 +24,34 @@ postRouter.get("/", async function (req, res) {
   }
 
   let data = [];
-  console.log("test")
-  if (XMLhash.find((e) => e === baseURI)) {
-    // XML 
-    const api = await axios.get(
-      "https://" +
-        baseURI +
-        "/index.php?page=dapi&s=post&q=index&tags=" +
-        req.query.tags +
-        "&pid=" +
-        pid / 100 +
-        "&json=0",
-      "text/xml"
-    ).catch(e=>{
-      console.log(e)
-    });
-    
-    parseString(api.data, function (err, result) {
+  const api = await axios.get(
+    "https://" +
+    baseURI +
+    "/index.php?page=dapi&s=post&q=index&tags=" +
+    req.query.tags +
+    "&pid=" +
+    pid / 100 +
+    "&json=0",
+    "text/xml"
+  ).catch(e => {
+    console.log(e)
+  });
+
+  let total = 0
+  parseString(api.data, function (err, result) {
+    if (result.posts.post) {
       for (let i = 0; i < result.posts.post.length; i++) result.posts.post[i] = result.posts.post[i].$
       data = result.posts.post;
-    });
-  } else {
-    // JSON
-    const api = await axios.get(
-      "https://" +
-        baseURI +
-        "/index.php?page=dapi&s=post&q=index&tags=" +
-        req.query.tags +
-        "&pid=" +
-        pid / 100 +
-        "&json=1",
-      "application/json"
-    );
+    } else {
+      data = []
+    }
+    total = new Number(result.posts.$.count)
+  });
 
-    data = api.data;
-    console.log(data)
-  }
-
-  res.json(data);
+  res.json({
+    total: total,
+    data: data
+  });
 });
 
 module.exports = postRouter;

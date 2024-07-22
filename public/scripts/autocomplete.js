@@ -479,10 +479,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
 function searchPosts() {
   if (tags.value.includes("&" || "?")) {
-    window.location.replace(`https://${hostURL}`);
+    window.location.replace(`http://${hostURL}`);
   } else {
     window.location.replace(
-      `https://${hostURL}/p?tags=${tags.value}`
+      `http://${hostURL}/p?tags=${tags.value}`
     );
   }
 }

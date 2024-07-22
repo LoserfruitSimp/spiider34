@@ -8,12 +8,37 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-img {
+#img, #video {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 99%;
-  max-height: 99%;
+
+  max-width: 99vh;
+  max-height: 99vh;
+}
+
+.red {
+  color: #ffa8a8;
+}
+
+.orange {
+  color: #ffd07a;
+}
+
+.yellow {
+  color: #ffff8c;
+}
+
+.green {
+  color: 9bff9b;
+}
+
+.blue {
+  color: #d1d1ff;
+}
+
+.purple {
+  color: purple;
 }
 
 .wrapper {
