@@ -1,5 +1,5 @@
 // Lookup Tables
-const [leftArrow, rightArrow, enter, m, t] = [37, 39, 13, 77, 84];
+const [leftArrow, rightArrow, enter, m, t, a, d] = [37, 39, 13, 77, 84, 65, 68];
 
 const GalleryToggle = { true: "display: grid;", false: "display: none;" };
 const TagsToggle = { true: "", false: "display: none;" };
@@ -55,6 +55,12 @@ addEvent(document, "keydown", function (e) {
   e = e || window.event;
 
   switch (e.keyCode) {
+    case a:
+      prevImage();
+      break;
+    case d:
+      nextImage();
+      break;
     case leftArrow:
       prevImage();
       break;
