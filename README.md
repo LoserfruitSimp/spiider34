@@ -11,7 +11,7 @@ Learn how to set it up for yourself [here](#setup)!
 spiider34 booru viewer comes with a wide set of features including
 
 - [Proxy requests](#proxy-requests)
-- [Easy sources switching](#easy-sourse-switching)
+- [Easy sources switching](#easy-source-switching)
 - [Easy quality switching](#easy-quality-switching)
 - [Easy post switching](#easy-post-switching)
 - [Video and image support](#video-and-image-support)
@@ -22,7 +22,7 @@ spiider34 booru viewer comes with a wide set of features including
 
 All requests made are piped through the express server so no unwanted connections to rule34 will be detected!
 
-### Easy sourse switching
+### Easy source switching
 
 On the spiider34 home page which can be found by clicking the home icon in the viewer or navigating to the base url there is an easy to use drop down box labeled "Toggle Source" which automatically switches the search output and autocomplete to the source of your choosing. Supported sources can be found [here](#sources).
 

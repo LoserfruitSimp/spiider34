@@ -382,14 +382,14 @@ function setUp(elem) {
 
 let cite = ""
   for (var i = 0; i < booruUrls.length; i++) {
-    if (booruUrls[i].includes(settings.sourse)) {
+    if (booruUrls[i].includes(settings.source)) {
       cite = booruUrls[i];
       break;
     }
   }
   
         var ajax = new XMLHttpRequest();
-        ajax.open("GET", "/autocomplete?sourse=" + cite + "&q=" + val, true);
+        ajax.open("GET", "/autocomplete?source=" + cite + "&q=" + val, true);
         ajax.onload = function () {
           var list = JSON.parse(ajax.responseText);
           a.list = list;

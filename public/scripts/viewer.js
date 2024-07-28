@@ -121,7 +121,7 @@ function GalleryImageClicked(img) {
 
 function setActivePost(data) {
   //document.getElementById("curTags").innerHTML = data.tags;
-  document.getElementById("sourse").innerHTML = `https://${urls[settings.sourse]
+  document.getElementById("source").innerHTML = `https://${urls[settings.source]
     }/index.php?page=post&s=view&id=${data.id}`;
   document.getElementById("page").innerHTML = `Page <strong>${activePid / 100 + 1}</strong> of <strong>${totalPages}</strong> | Post <strong>${(idx + 1) + activePid}</strong> of <strong>${totalPosts}</strong>`
 
@@ -141,7 +141,7 @@ function setActivePost(data) {
   }
 
   const staticIndex = idx
-  fetch(`/checktags?sourse=${settings.sourse}&tags=${data.tags}`).then(async (response) => {
+  fetch(`/checktags?source=${settings.source}&tags=${data.tags}`).then(async (response) => {
     const data = await response.json();
     // 4 == Char, 3 == copyright, 5 == meta 1 == artist, 0 == general
 
@@ -241,7 +241,7 @@ function checkSearchActive() {
 
 async function getData(tags, PID) {
   const response = await fetch(
-    `http://${hostURL}/posts?tags=${tags}&sourse=${settings.sourse}&pid=${PID}`
+    `http://${hostURL}/posts?tags=${tags}&source=${settings.source}&pid=${PID}`
   );
 
   const json = await response.json();

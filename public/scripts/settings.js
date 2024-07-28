@@ -4,7 +4,7 @@ const spoofKeycode = 27 // esc
 const toggleSpoofKeycode = 192 // ~.
 
 let settings = {
-  sourse: "rule34",
+  source: "rule34",
   quality: "Sample",
   spoofToggle: true,
 }
@@ -17,8 +17,8 @@ if (localStorage.getItem("settings") === null) {
   settings = getSettings();
 }
 
-function setSourse(sourse) {
-  settings.sourse = sourse;
+function setSource(source) {
+  settings.source = source;
   setSettings();
 }
 

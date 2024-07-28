@@ -7,8 +7,8 @@ addEvent(typeCombo, "change", updateCite);
 addEvent(qualityCombo, "change", updateQuality);
 
 function updateCite(e) {
-  setSourse(e.srcElement.value);
-  typeSetting.innerHTML = "Sourse: " + settings.sourse;
+  setSource(e.srcElement.value);
+  typeSetting.innerHTML = "Source: " + settings.source;
 }
 
 function updateQuality(e) {
@@ -24,8 +24,8 @@ function setSelected(element, child) {
   }
 }
 
-typeSetting.innerHTML = "Sourse: " + settings.sourse;
+typeSetting.innerHTML = "Source: " + settings.source;
 qualitySetting.innerHTML = "Quality: " + settings.quality;
 
 setSelected(qualityCombo, settings.quality);
-setSelected(typeCombo, settings.sourse);
+setSelected(typeCombo, settings.source);
