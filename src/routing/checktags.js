@@ -4,14 +4,7 @@ const axios = require("axios").default;
 const path = require('path');
 const fs = require('fs');
 
-const urls = [
-    "rule34.xxx",
-    "hypnohub.net",
-    "safebooru.org",
-    "realbooru.com",
-    "xbooru.com",
-    "gelbooru.com",
-];
+const urls = require('../../sources.json');
 
 const mergeAndRemoveDuplicates = (arr1, arr2) => {
     const combinedArray = [...arr1, ...arr2];

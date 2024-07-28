@@ -4,7 +4,8 @@
   "description": "A fun and exiting way to consume rule34 content.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "node setup.js"
   },
   "dependencies": {
     "axios": "^0.27.2",

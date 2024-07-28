@@ -2,14 +2,7 @@ const postRouter = require("express").Router({ mergeParams: true });
 var parseString = require("xml2js").parseString;
 const axios = require("axios").default;
 
-const urls = [
-  "rule34.xxx",
-  "hypnohub.net",
-  "safebooru.org",
-  "realbooru.com",
-  "xbooru.com",
-  "gelbooru.com",
-];
+const urls = require('../../sources.json');
 
 postRouter.get("/", async function (req, res) {
   const cite = req.query.sourse;
