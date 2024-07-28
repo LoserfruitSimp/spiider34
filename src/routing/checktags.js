@@ -13,6 +13,12 @@ const urls = [
     "gelbooru.com",
 ];
 
+const mergeAndRemoveDuplicates = (arr1, arr2) => {
+    const combinedArray = [...arr1, ...arr2];
+    const uniqueMap = new Map(combinedArray.map(item => [item.name, item]));
+    return Array.from(uniqueMap.values());
+  };
+
 fileRouter.get('/', async function (req, res) {
     const cite = req.query.sourse;
     const tags = req.query.tags
@@ -36,33 +42,40 @@ fileRouter.get('/', async function (req, res) {
         if (tag) {
             data.push(tag)
         } else {
-            const api = await axios.get(
-                "https://" +
-                baseURI +
-                "/index.php?page=dapi&s=tag&q=index&name=" +
-                tagElm,
-                "text/xml"
-            ).catch(e => {
-                console.log(e)
-            });
-
-            parseString(api.data, function (err, result) {
-                if(err) return
-                if(!result.tags) return
-                 
-                if (result.tags.tag) {
-                    const newEntry = {
-                        name: result.tags.tag[0].$.name,
-                        type: Number(result.tags.tag[0].$.type),
+            try {
+                const api = await axios.get(
+                    "https://" +
+                    baseURI +
+                    "/index.php?page=dapi&s=tag&q=index&name=" +
+                    tagElm,
+                    "text/xml"
+                ).catch(e => {
+                    console.log(e)
+                });
+    
+                parseString(api.data, function (err, result) {
+                    if(err) return
+                    if(!result.tags) return
+                     
+                    if (result.tags.tag) {
+                        const newEntry = {
+                            name: result.tags.tag[0].$.name,
+                            type: Number(result.tags.tag[0].$.type),
+                        }
+                        citeData.push(newEntry)
+                        data.push(newEntry)
+    
+                        console.log(`NEW ENTRY (${baseURI}): ${result.tags.tag[0].$.name}`)
                     }
-                    citeData.push(newEntry)
-                    data.push(newEntry)
-                }
-            });
+                });
+            } catch(err) {
+                console.log(err.message)
+            }
         }
     }
 
-    fs.writeFileSync(path.join(__dirname, `../../data/${baseURI}.json`), JSON.stringify(citeData))
+    const array2 = JSON.parse(fs.readFileSync(path.join(__dirname, `../../data/${baseURI}.json`), 'utf8'));
+    fs.writeFileSync(path.join(__dirname, `../../data/${baseURI}.json`), JSON.stringify(mergeAndRemoveDuplicates(citeData, array2)))
 
     res.json(data)
 });
