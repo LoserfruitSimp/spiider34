@@ -21,6 +21,8 @@ spiider34 booru viewer comes with a wide set of features including
 ### Proxy requests
 
 All requests made are piped through the express server so no unwanted connections to rule34 will be detected!
+> [!WARNING]
+> Requests are made on localhost by default. Change the server.js file for more proxy configuration.
 
 ### Easy source switching
 
@@ -40,8 +42,7 @@ Booru content on spiider34 has support for both images and videos to be displaye
 
 ### Auto complete tags
 
-On supported sources spiider34 uses [`Awesomplete`](https://github.com/LeaVerou/awesomplete) for better tag navigating in the search bar. (NOTE: Some sources do not support awesomplete)
-
+On supported sources spiider34 uses [`Awesomplete`](https://github.com/LeaVerou/awesomplete) for better tag navigating in the search bar.
 ### Tag gallery
 
 By clicking 'M' in the viewer, you are displayed with a gallery of all posts related to the inputted tag. By clicking a post, the selected file will be displayed in the viewer and by holding the left control key and clicking, the file will be sent to a new tab. Clicking 'T' brings you to the tag viewer. This pages shows you the top tags found in your search.
