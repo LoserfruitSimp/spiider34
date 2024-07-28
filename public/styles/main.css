@@ -14,7 +14,7 @@ body {
   margin-right: auto;
 
   max-width: 99vh;
-  max-height: 99vh;
+  max-height: 90vh;
 }
 
 .red {
@@ -43,7 +43,6 @@ body {
 
 .wrapper {
   text-align: center;
-  padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
   overflow-wrap: normal;
 }
