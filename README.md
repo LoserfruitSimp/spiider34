@@ -52,15 +52,19 @@ By clicking 'M' in the viewer, you are displayed with a gallery of all posts rel
 ```
 git clone https://github.com/LoserfruitSimp/spiider34.git
 ```
-### 2. Run npm install
+### 2. Enter project directory
+```
+cd spiider34
+```
+### 3. Run npm install
 ```
 npm install
 ```
-### 3. Run node server.js
+### 4. Run node server.js
 ```
 node server.js
 ```
-### 4. Visit [http://localhost:6969](http://localhost:6969)
+### 5. Visit [http://localhost:6969](http://localhost:6969)
 
 
 # Sources
