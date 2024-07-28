@@ -36,6 +36,9 @@ On the spiider34 home page which can be found by clicking the home icon in the v
 
 After you search for a tag, posts will start to be loaded on the spiider34 viewer. This viewer can be navigated using the arrow keys or clicking on the top half of the screen in the direction you want to go. The viewer only loads 100 files at once but if a tag(s) exceeds 100 posts, you will automatically be sent to a new page if you are finished with the first.
 
+### "Improved Tab Out"
+spiider34 offers an unique discreet method in quickly hiding spiider34 on your screen. After one minute (24 seconds when first launched) of idle time, spiider34's spoof manager removes window history of the current tab and launches twitter. This process can also be activated by clicking the escape key. This feature can be toggled with the Grave key (`).
+
 ### Video and image support
 
 Booru content on spiider34 has support for both images and videos to be displayed in the viewer.
